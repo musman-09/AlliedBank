@@ -3,20 +3,20 @@ import { Platform } from 'react-native';
 export const fonts = {
   Roboto: {
     bold: Platform.select({
-      android: 'Aileron-Bold',
-      ios: 'Aileron-Bold',
+      android: 'Roboto-SemiBold',
+      ios: 'Roboto-SemiBold',
     }),
     regular: Platform.select({
-      android: 'Aileron-Regular',
-      ios: 'Aileron-Regular',
+      android: 'Roboto-Regular',
+      ios: 'Roboto-Regular',
     }),
     light: Platform.select({
-      android: 'Aileron-Light',
-      ios: 'Aileron-Light',
+      android: 'Roboto-Medium',
+      ios: 'Roboto-Medium',
     }),
     semibold: Platform.select({
-      android: 'Aileron-SemiBold',
-      ios: 'Aileron-SemiBold',
+      android: 'Roboto-Medium',
+      ios: 'Roboto-Medium',
     }),
   },
 };
