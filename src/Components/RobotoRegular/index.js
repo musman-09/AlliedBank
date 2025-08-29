@@ -13,7 +13,5 @@ const Style = StyleSheet.create({
     textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
-    // lineHeight: vh * 1.5,
-    // letterSpacing: vw * 0.121,
   },
 });

@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 export const fonts = {
   Roboto: {
     bold: Platform.select({
-      android: 'Roboto-SemiBold',
-      ios: 'Roboto-SemiBold',
+      android: 'Roboto-Bold',
+      ios: 'Roboto-Bold',
     }),
     regular: Platform.select({
       android: 'Roboto-Regular',

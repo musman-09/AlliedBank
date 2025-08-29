@@ -12,10 +12,7 @@ export default RobotoBold;
 const Style = StyleSheet.create({
   textStyle: {
     fontFamily: fonts.Roboto.bold,
-    textAlign: 'center',
-    // color: COLORS.textColor,
-    fontSize: vw * 1.3,
-    // lineHeight: vh * 1.5,
-    // letterSpacing: vw * 0.121,
+    // textAlign: 'center',
+    fontSize: vw * 4,
   },
 });
