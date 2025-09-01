@@ -12,8 +12,8 @@ export default RobotoSemiBold;
 
 const Style = StyleSheet.create({
   textStyle: {
-    fontFamily: fonts.Roboto.bold,
-    textAlign: 'center',
+    fontFamily: fonts.Roboto.regular,
+    // textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
   },

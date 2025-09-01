@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     width: vw * 45,
     height: vh * 5,
     resizeMode: 'contain',
+    marginLeft: vw,
   },
   container: {
     flexDirection: 'row',
@@ -47,9 +48,9 @@ const styles = StyleSheet.create({
   headerRightContent: {
     flexDirection: 'row',
 
-    marginRight: vw * 2,
+    marginRight: vw * 3,
 
-    gap: vw * 3,
+    gap: vw * 4,
   },
   headerRightIcons: {
     width: vw * 8,

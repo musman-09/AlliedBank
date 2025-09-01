@@ -5,6 +5,7 @@ import { COLORS } from '../../Assets/themes/color';
 export const styles = StyleSheet.create({
   ImageBackground: {
     flex: 1,
+    // borderWidth: 2,
   },
   loginContent: {
     flex: 1,
