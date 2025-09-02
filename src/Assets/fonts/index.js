@@ -10,12 +10,14 @@ export const fonts = {
       android: 'Roboto-Regular',
       ios: 'Roboto-Regular',
     }),
-    light: Platform.select({
+
+    medium: Platform.select({
       android: 'Roboto-Medium',
       ios: 'Roboto-Medium',
     }),
+
     semibold: Platform.select({
-      android: 'Roboto-Medium',
+      android: 'Roboto-SemiBold',
       ios: 'Roboto-Medium',
     }),
   },

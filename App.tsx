@@ -5,15 +5,14 @@ import Home from './src/Screens/Home';
 
 function App() {
   return (
-    <Login />
+    // <Login />
 
-    // <SafeAreaProvider>
-    //   <SafeAreaView>
-    //     {/* <Login></Login> */}
-    //     <Login />
-    //     {/* <Home /> */}
-    //   </SafeAreaView>
-    // </SafeAreaProvider>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        {/* <Login /> */}
+        <Home />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 

@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   profileName: {
     color: COLORS.white,
-    fontSize: vw * 5,
+    fontSize: vw * 5.5,
   },
   userImage: {
     width: vw * 30,

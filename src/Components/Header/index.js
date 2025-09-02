@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { icons, Images } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
@@ -13,9 +13,18 @@ const Header = () => {
 
       <View style={styles.headerRight}>
         <View style={styles.headerRightContent}>
-          <Image source={icons.search} style={styles.headerRightIcons} />
-          <Image source={icons.notifications} style={styles.headerRightIcons} />
-          <Image source={icons.menu} style={styles.headerRightIcons} />
+          <TouchableOpacity>
+            <Image source={icons.search} style={styles.headerRightIcons} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={icons.notifications}
+              style={styles.headerRightIcons}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={icons.menu} style={styles.headerRightIcons} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>

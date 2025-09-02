@@ -12,7 +12,7 @@ export default RobotoSemiBold;
 
 const Style = StyleSheet.create({
   textStyle: {
-    fontFamily: fonts.Roboto.regular,
+    fontFamily: fonts.Roboto.semibold,
     // textAlign: 'center',
     color: COLORS.textColor,
     fontSize: vw * 1.3,
