@@ -16,6 +16,10 @@ export const icons = {
   pendingApproval: require('./icons/pendingApproval.png'),
   building: require('./icons/building.png'),
   map: require('./icons/map.png'),
+  backButton: require('./icons/backButton.png'),
+  editIcon: require('./icons/editIcon.png'),
+  calender: require('./icons/calender.png'),
+  whiteEye: require('./icons/whiteEye.png'),
 };
 
 export const cardsIcons = {

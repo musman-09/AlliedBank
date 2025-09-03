@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, ImageBackground, Image, FlatList } from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
@@ -9,6 +10,13 @@ import Card from '../../Components/Card';
 import { vh, vw } from '../../Assets/themes/dimension';
 
 const Home = () => {
+  const navigation = useNavigation();
+
+  const toggleDrawer = () => {
+    console.log('menu pressed');
+    navigation.toggleDrawer();
+  };
+
   const renderItem = ({ item }) => {
     return <Card name={item.name} icon={item.icon} />;
   };
@@ -64,7 +72,7 @@ const Home = () => {
   ];
   return (
     <>
-      <Header />
+      <Header toggleDrawer={toggleDrawer} />
 
       <ImageBackground
         style={styles.profileBackground}

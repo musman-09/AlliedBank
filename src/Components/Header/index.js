@@ -4,7 +4,7 @@ import { icons, Images } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 
-const Header = () => {
+const Header = ({ toggleDrawer }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerLeft}>
@@ -22,7 +22,7 @@ const Header = () => {
               style={styles.headerRightIcons}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={toggleDrawer}>
             <Image source={icons.menu} style={styles.headerRightIcons} />
           </TouchableOpacity>
         </View>
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
+    // backgroundColor: 'red',
   },
   headerLeft: {
     backgroundColor: COLORS.white,
