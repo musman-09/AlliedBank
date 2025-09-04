@@ -6,7 +6,7 @@ import { COLORS } from '../../Assets/themes/color';
 import { icons } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
 
-const TopView = () => {
+const TopView = ({name}) => {
   return (
     <LinearGradient
       style={styles.container}
@@ -21,7 +21,7 @@ const TopView = () => {
           <Image style={styles.backIcon} source={icons.backButton} />
         </View>
 
-        <RobotoBold style={styles.text} name={'My Pending Request'} />
+        <RobotoBold style={styles.text} name={name} />
       </View>
     </LinearGradient>
   );

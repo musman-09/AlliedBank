@@ -74,7 +74,7 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
 
         <View style={styles.secondRowSub}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View>
+          <View style={{}}>
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 3 }}
               name={claimEndType}
@@ -94,21 +94,16 @@ export default ClaimsCard;
 
 const styles = StyleSheet.create({
   container: {
-    // borderRadius: vw * 4,
-
     backgroundColor: COLORS.white,
     elevation: 4,
     borderRadius: vw * 4,
     borderWidth: 1,
     borderColor: COLORS.lightBorder,
+    // borderColor :"red",
     marginVertical: vh * 1.5,
-
-    // padding: vw * 3,
-    // marginHorizontal: vw,
-    paddingHorizontal: vw * 3,
-    paddingVertical: vh * 2,
-    // width: '100%',
-    // borderWidth: 2,
+    paddingHorizontal: vw * 2,
+    paddingVertical: vh * 1.5,
+    width: '100%',
   },
   eyeViewContainer: {
     backgroundColor: COLORS.orange,
@@ -119,10 +114,10 @@ const styles = StyleSheet.create({
     borderRadius: vw * 5,
     justifyContent: 'center',
     paddingHorizontal: vw * 3,
-    // borderWidth: 2,
     position: 'absolute',
     right: 0,
     bottom: vh * 2.3,
+    // borderWidth:2,
   },
   eye: {
     width: vw * 5,
@@ -136,9 +131,10 @@ const styles = StyleSheet.create({
   firstRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // justifyContent: 'center',
+
     alignItems: 'center',
-    width: '100%',
+    // width: '100%',
+    // borderWidth:2
   },
   editIcon: {
     width: vw * 10,
@@ -148,6 +144,9 @@ const styles = StyleSheet.create({
   left: {
     flexDirection: 'row',
     gap: vw * 2,
+    // borderWidth:2,
+    // width  : "100%",
+    borderColor: 'pink',
   },
   horizontallLine: {
     height: 1,
@@ -158,21 +157,25 @@ const styles = StyleSheet.create({
   verticalLine: {
     height: vh * 3.5,
     backgroundColor: COLORS.textGray,
-    // marginVertical: vh * 1.5,
+
     width: vw * 0.4,
   },
   secondRow: {
     flexDirection: 'row',
-    gap: vw * 1.6,
-    // justifyContent: 'center',
+    gap: vw * 1,
+
     alignItems: 'center',
+    // borderWidth:2,
+    // width : '80%'
   },
   secondRowSub: {
     flexDirection: 'row',
-    // borderWidth: 2,
-    // justifyContent: 'center',
+
     alignItems: 'center',
-    gap: vw * 2,
+    gap: vw * 1,
+    // borderWidth:2,
+    // width: "30%",
+    borderColor: 'purple',
   },
   calenderIcon: {
     width: vw * 8,

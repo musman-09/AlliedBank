@@ -4,6 +4,10 @@ import Login from './src/Screens/Login';
 import Home from './src/Screens/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import MyPendingRequest from './src/Screens/MyPendingRequest';
+import PendingApproval from './src/Screens/PendingApproval';
+import RecentHrCirculars from './src/Screens/RecentHrCirculars';
+
+
 
 function App() {
   return (
@@ -11,7 +15,9 @@ function App() {
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
           {/* <Login /> */}
-          <MyPendingRequest />
+          {/* <MyPendingRequest /> */}
+          {/* <PendingApproval/> */}
+          <RecentHrCirculars/>
           {/* <Home /> */}
         </SafeAreaView>
       </SafeAreaProvider>

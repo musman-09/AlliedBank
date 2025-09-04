@@ -18,7 +18,7 @@ const MyPendingRequest = () => {
     <View style={styles.container}>
       <Header />
 
-      <TopView />
+      <TopView name={'My pending Request'} />
       <CurvedView>
         <View style={styles.tabsContainer}>
           <Tabs
@@ -38,11 +38,10 @@ const MyPendingRequest = () => {
           claimEndType={'Claim Amount'}
           claimType={'Claim Source'}
           dateType={'Claim Date'}
-          name={'Medical Claim'}
+          name={'Salman Tahir - 1001'}
           type={'Claim Number'}
         />
-        <ClaimsCard />
-        <ClaimsCard />
+    
       </CurvedView>
     </View>
   );
