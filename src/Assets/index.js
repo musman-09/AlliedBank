@@ -20,6 +20,9 @@ export const icons = {
   editIcon: require('./icons/editIcon.png'),
   calender: require('./icons/calender.png'),
   whiteEye: require('./icons/whiteEye.png'),
+  pdfIcon: require('./icons/pdfIcon.png'),
+  downloadIcon: require('./icons/downloadIcon.png'),
+  eyeIcon: require('./icons/eyeIcon.png'),
 };
 
 export const cardsIcons = {

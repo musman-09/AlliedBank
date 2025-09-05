@@ -5,16 +5,19 @@ import TopView from '../../Components/TopView';
 import CurvedView from '../../Components/CurvedView';
 // import Header from '../../../AlliedBank/src/Components/Header';
 import { styles } from './style';
+import EmployeeCard from '../../Components/EmployeeCard';
 
-const index = () => {
+const RecentHrCirculars = () => {
   return (
     <View style={styles.container}>
       <Header />
       <TopView name={'Recent Hr Circulars'} />
 
-      <CurvedView></CurvedView>
+      <CurvedView>
+        <EmployeeCard />
+      </CurvedView>
     </View>
   );
 };
 
-export default index;
+export default RecentHrCirculars;
