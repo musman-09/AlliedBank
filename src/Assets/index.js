@@ -23,6 +23,8 @@ export const icons = {
   pdfIcon: require('./icons/pdfIcon.png'),
   downloadIcon: require('./icons/downloadIcon.png'),
   eyeIcon: require('./icons/eyeIcon.png'),
+  arrowUp: require('./icons/arrowUp.png'),
+  arrowDown: require('./icons/arrowDown.png'),
 };
 
 export const cardsIcons = {

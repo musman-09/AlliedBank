@@ -7,17 +7,15 @@ import MyPendingRequest from './src/Screens/MyPendingRequest';
 import PendingApproval from './src/Screens/PendingApproval';
 import RecentHrCirculars from './src/Screens/RecentHrCirculars';
 
-
-
 function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }}>
           {/* <Login /> */}
-          {/* <MyPendingRequest /> */}
+          <MyPendingRequest />
           {/* <PendingApproval/> */}
-          <RecentHrCirculars/>
+          {/* <RecentHrCirculars/> */}
           {/* <Home /> */}
         </SafeAreaView>
       </SafeAreaProvider>

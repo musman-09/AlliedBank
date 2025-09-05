@@ -42,7 +42,7 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
       <View style={styles.secondRow}>
         <View style={styles.secondRowSub}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View>
+          <View style={{ width: '65%' }}>
             <RobotoBold
               name={dateType}
               style={{ color: COLORS.textGray, fontSize: vw * 3 }}
@@ -58,7 +58,7 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
 
         <View style={styles.secondRowSub}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View>
+          <View style={{ width: '65%' }}>
             <RobotoBold
               name={claimType}
               style={{ color: COLORS.textGray, fontSize: vw * 3 }}
@@ -72,9 +72,9 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
 
         <View style={styles.verticalLine}></View>
 
-        <View style={styles.secondRowSub}>
+        <View style={[styles.secondRowSub]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{}}>
+          <View style={{ width: '65%' }}>
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 3 }}
               name={claimEndType}
@@ -162,21 +162,21 @@ const styles = StyleSheet.create({
   },
   secondRow: {
     flexDirection: 'row',
-    gap: vw * 1,
-
+    gap: vw * 2,
     alignItems: 'center',
-    // borderWidth:2,
+    // borderWidth: 2,
     // width : '80%'
   },
+
   secondRowSub: {
     flexDirection: 'row',
-
     alignItems: 'center',
     gap: vw * 1,
-    // borderWidth:2,
-    // width: "30%",
+    // borderWidth: 2,
+    width: '30%',
     borderColor: 'purple',
   },
+
   calenderIcon: {
     width: vw * 8,
     height: vw * 8,

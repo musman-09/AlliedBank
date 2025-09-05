@@ -41,7 +41,6 @@ const MyPendingRequest = () => {
           name={'Salman Tahir - 1001'}
           type={'Claim Number'}
         />
-    
       </CurvedView>
     </View>
   );
