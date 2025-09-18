@@ -25,6 +25,7 @@ export const icons = {
   eyeIcon: require('./icons/eyeIcon.png'),
   arrowUp: require('./icons/arrowUp.png'),
   arrowDown: require('./icons/arrowDown.png'),
+  profile : require('./icons/profile.png'),
 };
 
 export const cardsIcons = {
@@ -42,3 +43,7 @@ export const cardsIcons = {
   usefulLinks: require('./icons/usefulLinks.png'),
   rateThis: require('./icons/rateThis.png'),
 };
+
+export const drawerIcons = {
+  home: require('./icons/home.png'),
+}  

@@ -15,7 +15,7 @@ export default CurvedView;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#48C3FF',
+    backgroundColor:  'rgba(2, 27, 121, 1)',
     flex: 1,
     width: '100%',
   },

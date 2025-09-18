@@ -1,4 +1,10 @@
-import { View, Text, ImageBackground, Image } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import { icons, Images } from '../../Assets/index';
 import { styles } from './style';
@@ -7,8 +13,20 @@ import RobotoSemiBold from '../../Components/RobotoSemiBold';
 import { vw } from '../../Assets/themes/dimension';
 import InputFeild from '../../Components/InputFeild';
 import Button from '../../Components/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from '../../redux/authSlice';
 
 const Login = () => {
+
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.counter.token);
+  console.log(token, 'token');
+
+  const onPressLogin = () => {
+    dispatch(setToken('token'));
+
+
+  };
   return (
     <ImageBackground
       source={Images.LoginBackground}
@@ -48,9 +66,9 @@ const Login = () => {
           secureText={true}
         />
 
-        <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={onPressLogin} style={styles.buttonContainer}>
           <Button title="LOGIN" titleStyle={styles.ButtonTitle} />
-        </View>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
@@ -7,9 +7,43 @@ import RobotoBold from '../../Components/RobotoBold';
 import { styles } from './style';
 import Tabs from '../../Components/Tabs';
 import ClaimsCard from '../../Components/ClaimsCard';
+import { vw } from '../../Assets/themes/dimension';
+
 
 const MyPendingRequest = () => {
   const [activeTab, setActiveTab] = useState('Claims');
+
+  const cards = [
+    {
+      claimSource: "09/04/23",
+      claimDate: "23/24/2222",
+      claimAmount: "23/23/2323"
+    },
+    {
+      claimSource: "09/04/23",
+      claimDate: "23/24/2222",
+      claimAmount: "23/23/2323"
+    }
+    ,
+    {
+      claimSource: "09/04/23",
+      claimDate: "23/24/2222",
+      claimAmount: "23/23/2323"
+    }
+    ,
+    {
+      claimSource: "09/04/23",
+      claimDate: "23/24/2222",
+      claimAmount: "23/23/2323"
+    },
+    {
+      claimSource: "09/04/23",
+      claimDate: "23/24/2222",
+      claimAmount: "23/23/2323"
+    }
+  ]
+
+
 
   const onPressTab = () => {
     setActiveTab(!activeTab);
@@ -18,30 +52,42 @@ const MyPendingRequest = () => {
     <View style={styles.container}>
       <Header />
 
-      <TopView name={'My pending Request'} />
-      <CurvedView>
-        <View style={styles.tabsContainer}>
-          <Tabs
-            isActive={activeTab === 'Claims'}
-            container={activeTab}
-            onPress={() => setActiveTab('Claims')}
-            name={'Claims'}
-          />
-          <Tabs
-            isActive={activeTab === 'Leaves'}
-            onPress={() => setActiveTab('Leaves')}
-            name={'Leaves'}
-          />
-        </View>
 
-        <ClaimsCard
-          claimEndType={'Claim Amount'}
-          claimType={'Claim Source'}
-          dateType={'Claim Date'}
-          name={'Salman Tahir - 1001'}
-          type={'Claim Number'}
-        />
-      </CurvedView>
+      <ScrollView>
+        <TopView name={'My pending Request'} />
+
+        <CurvedView>
+          <View style={styles.tabsContainer}>
+            <Tabs
+              isActive={activeTab === 'Claims'}
+              container={activeTab}
+              onPress={() => setActiveTab('Claims')}
+              name={'Claims'}
+            />
+            <Tabs
+              isActive={activeTab === 'Leaves'}
+              onPress={() => setActiveTab('Leaves')}
+              name={'Leaves'}
+            />
+          </View>
+
+
+          {cards.map((item, index) => {
+            return <ClaimsCard
+              key={index}
+              claimEndType={'Claim Amount'}
+              claimType={'Claim Date'}
+              dateType={item?.claimDate}
+              name={'Salman Tahir - 1001'}
+              type={item?.claimSource}
+            />
+          })}
+
+
+
+
+        </CurvedView>
+      </ScrollView>
     </View>
   );
 };

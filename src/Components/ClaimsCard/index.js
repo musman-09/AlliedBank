@@ -16,16 +16,16 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
           </View>
           <View
             style={{
-              alignItems: 'center',
+              // alignItems: 'center',
               justifyContent: 'center',
             }}
           >
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3.8 }}
+              style={{ color: COLORS.textGray, fontSize: vw * 3.8, }}
               name={name}
             />
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3.8 }}
+              style={{ color: COLORS.textGray, fontSize: vw * 3.8, }}
               name={type}
             />
           </View>
@@ -40,47 +40,47 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
       <View style={styles.horizontallLine}></View>
 
       <View style={styles.secondRow}>
-        <View style={styles.secondRowSub}>
+        <View style={[styles.secondRowSub, { width: "34%" }]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{ width: '65%' }}>
+          <View style={{ width: "76%" }}>
             <RobotoBold
-              name={dateType}
-              style={{ color: COLORS.textGray, fontSize: vw * 3 }}
+              name={"Requested Date"}
+              style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
             />
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3 }}
-              name={'09/04/24'}
+              style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
+             name={dateType}
             />
           </View>
         </View>
 
-        <View style={styles.verticalLine}> </View>
+        {/* <View style={styles.verticalLine}> </View> */}
 
-        <View style={styles.secondRowSub}>
+        <View style={[styles.secondRowSub, { width: "34%" }]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{ width: '65%' }}>
+          <View style={{ width: "70%", }}>
             <RobotoBold
               name={claimType}
-              style={{ color: COLORS.textGray, fontSize: vw * 3 }}
+              style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
             />
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3 }}
+              style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
               name={'09/04/24'}
             />
           </View>
         </View>
 
-        <View style={styles.verticalLine}></View>
+        {/* <View style={styles.verticalLine}></View> */}
 
-        <View style={[styles.secondRowSub]}>
+        <View style={[styles.secondRowSub, { width: "30%", }]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{ width: '65%' }}>
+          <View style={{}}>
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3 }}
+              style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
               name={claimEndType}
             />
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3 }}
+              style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
               name={'09/04/24'}
             />
           </View>
@@ -157,29 +157,35 @@ const styles = StyleSheet.create({
   verticalLine: {
     height: vh * 3.5,
     backgroundColor: COLORS.textGray,
-
-    width: vw * 0.4,
   },
   secondRow: {
     flexDirection: 'row',
-    gap: vw * 2,
     alignItems: 'center',
     // borderWidth: 2,
+    gap: "1%",
+
     // width : '80%'
+    // backgroundColor: "green"
   },
 
   secondRowSub: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: vw * 1,
-    // borderWidth: 2,
+    // backgroundColor : "green",
+    // justifyContent : "center",
     width: '30%',
-    borderColor: 'purple',
+
+    // backgroundColor : "yellow",
+    // borderRightWidth: 1,
+    // borderWidth: 2
+    gap: "4%"
   },
 
   calenderIcon: {
-    width: vw * 8,
-    height: vw * 8,
+    width: "20%",
+    // height: vw * 6,
+    height: vh * 3,
     resizeMode: 'contain',
+    // borderWidth: 2
   },
 });

@@ -1,0 +1,31 @@
+import { View, Text } from 'react-native';
+import React from 'react';
+
+import { NavigationContainer } from '@react-navigation/native';
+import Home from '../../Screens/Home';
+import Login from '../../Screens/Login';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
+import MyPendingRequest from '../../Screens/MyPendingRequest';
+import drawerStack from '../drawerStack'
+import AuthStack from '../authStack'
+
+const MainStack = () => {
+  const token = useSelector(state => state.counter.token);
+  console.log(token, 'token');
+  const Stack = createStackNavigator();
+
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {token ? (
+     
+            <Stack.Screen name="drawerStack" component={drawerStack} />
+      ) : (
+        
+        <Stack.Screen name="authStack" component={AuthStack} />
+      )}
+    </Stack.Navigator>
+  );
+};
+
+export default MainStack;
