@@ -1,31 +1,13 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { NavigationContainer } from '@react-navigation/native';
-import Home from '../../Screens/Home';
-import Login from '../../Screens/Login';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
-import MyPendingRequest from '../../Screens/MyPendingRequest';
-import drawerStack from '../drawerStack'
-import AuthStack from '../authStack'
+const Tab = createBottomTabNavigator();
 
-const MainStack = () => {
-  const token = useSelector(state => state.counter.token);
-  console.log(token, 'token');
-  const Stack = createStackNavigator();
-
+const Tabs = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {token ? (
-     
-            <Stack.Screen name="drawerStack" component={drawerStack} />
-      ) : (
-        
-        <Stack.Screen name="authStack" component={AuthStack} />
-      )}
-    </Stack.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+    </Tab.Navigator>
   );
 };
 
-export default MainStack;
+export default Tabs;
