@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { cardsIcons } from '../../Assets';
 import RobotoBold from '../RobotoBold';
@@ -6,14 +6,14 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 import RobotoSemiBold from '../RobotoSemiBold';
 
-const Card = ({ name, icon }) => {
+const Card = ({ name, icon, onPress  , }) => {
   return (
-    <View style={styles.cardContainer}>
+    <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
       <View style={styles.cardContent}>
         <Image style={styles.icon} source={icon} />
         <RobotoSemiBold style={styles.cardText} name={name} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

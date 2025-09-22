@@ -12,6 +12,7 @@ import { fonts } from '../../Assets/fonts';
 import RobotoBold from '../../Components/RobotoBold';
 import RobotoRegular from '../../Components/RobotoRegular';
 import { ScrollView } from 'react-native-gesture-handler';
+import Tabs from '../Tabs';
 
 const drawerStack = () => {
   const Drawer = createDrawerNavigator();
@@ -23,65 +24,79 @@ const drawerStack = () => {
 
     {
       label: 'My Pending Requests',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerPendingRequest,
+      to: 'myPendingRequest',
     },
 
     {
       label: 'Employee Details',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerEmployeeDetails,
+      to: 'employeeDetails',
     },
 
     {
       label: 'HRecent HR Circulars',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerRecentHrCirculars,
+      to: 'recentHrCirculars',
     },
 
     {
       label: 'Pay Slips',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerPaySlip,
+      to: 'paySlips',
     },
 
     {
       label: 'Tax Certificate',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerTaxCertificate,
+      to: 'taxCertificate',
     },
     {
       label: 'Performance Management',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerPerformanceManagement,
+      to: 'performanceManagement',
     },
     {
       label: 'Claim Status',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerClaimStatus,
+      to: 'claimStatus',
     },
     {
       label: 'Leave Management',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerClaimStatus,
+      to: 'leaveManagement',
     },
     {
       label: 'Loan History',
       icon: drawerIcons.home,
+      to: 'loanHistory',
     },
     {
       label: 'Attendance',
       icon: drawerIcons.home,
+      to: 'attendance',
     },
     {
       label: 'Useful Links',
       icon: drawerIcons.home,
+      to: 'usefulLinks',
     },
     {
       label: 'Rate This App',
       icon: drawerIcons.home,
+      to: 'rateThisApp',
     },
 
     {
       label: 'setting',
       icon: drawerIcons.home,
+      to: 'settings',
     },
 
     {
       label: 'logout',
-      icon: drawerIcons.home,
+      icon: drawerIcons.drawerLogout,
+      to: 'logout',
     },
   ];
 
@@ -139,8 +154,9 @@ const drawerStack = () => {
         headerShown: false,
         // swipeEnabled: false,
       }}
-      initialRouteName="Home"
+      initialRouteName="Tabs"
     >
+      <Drawer.Screen name="Tabs" component={Tabs} />
       <Drawer.Screen name="Home" component={Home} />
     </Drawer.Navigator>
   );

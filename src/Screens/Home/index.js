@@ -12,62 +12,84 @@ import { vh, vw } from '../../Assets/themes/dimension';
 const Home = () => {
   const navigation = useNavigation();
 
+  const onPressCard = to => {
+    navigation.navigate(to);
+  };
+
   const toggleDrawer = () => {
     console.log('menu pressed');
     navigation.toggleDrawer();
   };
 
   const renderItem = ({ item }) => {
-    return <Card name={item.name} icon={item.icon} />;
+    return (
+      <Card
+        onPress={() => onPressCard(item.to)}
+        name={item.name}
+        icon={item.icon}
+      />
+    );
   };
   const cardData = [
     {
       name: 'My Pending Request',
       icon: cardsIcons.attendance,
+      to: 'MyPendingRequest',
     },
     {
       name: 'Employee Details',
       icon: cardsIcons.claimStatus,
+      to: 'pendingApproval',
     },
     {
       name: 'Recent Hr Circulars',
       icon: cardsIcons.employee,
+      to: 'pendingApproval',
     },
     {
       name: 'Pay\nSlips',
       icon: cardsIcons.paySlips,
+      to: 'PaySlips',
     },
     {
       name: 'Tax\nCertificates',
       icon: cardsIcons.taxCertificate,
+      to: 'TaxCertificate',
     },
     {
       name: 'Performance Management',
       icon: cardsIcons.performanceManagement,
+      to: 'PerformanceManagement',
     },
     {
       name: 'Claim\nStatus',
       icon: cardsIcons.claimStatus,
+      to: 'ClaimStatus',
     },
     {
       name: 'Leave Management',
       icon: cardsIcons.leaveManagement,
+      to: 'LeaveManagement',
     },
     {
       name: 'Loan\nHistory',
       icon: cardsIcons.loanHistory,
+      to: 'LoanHistory',
     },
     {
       name: 'Attendance',
       icon: cardsIcons.attendance,
+      to: 'Attendance',
     },
     {
       name: 'Useful',
       icon: cardsIcons.usefulLinks,
+      to: 'Useful',
     },
     {
       name: 'Rate This',
       icon: cardsIcons.rateThis,
+      to: 'RateThis',
     },
   ];
   return (
@@ -136,7 +158,10 @@ const Home = () => {
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           numColumns={3}
-          contentContainerStyle={{ gap: vh * 1.5 }}
+          contentContainerStyle={{
+            paddingBottom: vh * 35,
+            gap: vh * 1.5,
+          }}
           columnWrapperStyle={{
             justifyContent: 'space-between',
           }}

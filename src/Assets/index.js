@@ -25,7 +25,10 @@ export const icons = {
   eyeIcon: require('./icons/eyeIcon.png'),
   arrowUp: require('./icons/arrowUp.png'),
   arrowDown: require('./icons/arrowDown.png'),
-  profile : require('./icons/profile.png'),
+  profile: require('./icons/profile.png'),
+  tabsHome: require('./icons/tabsHome.png'),
+  tabsProfile: require('./icons/tabsProfile.png'),
+  tabsPolicy: require('./icons/tabsPolicy.png'),
 };
 
 export const cardsIcons = {
@@ -46,4 +49,13 @@ export const cardsIcons = {
 
 export const drawerIcons = {
   home: require('./icons/home.png'),
-}  
+  drawerPendingRequest: require('./icons/drawerPendingRequest.png'),
+  drawerEmployeeDetails: require('./icons/drawerEmployeeDetails.png'),
+  drawerRecentHrCirculars: require('./icons/drawerHrCirculars.png'),
+  drawerPaySlip: require('./icons/drawerPaySlips.png'),
+  drawerTaxCertificate: require('./icons/drawerTaxCertificate.png'),
+  drawerTaxCertificate: require('./icons/drawerTaxCertificate.png'),
+  drawerPerformanceManagement: require('./icons/drawerPerformaneManagement.png'),
+  drawerClaimStatus: require('./icons/drawerClaimStatus.png'),
+  drawerLogout: require('./icons/drawerLogout.png'),
+};

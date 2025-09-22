@@ -1,12 +1,17 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import RobotoBold from '../RobotoBold';
 import { COLORS } from '../../Assets/themes/color';
 import { icons } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
+import { useNavigation } from '@react-navigation/native';
 
-const TopView = ({name}) => {
+const TopView = ({ name }) => {
+  const navigation = useNavigation();
+  const onPressBack = () => {
+    navigation.goBack();
+  };
   return (
     <LinearGradient
       style={styles.container}
@@ -17,9 +22,12 @@ const TopView = ({name}) => {
       ]}
     >
       <View style={styles.subContainer}>
-        <View style={{ position: 'absolute', left: 2 }}>
+        <TouchableOpacity
+          onPress={onPressBack}
+          style={{ position: 'absolute', left: 2 }}
+        >
           <Image style={styles.backIcon} source={icons.backButton} />
-        </View>
+        </TouchableOpacity>
 
         <RobotoBold style={styles.text} name={name} />
       </View>
