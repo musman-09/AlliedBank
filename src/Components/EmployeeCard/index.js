@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 // import { icons } from '../../Assets';
 
 import RobotoBold from '../RobotoBold';
@@ -9,6 +9,11 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 
 const EmployeeCard = () => {
+  const [isToggle, setIsToggle] = useState(false);
+
+  const toggleButton = () => {
+    setIsToggle(!isToggle);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.firstRow}>
@@ -17,33 +22,56 @@ const EmployeeCard = () => {
           <RobotoBold style={styles.docName} name={'Employee Leave Policy'} />
         </View>
 
-        <View style={styles.right}>
-          <Image style={styles.docIcon} source={icons.calender} />
-          <RobotoBold
-            style={styles.docName}
-            name={'Last Update\n11/jan/2023'}
+        {isToggle ? (
+          <View style={styles.right}>
+            <Image style={styles.docIcon} source={icons.calender} />
+            <RobotoBold
+              style={styles.docName}
+              name={'Last Update\n11/jan/2023'}
+            />
+          </View>
+        ) :  <View style={styles.right}>  <TouchableOpacity onPress={toggleButton}>
+            <Image
+              style={styles.downloadIcon}
+              source={isToggle ? icons.arrowUp : icons.arrowDown}
+            />
+          </TouchableOpacity> </View> }
+      </View>
+
+      {isToggle && (
+        <View style={styles.description}>
+          <RobotoBold name={'Description:'} />
+          <RobotoRegular
+            style={styles.descriptionText}
+            name={
+              'Our Employee Leave Policy ensures a clear and fair framework for managing time off. It includes various types of leave such as annual, sick, parental, and special leave categories'
+            }
           />
         </View>
-      </View>
-
-      <View style={styles.description}>
-        <RobotoBold name={'Description:'} />
-        <RobotoRegular
-          style={styles.descriptionText}
-          name={
-            'Our Employee Leave Policy ensures a clear and fair framework for managing time off. It includes various types of leave such as annual, sick, parental, and special leave categories'
-          }
-        />
-      </View>
+      )}
 
       <View style={styles.secondRow}>
-        <View style={styles.secondRowLeft}>
-          <Image style={styles.downloadIcon} source={icons.downloadIcon} />
-          <Image style={styles.downloadIcon} source={icons.eyeIcon} />
+        {isToggle && (
+          <> 
+          <View style={styles.secondRowLeft}>
+            <Image style={styles.downloadIcon} source={icons.downloadIcon} />
+            <Image style={styles.downloadIcon} source={icons.eyeIcon} />
+          </View>
+
+ <View style={styles.secondRowRight}>
+          <TouchableOpacity onPress={toggleButton}>
+            <Image
+              style={styles.downloadIcon}
+              source={isToggle ? icons.arrowUp : icons.arrowDown}
+            />
+          </TouchableOpacity>
         </View>
-        <View style={styles.secondRowRight}>
-          <Image style={styles.downloadIcon} source={icons.arrowUp} />
-        </View>
+        </>
+
+
+        )}
+
+       
       </View>
     </View>
   );
@@ -60,8 +88,9 @@ const styles = StyleSheet.create({
     borderColor: COLORS.lightBorder,
     elevation: 2,
     backgroundColor: COLORS.white,
-    paddingHorizontal: vw * 2,
-    paddingVertical: vh * 1.5,
+    paddingHorizontal: vw * 4,
+    paddingVertical: vh * 1,
+ 
   },
   left: {
     flexDirection: 'row',
@@ -96,7 +125,8 @@ const styles = StyleSheet.create({
     width: '95%',
   },
   descriptionText: {
-    fontSize: vw * 2.9,
+    fontSize: vw * 3,
+    marginTop: vh * 0.5,
     // alignSelf: 'flex-start',
     // borderWidth: 2,
 

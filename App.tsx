@@ -11,7 +11,7 @@ function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1  }}>
           <Provider store={store}>
             <MainStack />
           </Provider>

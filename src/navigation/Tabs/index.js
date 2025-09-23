@@ -10,17 +10,20 @@ import { COLORS } from '../../Assets/themes/color';
 import { fonts } from '../../Assets/fonts';
 import { BounceInDown } from 'react-native-reanimated';
 
+import HomeStack from '../HomeStack'
+
+
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeStack"
       screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarLabel: 'Home',
           tabBarLabelStyle: styles.tabLabel,

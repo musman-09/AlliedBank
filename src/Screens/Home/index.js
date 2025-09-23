@@ -39,17 +39,17 @@ const Home = () => {
     {
       name: 'Employee Details',
       icon: cardsIcons.claimStatus,
-      to: 'pendingApproval',
+      to: 'EmployeeDetails',
     },
     {
       name: 'Recent Hr Circulars',
       icon: cardsIcons.employee,
-      to: 'pendingApproval',
+      to: 'RecentHrCirculars',
     },
     {
       name: 'Pay\nSlips',
       icon: cardsIcons.paySlips,
-      to: 'PaySlips',
+      to: 'PaySlip',
     },
     {
       name: 'Tax\nCertificates',

@@ -6,8 +6,9 @@ import { COLORS } from '../../Assets/themes/color';
 import { icons } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { useNavigation } from '@react-navigation/native';
+import RobotoRegular from '../RobotoRegular';
 
-const TopView = ({ name }) => {
+const TopView = ({ name, image }) => {
   const navigation = useNavigation();
   const onPressBack = () => {
     navigation.goBack();
@@ -30,6 +31,26 @@ const TopView = ({ name }) => {
         </TouchableOpacity>
 
         <RobotoBold style={styles.text} name={name} />
+
+        {image && (
+          <>
+            {' '}
+            <Image source={image} style={styles.image} />
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: vh * 2,
+              }}
+            >
+              <RobotoBold style={styles.imageHeading} name={'Zohaib Ghaffar'} />
+              <RobotoRegular
+                style={styles.imageText}
+                name={'Senior Officer IT Group Head Office'}
+              />
+            </View>
+          </>
+        )}
       </View>
     </LinearGradient>
   );
@@ -39,23 +60,13 @@ export default TopView;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor: 'red',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // flexDirection: 'row',
     paddingVertical: vh * 5,
-    // borderWidth: 2,
-    // width: '90%',
   },
   subContainer: {
-    // borderWidth: 2,
     paddingLeft: vw * 3,
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
+
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
   text: {
     color: COLORS.white,
@@ -65,5 +76,18 @@ const styles = StyleSheet.create({
     width: vw * 8,
     height: vw * 8,
     resizeMode: 'contain',
+  },
+  image: {
+    width: vw * 16,
+    height: vw * 16,
+    resizeMode: 'contain',
+    marginTop: vh * 1.8,
+  },
+  imageHeading: {
+    color: COLORS.white,
+  },
+  imageText: {
+    color: COLORS.white,
+    fontSize: vw * 3,
   },
 });

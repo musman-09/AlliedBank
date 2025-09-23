@@ -29,6 +29,15 @@ export const icons = {
   tabsHome: require('./icons/tabsHome.png'),
   tabsProfile: require('./icons/tabsProfile.png'),
   tabsPolicy: require('./icons/tabsPolicy.png'),
+  grade: require('./icons/grade.png'),
+  designation: require('./icons/designation.png'),
+  emailAddress: require('./icons/emailAddress.png'),
+  mobileNumber: require('./icons/mobileNumber.png'),
+  placeOfPosting: require('./icons/placeOfPosting.png'),
+  organization: require('./icons/organization.png'),
+  joiningDate: require('./icons/joiningDate.png'),
+  leftArrow: require('./icons/leftArrow.png'),
+  rightArrow: require('./icons/rightArrow.png'),
 };
 
 export const cardsIcons = {
