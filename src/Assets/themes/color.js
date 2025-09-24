@@ -10,4 +10,7 @@ export const COLORS = {
   black: 'black',
   textGray: 'rgba(63, 69, 93, 1)',
   lightBorder: 'rgba(233, 233, 233, 1)',
+  tabsColor : ['#F3F7FC' , '#CDE6FB'],  
+  tabsActiveColor : ['rgba(5, 117, 230, 1)' , 'rgba(2, 41, 138, 1)' , 'rgba(2, 27, 121, 1)']
+
 };

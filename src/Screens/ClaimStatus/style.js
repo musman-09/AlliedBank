@@ -8,13 +8,11 @@ export const styles = StyleSheet.create({
   },
   curvedViewContent: {},
   crowselBar: {
-    flexDirection: 'row'
-    ,
-    width: "70%",
+    flexDirection: 'row',
+    width: '70%',
 
     alignItems: 'center',
 
-      
     justifyContent: 'space-between',
   },
   crowseIcon: {
