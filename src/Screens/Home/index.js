@@ -79,10 +79,10 @@ const Home = () => {
     {
       name: 'Attendance',
       icon: cardsIcons.attendance,
-      to: 'Attendance',
+      to: 'AttendanceStatus',
     },
     {
-      name: 'Useful',
+      name: 'UsefulLinks',
       icon: cardsIcons.usefulLinks,
       to: 'Useful',
     },

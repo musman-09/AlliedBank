@@ -19,69 +19,51 @@ const Table = ({ data }) => {
     setSelected(tab);
   };
 
-  const selectedTabData = data.filter(
-    (item, index) => item.status === selected,
+  console.log(data, 'data coming');
+  const selectedTabData = data.filter(row =>
+    row?.some(obj => obj.label === 'status' && obj.value === selected),
   );
 
-  console.log(selectedTabData, 'usman');
+  const renderItem = ({ item }) => {
 
-  const renderItem = ({ item, index }) => {
-    console.log(item, 'item');
+    const statusObj = item.find(obj => obj.label === 'status');
+    const statusValue = statusObj?.value;
+
+    const fields = item.filter(obj => obj.label !== 'status');
 
     return (
       <View style={styles.row}>
-        <View key={index} style={styles.cell}>
-          <View
-            style={
-              item?.status === 'Pending'
-                ? styles.orangeCircle
-                : item?.status === 'Approved'
-                ? styles.greenCircle
-                : styles.redCircle
-            }
-          />
-          <RobotoBold style={styles.label} name={'Claim Type'} />
-          <RobotoRegular style={styles.value} name={item?.type} />
-        </View>
+        {fields.map((field, index) => (
+          <View key={index} style={styles.cell}>
+            {index === 0 && (
+              <>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View
+                    style={
+                      statusValue === 'Pending'
+                        ? styles.orangeCircle
+                        : statusValue === 'Approved'
+                        ? styles.greenCircle
+                        : styles.redCircle
+                    }
+                  />
 
-        <View key={index} style={styles.cell}>
-          <RobotoBold style={styles.label} name={'Claim Number'} />
-          <RobotoRegular style={styles.value} name={item?.id} />
-        </View>
+                  <RobotoBold name={statusValue} />
+                </View>
+              </>
+            )}
 
-        <View key={index} style={styles.cell}>
-          <RobotoBold style={styles.label} name={'Claim Date'} />
-          <RobotoRegular style={styles.value} name={item?.date} />
-        </View>
-
-        <View style={styles.horizontalBar} />
-
-        <View key={index} style={styles.cell}>
-          <RobotoBold style={styles.label} name={'Claim Status'} />
-
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View
-              style={
-                item?.status === 'Pending'
-                  ? styles.orangeDot
-                  : item?.status === 'Approved'
-                  ? styles.greenDot
-                  : styles.redDot
-              }
-            />
-            <RobotoRegular style={styles.value} name={item?.status} />
+            <RobotoBold style={styles.label} name={field.label} />
+            <RobotoRegular style={styles.value} name={field.value} />
           </View>
-        </View>
+        ))}
 
-        <View key={index} style={styles.cell}>
-          <RobotoBold style={styles.label} name={'Claim Amount'} />
-          <RobotoRegular style={styles.value} name={item?.amount} />
-        </View>
-
+        {/* divider at bottom of each row */}
         <View style={styles.horizontalBar} />
       </View>
     );
   };
+
   console.log(selectedTabData, 'selected tab data');
   return (
     <View style={styles.tableContainer}>
@@ -172,8 +154,10 @@ const styles = StyleSheet.create({
   cell: {
     width: '33.3%',
     paddingVertical: vh * 1,
-    justifyContent: 'center',
-    // backgroundColor: "yellow"
+    // justifyContent: 'center',
+    // backgroundColor: "yellow",
+    // flexDirection :'row'
+    alignItems:"center"
   },
   label: {},
   value: {

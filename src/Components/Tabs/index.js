@@ -4,18 +4,19 @@ import RobotoBold from '../RobotoBold';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 
-const Tabs = ({ name, onPress, isActive }) => {
+const Tabs = ({ name, onPress, isActive, container , labelStyle }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[
         styles.container,
+        container,
         { backgroundColor: isActive ? COLORS.blueTabs : COLORS.whiteTabs },
       ]}
     >
       <RobotoBold
         name={name}
-        style={{ color: isActive ? COLORS.white : COLORS.black }}
+        style={[{ color: isActive ? COLORS.white : COLORS.black } , labelStyle ]}
       />
     </TouchableOpacity>
   );

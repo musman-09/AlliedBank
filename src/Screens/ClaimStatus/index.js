@@ -12,92 +12,58 @@ import { COLORS } from '../../Assets/themes/color';
 
 const ClaimStatus = () => {
   const claimsData = [
-    {
-      id: '000245109',
-      type: 'OPD',
-      status: 'Pending',
-      amount: 40000,
-      date: '2024-01-03',
-    },
-    {
-      id: '000245108',
-      type: 'OPD',
-      status: 'Pending',
-      amount: 10000,
-      date: '2024-02-07',
-    },
-    {
-      id: '000245200',
-      type: 'IPD',
-      status: 'Approved',
-      amount: 55000,
-      date: '2024-01-15',
-    },
-    {
-      id: '000245300',
-      type: 'OPD',
-      status: 'Rejected',
-      amount: 15000,
-      date: '2024-02-20',
-    },
+    [
+      { label: 'status', value: 'Pending' },
+     
+      { label: 'Claim Type:', value: '12/23/2223' },
+       {
+        label: 'Claim Number',
+        value: '12/23/2332',
+      },
+      { label: 'Claim Date', value: '12/12/2223' },
+      {label  : 'Claim Status' , value : "Pending"},
+      {label : "Claim Amount"  , value : "232323"}
+    ],
+      [
+      { label: 'status', value: 'Pending' },
+     
+      { label: 'Claim Type:', value: '12/23/2223' },
+       {
+        label: 'Claim Number',
+        value: '12/23/2332',
+      },
+      { label: 'Claim Date', value: '12/12/2223' },
+      {label  : 'Claim Status' , value : "Pending"},
+      {label : "Claim Amount"  , value : "232323"}
+    ],
+      [
+      { label: 'status', value: 'Pending' },
+     
+      { label: 'Claim Type:', value: '12/23/2223' },
+       {
+        label: 'Claim Number',
+        value: '12/23/2332',
+      },
+      { label: 'Claim Date', value: '12/12/2223' },
+      {label  : 'Claim Status' , value : "Pending"},
+      {label : "Claim Amount"  , value : "232323"}
+    ],
+      [
+      { label: 'status', value: 'Approved' },
+     
+      { label: 'Claim Type:', value: '12/23/2223' },
+       {
+        label: 'Claim Number',
+        value: '12/23/2332',
+      },
+      { label: 'Claim Date', value: '12/12/2223' },
+      {label  : 'Claim Status' , value : "Approved"},
+      {label : "Claim Amount"  , value : "232323"}
+    ],
 
-    {
-      id: '000245109',
-      type: 'OPD',
-      status: 'Pending',
-      amount: 40000,
-      date: '2024-01-03',
-    },
-    {
-      id: '000245108',
-      type: 'OPD',
-      status: 'Pending',
-      amount: 10000,
-      date: '2024-02-07',
-    },
-    {
-      id: '000245200',
-      type: 'IPD',
-      status: 'Approved',
-      amount: 55000,
-      date: '2024-01-15',
-    },
-    {
-      id: '000245300',
-      type: 'OPD',
-      status: 'Rejected',
-      amount: 15000,
-      date: '2024-02-20',
-    },
 
-    {
-      id: '000245109',
-      type: 'OPD',
-      status: 'Pending',
-      amount: 40000,
-      date: '2024-01-03',
-    },
-    {
-      id: '000245108',
-      type: 'OPD',
-      status: 'Pending',
-      amount: 10000,
-      date: '2024-02-07',
-    },
-    {
-      id: '000245200',
-      type: 'IPD',
-      status: 'Approved',
-      amount: 55000,
-      date: '2024-01-15',
-    },
-    {
-      id: '000245300',
-      type: 'OPD',
-      status: 'Rejected',
-      amount: 15000,
-      date: '2024-02-20',
-    },
+
+   
   ];
 
   const barData = [

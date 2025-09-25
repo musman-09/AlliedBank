@@ -1,10 +1,14 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import Header from '../../Components/Header';
+import TopView from '../../Components/TopView';
 
 const AttendanceStatus = () => {
   return (
-    <View>
-      <Text>Attendance</Text>
+    <View style={{flex:1}}>
+    
+    <Header/>
+    <TopView/>
     </View>
   );
 };
