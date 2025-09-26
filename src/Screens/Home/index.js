@@ -84,7 +84,7 @@ const Home = () => {
     {
       name: 'UsefulLinks',
       icon: cardsIcons.usefulLinks,
-      to: 'Useful',
+      to: 'UsefulLinks',
     },
     {
       name: 'Rate This',

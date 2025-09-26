@@ -1,12 +1,91 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import React from 'react';
+import RobotoBold from '../RobotoBold';
+import { COLORS } from '../../Assets/themes/color';
+import { vh, vw } from '../../Assets/themes/dimension';
+import RobotoRegular from '../RobotoRegular';
 
-const DisplayTable = () => {
+const DisplayTable = ({ data, tableCellHeading }) => {
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.cellRowContainer}>
+        <View style={styles.cellRow}>
+          <RobotoRegular style={styles.row} name={item?.payMonth} />
+        </View>
+
+        <View style={styles.cellRow}>
+          <RobotoRegular style={styles.row} name={item?.paymentDate} />
+        </View>
+        <View style={styles.cellRow}>
+          <RobotoRegular style={styles.row} name={item?.installationAmount} />
+        </View>
+      </View>
+    );
+  };
   return (
-    <View>
-      <Text>DisplayTable</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <View style={styles.cellHeadingContainer}>
+        <View style={styles.cellHeading}>
+          <RobotoBold style={styles.heading} name={tableCellHeading[0]} />
+        </View>
 
-export default DisplayTable
+        <View style={styles.cellHeading}>
+          <RobotoBold style={styles.heading} name={tableCellHeading[1]} />
+        </View>
+        <View style={styles.cellHeading}>
+          <RobotoBold style={styles.heading} name={tableCellHeading[2]} />
+        </View>
+      </View>
+
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        ListHeaderComponent={()=>(
+          <View>terhiqksldjfljqerwkdasjfo;wreq eridqufshckjenwds eridsglkmc, </View>
+        )}
+        contentContainerStyle={{
+          gap: vh * 0.5,
+
+      
+        }}
+        style={{   }}
+      />
+    </View>
+  );
+};
+
+export default DisplayTable;
+
+const styles = StyleSheet.create({
+  container: {},
+  cellHeadingContainer: {
+    flexDirection: 'row',
+  },
+  cellHeading: {
+    backgroundColor: COLORS.orange,
+    width: '33.4%',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: vh,
+  },
+  cellRowContainer: {
+    flexDirection: 'row',
+
+    paddingVertical: vh,
+    gap: vw,
+  },
+  cellRow: {
+    width: '33.4%',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  heading: {
+    color: COLORS.white,
+    // fontSize : vw*
+  },
+  row: {
+    fontSize: vw * 4,
+  },
+});

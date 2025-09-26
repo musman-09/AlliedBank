@@ -8,6 +8,13 @@ const UsefulLinks = () => {
     <View>
 <Header/>
 <TopView/>
+
+<View style={styles.usefulLinksContainer}> 
+
+
+
+</View>
+
     </View>
   )
 }
