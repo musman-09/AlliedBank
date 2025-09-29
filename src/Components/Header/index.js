@@ -3,8 +3,13 @@ import React from 'react';
 import { icons, Images } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
+import { useNavigation } from '@react-navigation/native';
 
 const Header = ({ toggleDrawer }) => {
+  const navigation = useNavigation();
+  const onPressDrawer = () => {
+    navigation.toggleDrawer();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headerLeft}>
@@ -22,7 +27,9 @@ const Header = ({ toggleDrawer }) => {
               style={styles.headerRightIcons}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={toggleDrawer}>
+          <TouchableOpacity
+            onPress={toggleDrawer ? toggleDrawer : onPressDrawer}
+          >
             <Image source={icons.menu} style={styles.headerRightIcons} />
           </TouchableOpacity>
         </View>

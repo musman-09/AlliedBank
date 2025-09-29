@@ -15,6 +15,7 @@ import AttendanceStatus from '../../Screens/AttendanceStatus';
 import LoanHistory from '../../Screens/LoanHistory';
 import RateThis from '../../Screens/RateThis';
 
+
 const HomeStack = () => {
   const Stack = createStackNavigator();
 
@@ -24,7 +25,7 @@ const HomeStack = () => {
       initialRouteName="Home"
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="pendingApproval" component={PendingApproval} />
+      <Stack.Screen name="PendingApproval" component={PendingApproval} />
       <Stack.Screen name="MyPendingRequest" component={MyPendingRequest} />
       <Stack.Screen name="PaySlip" component={PaySlip} />
       <Stack.Screen name="AttendanceStatus" component={AttendanceStatus} />

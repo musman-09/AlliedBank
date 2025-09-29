@@ -1,5 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, ImageBackground, Image, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import { styles } from './style';
@@ -122,7 +129,10 @@ const Home = () => {
               />
             </View>
 
-            <View style={styles.approvalBanner}>
+            <TouchableOpacity
+              onPress={() => onPressCard('PendingApproval')}
+              style={styles.approvalBanner}
+            >
               <View style={styles.approvalBannerContent}>
                 <Image
                   style={styles.bannerIcon}
@@ -137,7 +147,7 @@ const Home = () => {
                   <RobotoBold name={'2'} />
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.right}>

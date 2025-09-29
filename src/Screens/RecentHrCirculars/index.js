@@ -13,10 +13,11 @@ const RecentHrCirculars = () => {
       <Header />
       <TopView name={'Recent Hr Circulars'} />
 
-      <CurvedView>
 
+
+
+      <CurvedView>
         <EmployeeCard />
-       
       </CurvedView>
     </View>
   );
