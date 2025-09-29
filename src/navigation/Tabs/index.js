@@ -6,12 +6,10 @@ import PendingApproval from '../../Screens/PendingApproval';
 import { icons } from '../../Assets';
 import { Image, StyleSheet } from 'react-native';
 import { vh, vw } from '../../Assets/themes/dimension';
-import { COLORS } from '../../Assets/themes/color';
-import { fonts } from '../../Assets/fonts';
-import { BounceInDown } from 'react-native-reanimated';
+import EmployeeDetails from '../../Screens/EmployeeDetails';
 
-import HomeStack from '../HomeStack'
-
+import HomeStack from '../HomeStack';
+import RecentHrCirculars from '../../Screens/RecentHrCirculars';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,8 +40,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="pendingRequest"
-        component={MyPendingRequest}
+        name="EmployeeDetails"
+        component={EmployeeDetails}
         options={{
           tabBarLabel: 'Profile',
           tabBarLabelStyle: styles.tabLabel,
@@ -63,8 +61,8 @@ const Tabs = () => {
       />
 
       <Tab.Screen
-        name="pendingApproval"
-        component={PendingApproval}
+        name="RecentHrCirculars"
+        component={RecentHrCirculars}
         options={{
           tabBarLabel: 'Policy',
           tabBarLabelStyle: styles.tabLabel,

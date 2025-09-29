@@ -35,9 +35,9 @@ const AttendanceStatus = () => {
             style={{
               // elevation: 3,
               borderRadius: vw * 2,
-              marginVertical: vh * 5,
+              // marginVertical: vh * 5,
               // backgroundColor: COLORS.white,
-              marginHorizontal: vw * 2,
+              // marginHorizontal: vw * 2,
             }}
             theme={{
               backgroundColor: COLORS.orange,
@@ -52,10 +52,42 @@ const AttendanceStatus = () => {
             }}
           />
 
-          
-      
-            <RobotoBold name={'2323'} />
-        
+          <View style={styles.identifier}>
+            <View style={styles.leave}>
+              <View style={styles.squareBlue}>
+
+
+              </View>
+              <RobotoBold name={'On Leave'} />
+            </View>
+
+
+              <View style={styles.leave}>
+              <View style={styles.squarePink}>
+
+                
+              </View>
+              <RobotoBold name={'Absent'} />
+            </View>
+
+
+              <View style={styles.leave}>
+              <View style={styles.squareGreen}>
+
+                
+              </View>
+              <RobotoBold name={'Holiday'} />
+            </View>
+
+
+              <View style={styles.leave}>
+              <View style={styles.squareOrange}>
+
+                
+              </View>
+              <RobotoBold name={'Present With Violation'} />
+            </View>
+          </View>
         </View>
       </CurvedView>
     </View>

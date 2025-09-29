@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import {  TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import RobotoBold from '../RobotoBold';
 import { vh, vw } from '../../Assets/themes/dimension';

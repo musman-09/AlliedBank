@@ -38,6 +38,16 @@ export const icons = {
   joiningDate: require('./icons/joiningDate.png'),
   leftArrow: require('./icons/leftArrow.png'),
   rightArrow: require('./icons/rightArrow.png'),
+  usefulCardIcon: require('./icons/usefulCardIcon.png'),
+  arrowDirection: require('./icons/arrowDirection.png'),
+
+  unfilledStars: require('./icons/unfilledStar.png'),
+  filledStars: require('./icons/filledStar.png'),
+  veryBadEmoji: require('./icons/veryBadEmoji.png'),
+  greatEmoji: require('./icons/greatEmoji.png'),
+  badEmoji: require('./icons/badEmoji.png'),
+  okayEmoji: require('./icons/okayEmoji.png'),
+  smileEmojiGreen: require('./icons/smileEmojiGreen.png'),
 };
 
 export const cardsIcons = {
@@ -66,5 +76,11 @@ export const drawerIcons = {
   drawerTaxCertificate: require('./icons/drawerTaxCertificate.png'),
   drawerPerformanceManagement: require('./icons/drawerPerformaneManagement.png'),
   drawerClaimStatus: require('./icons/drawerClaimStatus.png'),
+  drawerLoanHistory: require('./icons/drawerLoanHistory.png'),
+  drawerAttendance: require('./icons/drawerAttendance.png'),
+  drawerUsefulLinks: require('./icons/drawerUsefulLinks.png'),
+  drawerRateThisApp: require('./icons/drawerRateThisApp.png'),
+  drawerSettings: require('./icons/drawerSettings.png'),
+
   drawerLogout: require('./icons/drawerLogout.png'),
 };

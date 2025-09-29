@@ -1,14 +1,10 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import Home from '../../Screens/Home';
+import { useNavigation } from '@react-navigation/native';
 import { drawerIcons, icons } from '../../Assets';
 import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
-import LinearGradient from 'react-native-linear-gradient';
-import RobotoSemiBold from '../../Components/RobotoSemiBold';
-import { fonts } from '../../Assets/fonts';
 import RobotoBold from '../../Components/RobotoBold';
 import RobotoRegular from '../../Components/RobotoRegular';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -16,91 +12,121 @@ import Tabs from '../Tabs';
 
 const drawerStack = () => {
   const Drawer = createDrawerNavigator();
+
+
   const menus = [
     {
       label: 'Home',
       icon: drawerIcons.home,
+      mainParent: 'Tabs',
+      stChild: 'Home',
     },
-
     {
       label: 'My Pending Requests',
       icon: drawerIcons.drawerPendingRequest,
-      to: 'myPendingRequest',
-    },
 
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
+      ndChild: 'MyPendingRequest',
+    },
     {
       label: 'Employee Details',
       icon: drawerIcons.drawerEmployeeDetails,
-      to: 'employeeDetails',
+      mainParent: 'Tabs',
+      stChild: 'EmployeeDetails',
     },
-
     {
-      label: 'HRecent HR Circulars',
+      label: 'Recent HR Circulars',
       icon: drawerIcons.drawerRecentHrCirculars,
-      to: 'recentHrCirculars',
+      mainParent: 'Tabs',
+      stChild: 'RecentHrCirculars',
     },
 
     {
       label: 'Pay Slips',
       icon: drawerIcons.drawerPaySlip,
-      to: 'paySlips',
+      ndChild: 'PaySlip',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
     },
 
     {
       label: 'Tax Certificate',
       icon: drawerIcons.drawerTaxCertificate,
-      to: 'taxCertificate',
+      ndChild: 'TaxCertificate',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
     {
       label: 'Performance Management',
       icon: drawerIcons.drawerPerformanceManagement,
-      to: 'performanceManagement',
+      ndChild: 'PerformanceManagement',
+      mainParent: 'Tabs',
+      stChild: 'HomeStack',
     },
     {
       label: 'Claim Status',
       icon: drawerIcons.drawerClaimStatus,
-      to: 'claimStatus',
+      ndChild: 'ClaimStatus',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
     {
       label: 'Leave Management',
       icon: drawerIcons.drawerClaimStatus,
-      to: 'leaveManagement',
+      ndChild: 'LeaveManagement',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
     {
       label: 'Loan History',
-      icon: drawerIcons.home,
-      to: 'loanHistory',
+      icon: drawerIcons.drawerLoanHistory,
+      ndChild: 'LoanHistory',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
     {
       label: 'Attendance',
-      icon: drawerIcons.home,
-      to: 'attendance',
+      icon: drawerIcons.drawerAttendance,
+      ndChild: 'AttendanceStatus',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
     {
       label: 'Useful Links',
-      icon: drawerIcons.home,
-      to: 'usefulLinks',
+      icon: drawerIcons.drawerUsefulLinks,
+      ndChild: 'UsefulLinks',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
     {
       label: 'Rate This App',
-      icon: drawerIcons.home,
-      to: 'rateThisApp',
+      icon: drawerIcons.drawerRateThisApp,
+      ndChild: 'RateThis',
+      stChild: 'HomeStack',
+      mainParent: 'Tabs',
     },
 
-    {
-      label: 'setting',
-      icon: drawerIcons.home,
-      to: 'settings',
-    },
+    { label: 'Settings', icon: drawerIcons.drawerSettings, to: 'Settings' },
 
-    {
-      label: 'logout',
-      icon: drawerIcons.drawerLogout,
-      to: 'logout',
-    },
+    { label: 'Logout', icon: drawerIcons.drawerLogout, to: 'Logout' },
   ];
 
-  const DrawerContent = () => {
+  const DrawerContent = ({ navigation }) => {
+    const onPressMenu = menu => {
+      if (menu?.mainParent && menu?.stChild && menu?.ndChild) {
+        navigation.navigate(menu.mainParent, {
+          screen: menu.stChild,
+          params: {
+            screen: menu.ndChild,
+          },
+        });
+      } else if (menu?.mainParent && menu?.stChild) {
+        navigation.navigate(menu.mainParent, { screen: menu.stChild });
+      } else if (menu?.to) {
+        navigation.navigate(menu.to);
+      }
+    };
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -129,7 +155,10 @@ const drawerStack = () => {
           <View style={styles.menusContainer}>
             {menus.map((menu, index) => {
               return (
-                <TouchableOpacity style={styles.menuContainer}>
+                <TouchableOpacity
+                  style={styles.menuContainer}
+                  onPress={() => onPressMenu(menu)}
+                >
                   <Image source={menu?.icon} style={styles.menusIcon} />
 
                   <RobotoRegular
@@ -152,12 +181,10 @@ const drawerStack = () => {
         drawerPosition: 'left',
         drawerStyle: styles.drawerContainer,
         headerShown: false,
-        // swipeEnabled: false,
       }}
       initialRouteName="Tabs"
     >
       <Drawer.Screen name="Tabs" component={Tabs} />
-      <Drawer.Screen name="Home" component={Home} />
     </Drawer.Navigator>
   );
 };
@@ -167,11 +194,8 @@ export default drawerStack;
 const styles = StyleSheet.create({
   drawerContainer: {
     backgroundColor: COLORS.white,
-    // borderTopRightRadius: vh * 3,
-    // borderBottomRightRadius: 0,
+
     width: vw * 70,
-    // paddingVertical: vh * 3,
-    // paddingHorizontal: vw * 6,
   },
   logoContainer: {
     flexDirection: 'row',
@@ -188,7 +212,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 4,
     alignItems: 'center',
-    // borderWidth: 2,
   },
   menusIcon: {
     width: vw * 8,
@@ -212,12 +235,8 @@ const styles = StyleSheet.create({
     paddingLeft: vw * 5,
     marginTop: vh * 1.8,
     justifyContent: 'center',
-    // alignItems: "center"
   },
   menusContainer: {
-    // gap: vh * 4.5,
-    // marginBottom: vh * 4.5,
-
     gap: vh * 2,
     marginTop: vw * 4,
   },
@@ -239,7 +258,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: vw * 4,
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   profileIcon: {
     width: vw * 15,
@@ -247,11 +265,9 @@ const styles = StyleSheet.create({
     borderRadius: vh * 1.5,
   },
   profileTittle: {
-    // width: vw * 35,
     fontSize: vw * 3.5,
     lineHeight: vh * 2,
     textAlign: 'left',
-    // borderWidth: 2,
   },
   Buttontext: {
     fontSize: vw * 3.5,
@@ -274,21 +290,17 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // borderWidth:2,
-    // width:"100%"
   },
   buttonIcon: {
     width: vw * 7,
     height: vw * 5,
   },
   profileDetailContainer: {
-    // borderWidth: 2,
     borderColor: 'red',
     gap: vw * 2.5,
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: vw * 3,
     marginTop: vh * 4,
-    // marginHorizontal : "auto"
   },
 });

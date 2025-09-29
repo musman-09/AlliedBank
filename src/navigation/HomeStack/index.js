@@ -26,8 +26,6 @@ const HomeStack = () => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="pendingApproval" component={PendingApproval} />
       <Stack.Screen name="MyPendingRequest" component={MyPendingRequest} />
-      <Stack.Screen name="EmployeeDetails" component={EmployeeDetails} />
-      <Stack.Screen name="RecentHrCirculars" component={RecentHrCirculars} />
       <Stack.Screen name="PaySlip" component={PaySlip} />
       <Stack.Screen name="AttendanceStatus" component={AttendanceStatus} />
       <Stack.Screen name="UsefulLinks" component={UsefulLinks} />

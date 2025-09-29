@@ -23,4 +23,8 @@ export const COLORS = {
     'rgba(2, 27, 121, 1)',
   ],
   green: 'rgba(3, 158, 29, 1)',
+  pink: 'rgba(255, 120, 120, 1)',
+  seaGreen: 'rgba(138, 236, 195, 1)',
+  lightOrange: 'rgba(255, 218, 163, 1)',
+  borderColor: 'rgba(222, 222, 222, 1)',
 };
