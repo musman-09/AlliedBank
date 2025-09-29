@@ -1,10 +1,24 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import Header from '../../Components/Header';
+import TopView from '../../Components/TopView';
+import CurvedView from '../../Components/CurvedView';
 
 const TaxCertificate = () => {
   return (
     <View>
-      <Text>TaxCertificate</Text>
+   <Header/>
+   <TopView/>
+   
+   <CurvedView>
+
+    <View>
+
+
+
+      
+    </View>
+   </CurvedView>
     </View>
   );
 };
