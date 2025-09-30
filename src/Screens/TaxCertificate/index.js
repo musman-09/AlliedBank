@@ -7,18 +7,12 @@ import CurvedView from '../../Components/CurvedView';
 const TaxCertificate = () => {
   return (
     <View>
-   <Header/>
-   <TopView/>
-   
-   <CurvedView>
+      <Header />
+      <TopView />
 
-    <View>
-
-
-
-      
-    </View>
-   </CurvedView>
+      <CurvedView>
+        <View></View>
+      </CurvedView>
     </View>
   );
 };
