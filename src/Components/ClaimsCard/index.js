@@ -13,14 +13,14 @@ const ClaimsCard = ({ data }) => {
         <View style={styles.left}>
           <Image source={icons.editIcon} style={styles.editIcon} />
 
-          <View style={{ justifyContent: 'center' }}>
+          <View style={{ justifyContent: 'center' ,   }}>
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3.8 }}
-              name={data?.claimType ?? 'Unknown Claim'}
+              style={{ color: COLORS.textGray, fontSize: vw * 3.8 , maxWidth: "80%" }}
+              name={data[0]?.value ?? 'Unknown Claim'}
             />
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3.8 }}
-              name={`Claim Number: ${data?.claimNumber ?? '---'}`}
+              style={{ color: COLORS.textGray, fontSize: vw * 3.8  }}
+              name={`${data[1]?.label}: ${data[1]?.value ?? '---'}`}
             />
           </View>
         </View>
@@ -38,12 +38,12 @@ const ClaimsCard = ({ data }) => {
           <Image style={styles.calenderIcon} source={icons.calender} />
           <View style={{ width: '76%' }}>
             <RobotoBold
-              name={'Claim Date'}
+              name={data[2]?.label}
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
             />
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={data?.claimDate ?? '--'}
+              name={data[2]?.value ?? '--'}
             />
           </View>
         </View>
@@ -52,12 +52,12 @@ const ClaimsCard = ({ data }) => {
           <Image style={styles.calenderIcon} source={icons.calender} />
           <View style={{ width: '70%' }}>
             <RobotoBold
-              name={'Claim Source'}
+              name={data[3]?.label}
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
             />
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={data?.claimSource ?? '--'}
+              name={data[3]?.value ?? '--'}
             />
           </View>
         </View>
@@ -67,11 +67,11 @@ const ClaimsCard = ({ data }) => {
           <View>
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={'Claim Amount'}
+              name={data[4]?.label}
             />
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={`PKR ${data?.claimAmount ?? '--'}`}
+              name={`${data[4]?.value ?? '--'}`}
             />
           </View>
         </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: vw * 4,
     borderWidth: 1,
     borderColor: COLORS.lightBorder,
-    // borderColor :"red",
+
     marginVertical: vh * 1.5,
     paddingHorizontal: vw * 2,
     paddingVertical: vh * 1.5,
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: vh * 2.3,
-    // borderWidth:2,
   },
   eye: {
     width: vw * 5,
@@ -123,8 +122,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
 
     alignItems: 'center',
-    // width: '100%',
-    // borderWidth:2
   },
   editIcon: {
     width: vw * 10,
@@ -134,8 +131,7 @@ const styles = StyleSheet.create({
   left: {
     flexDirection: 'row',
     gap: vw * 2,
-    // borderWidth:2,
-    // width  : "100%",
+
     borderColor: 'pink',
   },
   horizontallLine: {
@@ -151,31 +147,23 @@ const styles = StyleSheet.create({
   secondRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    // borderWidth: 2,
-    gap: '1%',
 
-    // width : '80%'
-    // backgroundColor: "green"
+    gap: '1%',
   },
 
   secondRowSub: {
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor : "green",
-    // justifyContent : "center",
+
     width: '30%',
 
-    // backgroundColor : "yellow",
-    // borderRightWidth: 1,
-    // borderWidth: 2
     gap: '4%',
   },
 
   calenderIcon: {
     width: '20%',
-    // height: vw * 6,
+
     height: vh * 3,
     resizeMode: 'contain',
-    // borderWidth: 2
   },
 });

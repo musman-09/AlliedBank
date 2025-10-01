@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
@@ -7,70 +7,76 @@ import RobotoBold from '../../Components/RobotoBold';
 import { styles } from './style';
 import Tabs from '../../Components/Tabs';
 import ClaimsCard from '../../Components/ClaimsCard';
-import { vw } from '../../Assets/themes/dimension';
 import { endpoints } from '../../apis/endpoints';
 import { get, post } from '../../apis/index';
 import { useFocusEffect } from '@react-navigation/native';
+import Loader from '../../Components/Loader';
+import moment from 'moment';
 
 const MyPendingRequest = () => {
   const [activeTab, setActiveTab] = useState('Claims');
-  const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [leavesData, setLeavesData] = useState([]);
+  const [claimsData, setClaimsData] = useState([]);
 
-  console.log(cards, 'data');
-  // const cards = [
-  //   {
-  //     claimSource: '09/04/23',
-  //     claimDate: '23/24/2222',
-  //     claimAmount: '23/23/2323',
-  //   },
-  //   {
-  //     claimSource: '09/04/23',
-  //     claimDate: '23/24/2222',
-  //     claimAmount: '23/23/2323',
-  //   },
-  //   {
-  //     claimSource: '09/04/23',
-  //     claimDate: '23/24/2222',
-  //     claimAmount: '23/23/2323',
-  //   },
-  //   {
-  //     claimSource: '09/04/23',
-  //     claimDate: '23/24/2222',
-  //     claimAmount: '23/23/2323',
-  //   },
-  //   {
-  //     claimSource: '09/04/23',
-  //     claimDate: '23/24/2222',
-  //     claimAmount: '23/23/2323',
-  //   },
-  // ];
+  console.log('component rendering .. ');
 
   const fetchClaims = async () => {
     try {
       setLoading(true);
 
       const res = await get(endpoints.claims.getPendingClaims);
-      console.log(res.data, 'resssponsesee');
 
-      setCards(res.data ?? []);
+      const formatted = res.data?.map(item => [
+        { label: 'Claim Type', value: item?.claimType ?? '--' },
+        { label: 'Claim Number', value: item?.claimNumber ?? '--' },
+        {
+          label: 'Claim Date',
+          value: item?.claimDate
+            ? moment(item.claimDate).format('DD-MMM-YYYY')
+            : '--',
+        },
+        { label: 'Claim Source', value: item?.claimSource ?? '--' },
+        { label: 'Claim Amount', value: `PKR ${item?.claimAmount ?? '--'}` },
+      ]);
+
+      setClaimsData(formatted ?? []);
     } catch (error) {
-      console.log('Error from api', error);
     } finally {
-      console.log('finally');
+      setLoading(false);
+    }
+  };
+
+  const fetchLeaves = async () => {
+    try {
+      setLoading(true);
+      const res = await get(endpoints.leaves.getPendingLeaves);
+
+      const formatted = res.data?.map(item => [
+        { label: 'Leave Type', value: item?.leaveType ?? '--' },
+        { label: 'Leave ID', value: item?.leaveId ?? '--' },
+        { label: 'Leave From', value: item?.leaveFrom ?? '--' },
+        { label: 'Leave To', value: item?.leaveTo ?? '--' },
+        { label: 'Status', value: item?.status ?? '--' },
+      ]);
+
+      setLeavesData(formatted ?? []);
+    } catch (error) {
+      console.log('Error from leaves api', error);
+    } finally {
       setLoading(false);
     }
   };
 
   useFocusEffect(
     useCallback(() => {
-      fetchClaims();
-    }, []),
+      if (activeTab === 'Claims') {
+        fetchClaims();
+      } else {
+        fetchLeaves();
+      }
+    }, [activeTab]),
   );
-
-  // const onPressTab = () => {
-  //   setActiveTab(!activeTab);
-  // };
 
   return (
     <View style={styles.container}>
@@ -93,20 +99,27 @@ const MyPendingRequest = () => {
               name={'Leaves'}
             />
           </View>
-
           {loading ? (
-            <RobotoBold style={styles.loaderContainer} name={'Loading ..'} />
-          ) : cards.length === 0 ? (
+            <Loader />
+          ) : activeTab === 'Claims' ? (
+            claimsData.length === 0 ? (
+              <RobotoBold
+                style={styles.loaderContainer}
+                name={'No pending claims'}
+              />
+            ) : (
+              claimsData.map((card, index) => (
+                <ClaimsCard key={index} data={card} />
+              ))
+            )
+          ) : leavesData.length === 0 ? (
             <RobotoBold
               style={styles.loaderContainer}
-              name={'No pending requests'}
+              name={'No pending leaves'}
             />
           ) : (
-            cards?.map((item, index) => (
-              <ClaimsCard
-                key={index}
-                data={item}
-              />
+            leavesData.map((card, index) => (
+              <ClaimsCard key={index} data={card} />
             ))
           )}
         </CurvedView>
