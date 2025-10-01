@@ -10,7 +10,7 @@ const api = axios.create({
 
   // baseURL: "http://192.168.0.231:3001/api",
 
-  timeout: 60000,
+  timeout: 6000,
 
 });
  
@@ -49,13 +49,14 @@ api.interceptors.request.use(
       }
 
     }
+    console.log(config)
 
     return config;
 
   },
 
   (error) => {
-
+console.log(error, "Error")
     return Promise.reject(error);
 
   }
@@ -81,12 +82,13 @@ export const jsonToFormdata = json => {
 api.interceptors.response.use(
 
   (response) => {
-
+console.log("RRsss",response)
     return response?.data;
 
   },
 
   (error) => {
+console.log("error",error)
 
     if (error?.response) {
 

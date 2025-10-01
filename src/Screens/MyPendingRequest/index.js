@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
 import CurvedView from '../../Components/CurvedView';
@@ -10,6 +10,7 @@ import ClaimsCard from '../../Components/ClaimsCard';
 import { vw } from '../../Assets/themes/dimension';
 import { endpoints } from '../../apis/endpoints';
 import { get, post } from '../../apis/index';
+import { useFocusEffect } from '@react-navigation/native';
 
 const MyPendingRequest = () => {
   const [activeTab, setActiveTab] = useState('Claims');
@@ -48,19 +49,24 @@ const MyPendingRequest = () => {
   const fetchClaims = async () => {
     try {
       setLoading(true);
-      const res = await post(endpoints.approval.processRequest);
+
+      const res = await get(endpoints.claims.getPendingClaims);
       console.log(res.data, 'resssponsesee');
+
       setCards(res.data ?? []);
     } catch (error) {
       console.log('Error from api', error);
     } finally {
+      console.log('finally');
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchClaims();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchClaims();
+    }, []),
+  );
 
   // const onPressTab = () => {
   //   setActiveTab(!activeTab);
@@ -89,18 +95,17 @@ const MyPendingRequest = () => {
           </View>
 
           {loading ? (
-            <RobotoBold name={'Loading'} />
+            <RobotoBold style={styles.loaderContainer} name={'Loading ..'} />
           ) : cards.length === 0 ? (
-            <RobotoBold name={'No pending requests'} />
+            <RobotoBold
+              style={styles.loaderContainer}
+              name={'No pending requests'}
+            />
           ) : (
             cards?.map((item, index) => (
               <ClaimsCard
                 key={index}
-                claimEndType={'Claim Amount'}
-                claimType={'Claim Date'}
-                dateType={item?.claimDate}
-                name={item?.employeeName ?? 'Unknown'}
-                type={item?.claimSource}
+                data={item}
               />
             ))
           )}

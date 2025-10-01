@@ -12,4 +12,8 @@ export const styles = StyleSheet.create({
     // borderWidth: 2,
     marginTop: vh * 1.5,
   },
+  loaderContainer: {
+    textAlign: 'center',
+    marginTop: vh * 6,
+  },
 });

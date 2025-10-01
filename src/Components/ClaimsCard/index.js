@@ -6,27 +6,21 @@ import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { fonts } from '../../Assets/fonts';
 
-const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
+const ClaimsCard = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={styles.firstRow}>
         <View style={styles.left}>
-          <View>
-            <Image source={icons.editIcon} style={styles.editIcon} />
-          </View>
-          <View
-            style={{
-              // alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+          <Image source={icons.editIcon} style={styles.editIcon} />
+
+          <View style={{ justifyContent: 'center' }}>
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3.8, }}
-              name={name}
+              style={{ color: COLORS.textGray, fontSize: vw * 3.8 }}
+              name={data?.claimType ?? 'Unknown Claim'}
             />
             <RobotoBold
-              style={{ color: COLORS.textGray, fontSize: vw * 3.8, }}
-              name={type}
+              style={{ color: COLORS.textGray, fontSize: vw * 3.8 }}
+              name={`Claim Number: ${data?.claimNumber ?? '---'}`}
             />
           </View>
         </View>
@@ -40,48 +34,44 @@ const ClaimsCard = ({ name, type, dateType, claimType, claimEndType }) => {
       <View style={styles.horizontallLine}></View>
 
       <View style={styles.secondRow}>
-        <View style={[styles.secondRowSub, { width: "34%" }]}>
+        <View style={[styles.secondRowSub, { width: '34%' }]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{ width: "76%" }}>
+          <View style={{ width: '76%' }}>
             <RobotoBold
-              name={"Requested Date"}
+              name={'Claim Date'}
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
             />
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-             name={dateType}
+              name={data?.claimDate ?? '--'}
             />
           </View>
         </View>
 
-        {/* <View style={styles.verticalLine}> </View> */}
-
-        <View style={[styles.secondRowSub, { width: "34%" }]}>
+        <View style={[styles.secondRowSub, { width: '34%' }]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{ width: "70%", }}>
+          <View style={{ width: '70%' }}>
             <RobotoBold
-              name={claimType}
+              name={'Claim Source'}
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
             />
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={'09/04/24'}
+              name={data?.claimSource ?? '--'}
             />
           </View>
         </View>
 
-        {/* <View style={styles.verticalLine}></View> */}
-
-        <View style={[styles.secondRowSub, { width: "30%", }]}>
+        <View style={[styles.secondRowSub, { width: '30%' }]}>
           <Image style={styles.calenderIcon} source={icons.calender} />
-          <View style={{}}>
+          <View>
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={claimEndType}
+              name={'Claim Amount'}
             />
             <RobotoBold
               style={{ color: COLORS.textGray, fontSize: vw * 2.8 }}
-              name={'09/04/24'}
+              name={`PKR ${data?.claimAmount ?? '--'}`}
             />
           </View>
         </View>
@@ -162,7 +152,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // borderWidth: 2,
-    gap: "1%",
+    gap: '1%',
 
     // width : '80%'
     // backgroundColor: "green"
@@ -178,11 +168,11 @@ const styles = StyleSheet.create({
     // backgroundColor : "yellow",
     // borderRightWidth: 1,
     // borderWidth: 2
-    gap: "4%"
+    gap: '4%',
   },
 
   calenderIcon: {
-    width: "20%",
+    width: '20%',
     // height: vw * 6,
     height: vh * 3,
     resizeMode: 'contain',
