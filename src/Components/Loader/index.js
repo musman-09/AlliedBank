@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 
-const Loader = () => {
+const Loader = ({containerStyle}) => {
   // Create animation refs for 3 dots
   const dot1 = useRef(new Animated.Value(0)).current;
   const dot2 = useRef(new Animated.Value(0)).current;
@@ -33,7 +33,7 @@ const Loader = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle] }>
       <View style={styles.dotsContainer}>
         <Animated.View style={[styles.dot, { transform: [{ translateY: dot1 }] }]} />
         <Animated.View style={[styles.dot, { transform: [{ translateY: dot2 }] }]} />

@@ -48,6 +48,7 @@ export const icons = {
   badEmoji: require('./icons/badEmoji.png'),
   okayEmoji: require('./icons/okayEmoji.png'),
   smileEmojiGreen: require('./icons/smileEmojiGreen.png'),
+  noDataFound : require('./icons/noDataFound.png'),
 };
 
 export const cardsIcons = {

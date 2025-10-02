@@ -24,7 +24,6 @@ const drawerStack = () => {
     {
       label: 'My Pending Requests',
       icon: drawerIcons.drawerPendingRequest,
-
       mainParent: 'Tabs',
       stChild: 'HomeStack',
       ndChild: 'MyPendingRequest',

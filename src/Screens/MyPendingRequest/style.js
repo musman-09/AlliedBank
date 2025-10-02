@@ -4,16 +4,21 @@ import { vh, vw } from '../../Assets/themes/dimension';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor : "red"
   },
   tabsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: vw * 3,
-    // borderWidth: 2,
+
     marginTop: vh * 1.5,
   },
   loaderContainer: {
     textAlign: 'center',
-    marginTop: vh * 6,
+    marginTop: vh * 10,
+    fontSize: vw * 4,
+  },
+  loadercontainer: {
+    marginTop: vh * 10,
   },
 });

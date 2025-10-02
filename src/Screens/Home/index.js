@@ -130,7 +130,7 @@ const Home = () => {
             </View>
 
             <TouchableOpacity
-              onPress={() => onPressCard('PendingApproval')}
+              onPress={() => onPressCard('MyPendingRequest')}
               style={styles.approvalBanner}
             >
               <View style={styles.approvalBannerContent}>

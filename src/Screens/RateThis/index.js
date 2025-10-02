@@ -10,7 +10,7 @@ import RobotoRegular from '../../Components/RobotoRegular';
 import { icons } from '../../Assets';
 
 const RateThis = () => {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
 
   const onPressStar = id => {
     setRating(id);

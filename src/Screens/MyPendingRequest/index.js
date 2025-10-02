@@ -12,6 +12,8 @@ import { get, post } from '../../apis/index';
 import { useFocusEffect } from '@react-navigation/native';
 import Loader from '../../Components/Loader';
 import moment from 'moment';
+import { COLORS } from '../../Assets/themes/color';
+import NoDataFound from '../../Components/NoDataFound';
 
 const MyPendingRequest = () => {
   const [activeTab, setActiveTab] = useState('Claims');
@@ -41,6 +43,7 @@ const MyPendingRequest = () => {
       ]);
 
       setClaimsData(formatted ?? []);
+      setClaimsData([]);
     } catch (error) {
     } finally {
       setLoading(false);
@@ -52,12 +55,29 @@ const MyPendingRequest = () => {
       setLoading(true);
       const res = await get(endpoints.leaves.getPendingLeaves);
 
+      console.log(res, 'leaves response . . . . .');
+
       const formatted = res.data?.map(item => [
-        { label: 'Leave Type', value: item?.leaveType ?? '--' },
-        { label: 'Leave ID', value: item?.leaveId ?? '--' },
-        { label: 'Leave From', value: item?.leaveFrom ?? '--' },
-        { label: 'Leave To', value: item?.leaveTo ?? '--' },
-        { label: 'Status', value: item?.status ?? '--' },
+        { label: 'Full Name', value: item?.fullName ?? '--' },
+        { label: 'Type', value: item?.leaveType ?? '--' },
+        {
+          label: 'Requested Date',
+          value: item?.requestedDate
+            ? moment(item?.requestedDate).format('DD-MMM-YYYY')
+            : '--',
+        },
+        {
+          label: 'From',
+          value: item?.startDate
+            ? moment(item?.startDate).format('DD-MMM-YYYY')
+            : '--',
+        },
+        {
+          label: 'To',
+          value: item?.endDate
+            ? moment(item?.endDate).format('DD-MMM-YYYY')
+            : '--',
+        },
       ]);
 
       setLeavesData(formatted ?? []);
@@ -82,7 +102,7 @@ const MyPendingRequest = () => {
     <View style={styles.container}>
       <Header />
 
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: COLORS.white }}>
         <TopView name={'My pending Request'} />
 
         <CurvedView>
@@ -100,13 +120,10 @@ const MyPendingRequest = () => {
             />
           </View>
           {loading ? (
-            <Loader />
+            <Loader containerStyle={styles.loadercontainer} />
           ) : activeTab === 'Claims' ? (
             claimsData.length === 0 ? (
-              <RobotoBold
-                style={styles.loaderContainer}
-                name={'No pending claims'}
-              />
+              <NoDataFound title={'No Claims Found'} />
             ) : (
               claimsData.map((card, index) => (
                 <ClaimsCard key={index} data={card} />

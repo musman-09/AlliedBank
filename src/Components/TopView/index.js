@@ -8,7 +8,7 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import { useNavigation } from '@react-navigation/native';
 import RobotoRegular from '../RobotoRegular';
 
-const TopView = ({ name, image }) => {
+const TopView = ({ name, image, profileName, profileDesignation }) => {
   const navigation = useNavigation();
   const onPressBack = () => {
     navigation.goBack();
@@ -43,10 +43,10 @@ const TopView = ({ name, image }) => {
                 marginTop: vh * 2,
               }}
             >
-              <RobotoBold style={styles.imageHeading} name={'Zohaib Ghaffar'} />
+              <RobotoBold style={styles.imageHeading} name={profileName} />
               <RobotoRegular
                 style={styles.imageText}
-                name={'Senior Officer IT Group Head Office'}
+                name={profileDesignation}
               />
             </View>
           </>
@@ -89,5 +89,7 @@ const styles = StyleSheet.create({
   imageText: {
     color: COLORS.white,
     fontSize: vw * 3,
+    maxWidth: '80%',
+    textAlign: 'center',
   },
 });
