@@ -9,10 +9,12 @@ import RobotoBold from '../../Components/RobotoBold';
 import RobotoRegular from '../../Components/RobotoRegular';
 import { ScrollView } from 'react-native-gesture-handler';
 import Tabs from '../Tabs';
+import { logoutUser } from '../../redux/authSlice';
+import { useDispatch } from 'react-redux';
 
 const drawerStack = () => {
+  const dispatch = useDispatch();
   const Drawer = createDrawerNavigator();
-
 
   const menus = [
     {
@@ -123,7 +125,12 @@ const drawerStack = () => {
       } else if (menu?.mainParent && menu?.stChild) {
         navigation.navigate(menu.mainParent, { screen: menu.stChild });
       } else if (menu?.to) {
-        navigation.navigate(menu.to);
+        if (menu?.to === 'Logout') {
+          dispatch(logoutUser());
+        } else {
+          navigation.navigate(menu.to);
+          
+        }
       }
     };
     return (

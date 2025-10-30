@@ -11,6 +11,8 @@ import { get } from '../../apis';
 import endpoints from '../../apis/endpoints';
 import { vh, vw } from '../../Assets/themes/dimension';
 import moment from 'moment';
+import InputFeild from '../../Components/InputFeild';
+import { icons } from '../../Assets';
 
 const RecentHrCirculars = () => {
   const [hrCircularsData, setHrCircularData] = useState([]);
@@ -49,12 +51,15 @@ const RecentHrCirculars = () => {
       <TopView name={'Recent Hr Circulars'} />
 
       <CurvedView>
-        <FlatList
-          data={hrCircularsData}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <EmployeeCard data={item} />}
-          contentContainerStyle={{ gap: vh * 2 }}
-        />
+        <View style={styles.curvedViewContainer}>
+          <InputFeild eyeOpen={icons.eyeClose} placeholder={'search'} />
+          <FlatList
+            data={hrCircularsData}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => <EmployeeCard data={item} />}
+            contentContainerStyle={{ gap: vh * 2 }}
+          />
+        </View>
       </CurvedView>
     </View>
   );

@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: vw * 4,
+    // borderWidth:2,
     // fontFamily: fonts.Roboto.bold,
     fontFamily: 'bold',
     color: COLORS.labelColor,

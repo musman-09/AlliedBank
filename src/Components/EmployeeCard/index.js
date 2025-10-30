@@ -17,7 +17,7 @@ const EmployeeCard = ({ data }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={!isToggle? styles.container : styles.containerClosed}>
       <View style={styles.firstRow}>
         <View style={styles.left}>
           <Image source={icons.pdfIcon} style={styles.docIcon} />
@@ -80,17 +80,38 @@ const EmployeeCard = ({ data }) => {
 export default EmployeeCard;
 
 const styles = StyleSheet.create({
+
+
   container: {
+ 
+    borderRadius: vw * 5,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+ 
+    borderColor: COLORS.lightBorder,
+    elevation: 2,
+    backgroundColor: COLORS.white,
+    paddingHorizontal: vw * 3,
+    paddingVertical: vh * 1,
+  },
+  containerClosed: {
     // flex: 1,
     gap: vh,
     borderRadius: vw * 5,
     borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // alignContent : "center",
     borderColor: COLORS.lightBorder,
     elevation: 2,
     backgroundColor: COLORS.white,
-    paddingHorizontal: vw * 4,
+    paddingHorizontal: vw * 3,
     paddingVertical: vh * 1,
   },
+
+
+
   left: {
     flexDirection: 'row',
     // borderWidth: 2,
@@ -106,7 +127,11 @@ const styles = StyleSheet.create({
   firstRow: {
     flexDirection: 'row',
     // borderWidth: 2,
-    borderColor: 'red',
+    alignContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // borderColor: 'red',
     // justifyContent: 'space-between',
     // alignItems: 'flex-end',
     // alignItems:""
@@ -114,6 +139,8 @@ const styles = StyleSheet.create({
   right: {
     flexDirection: 'row',
     // borderWidth: 2,
+    // justifyContent:"center",
+    // alignItems:"center",
     gap: vw * 2,
     width: '50%',
     alignItems: 'center',
@@ -134,10 +161,13 @@ const styles = StyleSheet.create({
   secondRowLeft: {
     flexDirection: 'row',
     gap: vw,
+    // borderWidth:2
   },
   secondRow: {
+    // borderWidth:2,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '100%',
   },
   downloadIcon: {
     width: vw * 7,

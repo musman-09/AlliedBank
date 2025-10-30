@@ -11,9 +11,13 @@ export const counterSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
+
+    logoutUser: (state, action) => {
+      state.token = null;
+    },
   },
 });
 
-export const { setToken } = counterSlice.actions;
+export const { setToken, logoutUser } = counterSlice.actions;
 
 export default counterSlice.reducer;

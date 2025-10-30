@@ -5,6 +5,10 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  curvedViewContainer: {
+    gap: vh * 2,
+  },
+
   tabsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
