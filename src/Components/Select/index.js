@@ -12,7 +12,7 @@ import RobotoBold from '../RobotoBold';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 
-const Select = ({ label, placeholder, options }) => {
+const Select = ({ label, placeholder, options  , onSelectOption}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -23,6 +23,9 @@ const Select = ({ label, placeholder, options }) => {
   const onSelect = item => {
     setSelectedOption(item);
     setIsVisible(false);
+     if (onSelectOption) {
+      onSelectOption(item); 
+    }
   };
   return (
     <View style={styles.wrapper}>

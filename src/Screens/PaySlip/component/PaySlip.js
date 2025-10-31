@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-const PaySlip = () => {
+const PaySlipCard = ({ year, month }) => {
   return (
     <View>
-      <Text>PaySlip</Text>
+      <Text>Showing payslip for {month} {year}</Text>
     </View>
   );
 };
 
-export default PaySlip;
+export default PaySlipCard;
