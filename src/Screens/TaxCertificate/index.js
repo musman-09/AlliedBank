@@ -8,6 +8,10 @@ import Select from '../../Components/Select';
 import PaySlipCard from '../PaySlip/component/PaySlip';
 import endpoints from '../../apis/endpoints';
 import { get } from '../../apis';
+import RNFS from 'react-native-fs';
+import FileViewer from 'react-native-file-viewer';
+
+
 const TaxCertificate = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
@@ -28,10 +32,26 @@ const TaxCertificate = () => {
     'December',
   ];
 
+
+  const openPdf = async (base64Data) => {
+  try {
+    const path = `${RNFS.DocumentDirectoryPath}/tax_certificate.pdf`;
+    await RNFS.writeFile(path, base64Data, 'base64');
+    await FileViewer.open(path);
+  } catch (err) {
+    console.error('Error opening PDF:', err);
+  }
+};
+
+
   const fetchTaxCertificate = async () => {
     try {
-      const res = await get(endpoints.documents.TaxCertificate);
+      const res = await get(endpoints.documents.generateTaxCertifcate);
       console.log(res, 'tax certificate endpoint');
+      if (res?.data?.file) {
+        const base64Data = res.data.data;
+        openPdf(base64Data);
+      }
     } catch (error) {
       console.error('Error fetching tax certificate:', error);
     }
