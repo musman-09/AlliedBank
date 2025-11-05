@@ -20,6 +20,7 @@ const InputFeild = ({
   eyeIcon,
   eyeOpen,
   secureText,
+  onChangeText,
 }) => {
   const [passwordHide, setPasswordHide] = useState(false);
 
@@ -38,6 +39,11 @@ const InputFeild = ({
           style={styles.input}
           secureTextEntry={passwordHide ? secureText : false}
           //   secureTextEntry={true}
+          onChangeText={onChangeText}
+
+          
+
+
         />
         {eyeIcon && (
           <TouchableOpacity onPress={passwordHideFunc}>
