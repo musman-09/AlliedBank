@@ -8,7 +8,7 @@ import { icons } from '../../Assets';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 
-const EmployeeCard = ({ data }) => {
+const EmployeeCard = ({ data, onViewDownload }) => {
   console.log(data, 'Data . . . ');
   const [isToggle, setIsToggle] = useState(false);
 
@@ -17,7 +17,7 @@ const EmployeeCard = ({ data }) => {
   };
 
   return (
-    <View style={!isToggle? styles.container : styles.containerClosed}>
+    <View style={!isToggle ? styles.container : styles.containerClosed}>
       <View style={styles.firstRow}>
         <View style={styles.left}>
           <Image source={icons.pdfIcon} style={styles.docIcon} />
@@ -59,7 +59,10 @@ const EmployeeCard = ({ data }) => {
           <>
             <View style={styles.secondRowLeft}>
               <Image style={styles.downloadIcon} source={icons.downloadIcon} />
-              <Image style={styles.downloadIcon} source={icons.eyeIcon} />
+
+              <TouchableOpacity onPress={onViewDownload}>
+                <Image style={styles.downloadIcon} source={icons.eyeIcon} />
+              </TouchableOpacity>
             </View>
 
             <View style={styles.secondRowRight}>
@@ -80,15 +83,12 @@ const EmployeeCard = ({ data }) => {
 export default EmployeeCard;
 
 const styles = StyleSheet.create({
-
-
   container: {
- 
     borderRadius: vw * 5,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
- 
+
     borderColor: COLORS.lightBorder,
     elevation: 2,
     backgroundColor: COLORS.white,
@@ -109,8 +109,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw * 3,
     paddingVertical: vh * 1,
   },
-
-
 
   left: {
     flexDirection: 'row',

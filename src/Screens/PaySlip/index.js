@@ -14,6 +14,7 @@ import { Platform, PermissionsAndroid, Alert } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
 import FileViewer from 'react-native-file-viewer';
+import { COLORS } from '../../Assets/themes/color';
 
 const PaySlip = ({ navigation }) => {
   const [selectedYear, setSelectedYear] = useState(null);
@@ -42,6 +43,7 @@ const PaySlip = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
+    console.log('item on view', item);
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -72,28 +74,36 @@ const PaySlip = ({ navigation }) => {
   const onDownload = async item => {
     try {
       const permissionGranted = await requestStoragePermission();
-      if (permissionGranted) {
-        const dir =
-          Platform.OS === 'android'
-            ? RNFetchBlob.fs.dirs.DownloadDir
-            : RNFetchBlob.fs.dirs.DocumentDir;
+      if (!permissionGranted) return;
 
-        const fileName = `PaySlip_${selectedMonth}_${selectedYear}.pdf`;
+      const fileName = `PaySlip_${selectedMonth}_${selectedYear}.pdf`;
+      const dir =
+        Platform.OS === 'android'
+          ? RNFetchBlob.fs.dirs.DownloadDir
+          : RNFS.DocumentDirectoryPath;
 
-        const filePath = `${dir}/${fileName}`;
-        await RNFetchBlob.fs.writeFile(filePath, item?.data, 'base64');
-        if (Platform.OS === 'android') {
-          await RNFS.scanFile(filePath)
-            .then(() => console.log('Media scan complete'))
-            .catch(err => console.log('Media scan failed', err));
-        }
-        await FileViewer.open(filePath);
-        if (Platform.OS === 'android') {
-          showToast({ message: 'Downloaded', type: 'success' });
-        }
+      const filePath = `${dir}/${fileName}`;
+
+      await RNFetchBlob.fs.writeFile(filePath, item, 'base64');
+
+      if (Platform.OS === 'android') {
+        await RNFetchBlob.android.addCompleteDownload({
+          title: fileName,
+          description: 'Pay Slip PDF',
+          mime: 'application/pdf',
+          path: filePath,
+          showNotification: true,
+          notification: true,
+        });
       }
-    } catch (e) {
-      console.log('Error', e);
+
+      Alert.alert(
+        'Download Complete',
+        'Your pay slip has been downloaded successfully!',
+      );
+    } catch (error) {
+      console.log('Error downloading file:', error);
+      Alert.alert('Error', 'Failed to download the file. Please try again.');
     }
   };
 
@@ -149,13 +159,15 @@ const PaySlip = ({ navigation }) => {
               data={pdfData}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
-                <View style={{ marginTop: 10 }}>
-                  <PdfViewCard
-                    name={`Pay Slip ${selectedMonth} - ${selectedYear}`}
-                    onView={() => handleView(item)}
-                    onDownload={() => onDownload(item)}
-                  />
-                </View>
+                <>
+                  <View style={{ marginTop: 10 }}>
+                    <PdfViewCard
+                      name={`Pay Slip ${selectedMonth} - ${selectedYear}`}
+                      onView={() => handleView(item)}
+                      onDownload={() => onDownload(item)}
+                    />
+                  </View>
+                </>
               )}
             />
           )}
@@ -164,9 +176,11 @@ const PaySlip = ({ navigation }) => {
 
       <Modal visible={visible} animationType="slide">
         <View style={{ flex: 1 }}>
+
+          <Header  toggleDrawer={()=>setVisible(false)}/>
           <TouchableOpacity
             onPress={() => setVisible(false)}
-            style={{ padding: 15, backgroundColor: '#000' }}
+            style={{ padding: 15, backgroundColor: COLORS.black }}
           >
             <RobotoBold
               name="Close PDF"

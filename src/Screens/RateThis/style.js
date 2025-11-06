@@ -8,11 +8,10 @@ export const styles = StyleSheet.create({
     marginTop: vh * 2,
   },
   container: {
-   
     justifyContent: 'center',
     alignItems: 'center',
-    gap : vh*4,
-    marginTop : vh*1.5
+    gap: vh * 4,
+    marginTop: vh * 1.5,
   },
   headingText: {
     fontSize: vw * 10,
@@ -23,8 +22,8 @@ export const styles = StyleSheet.create({
     fontSize: vw * 8,
   },
   smileIcon: {
-    width: vw * 60,
-    height: vw * 60,
+    width: vw * 50,
+    height: vw * 50,
     resizeMode: 'contain',
   },
   stars: {

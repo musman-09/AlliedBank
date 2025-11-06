@@ -8,11 +8,11 @@ export const styles = StyleSheet.create({
   graphContainer: {
     flexDirection: 'row',
     // borderWidth: 2,
-    marginTop : vh,
-    gap : vw*11,
-    justifyContent:'center'
+    marginTop: vh,
+    gap: vw * 11,
+    justifyContent: 'center',
   },
-    barIdentifier: {
+  barIdentifier: {
     flexDirection: 'row',
 
     width: '40%',
@@ -28,5 +28,8 @@ export const styles = StyleSheet.create({
     height: 12,
     borderRadius: 6,
     marginRight: 6,
+  },
+  table: {
+    marginTop: vh * 2,
   },
 });

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import React from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
@@ -64,8 +64,9 @@ const LeaveManagement = () => {
       <Header />
       <TopView name={'Leave Management'} />
 
-      <CurvedView>
-        <View>
+        <ScrollView>
+      <CurvedView >
+
           <View style={styles.graphContainer}>
             <PieChart data={data} chartLabel={'Privelege Leaves'} />
             <PieChart data={data} chartLabel={'Casual Leaves'} />
@@ -90,9 +91,14 @@ const LeaveManagement = () => {
             </View>
           </View>
 
+<View style={styles.table}> 
+
           <Table data={leaveManagementData} />
-        </View>
+          </View>
       </CurvedView>
+        </ScrollView>
+
+
     </View>
   );
 };

@@ -25,7 +25,6 @@ const Table = ({ data }) => {
   );
 
   const renderItem = ({ item }) => {
-
     const statusObj = item.find(obj => obj.label === 'status');
     const statusValue = statusObj?.value;
 
@@ -114,7 +113,7 @@ const Table = ({ data }) => {
       <FlatList
         data={selectedTabData}
         renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: vh * 80 }}
+
       />
     </View>
   );
@@ -123,7 +122,9 @@ const Table = ({ data }) => {
 export default Table;
 
 const styles = StyleSheet.create({
-  tableContainer: {},
+  tableContainer: {
+    // flex:1
+  },
   tabsContainer: {
     flexDirection: 'row',
   },
@@ -147,7 +148,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // borderBottomWidth: 1,
 
     paddingVertical: vh * 1.2,
   },
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // backgroundColor: "yellow",
     // flexDirection :'row'
-    alignItems:"center"
+    alignItems: 'center',
   },
   label: {},
   value: {

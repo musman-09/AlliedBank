@@ -1,13 +1,20 @@
 import { StyleSheet } from 'react-native';
 import { vh, vw } from '../../Assets/themes/dimension';
-import { COLORS } from '../../Assets/themes/color';
 
 export const styles = StyleSheet.create({
- container : {
-    flex:1
- },
- curvedViewContent : {
+  container: {
+    flex: 1,
+  },
+  curvedViewContainer: {
+    marginTop: vh * 2,
+    gap: vh * 4,
+  },
 
-    marginTop : vh*4
- }
+  tabsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: vw * 3,
+    // borderWidth: 2,
+    marginTop: vh * 1.5,
+  },
 });

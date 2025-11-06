@@ -120,47 +120,50 @@ const LoanHistory = () => {
 
       <TopView name={'Active Loans'} />
 
-      <CurvedView>
+      <ScrollView>
+        <CurvedView>
+          <View style={styles.graphContainer}>
+            <BarGraph data={barData} />
+          </View>
 
-        <View style={styles.graphContainer}>
-          <BarGraph data={barData} />
-        </View>
+          <RobotoBold name={'Loan History'} />
 
-        <RobotoBold name={'Loan History'} />
+          <View style={styles.tabsContainer}>
+            <Tabs
+              name={'House Building'}
+              container={styles.tabContainer}
+              labelStyle={styles.labelStyle}
+            />
+            <Tabs
+              name={'House Finance'}
+              container={styles.tabContainer}
+              labelStyle={styles.labelStyle}
+            />
+            <Tabs
+              name={'Personal Finance'}
+              container={styles.tabContainer}
+              labelStyle={styles.labelStyle}
+            />
+            <Tabs
+              name={'Care Ijara'}
+              container={styles.tabContainer}
+              labelStyle={styles.labelStyle}
+            />
+            <Tabs
+              name={'Care Lease'}
+              container={styles.tabContainer}
+              labelStyle={styles.labelStyle}
+            />
+          </View>
 
-        <View style={styles.tabsContainer}>
-          <Tabs
-            name={'House Building'}
-            container={styles.tabContainer}
-            labelStyle={styles.labelStyle}
-          />
-          <Tabs
-            name={'House Finance'}
-            container={styles.tabContainer}
-            labelStyle={styles.labelStyle}
-          />
-          <Tabs
-            name={'Personal Finance'}
-            container={styles.tabContainer}
-            labelStyle={styles.labelStyle}
-          />
-          <Tabs
-            name={'Care Ijara'}
-            container={styles.tabContainer}
-            labelStyle={styles.labelStyle}
-          />
-          <Tabs
-            name={'Care Lease'}
-            container={styles.tabContainer}
-            labelStyle={styles.labelStyle}
-          />
-        </View>
-
-        <View style={styles.table}>
-          <DisplayTable data={tableData} tableCellHeading={tableCellHeading} />
-        </View>
-
-      </CurvedView>
+          <View style={styles.table}>
+            <DisplayTable
+              data={tableData}
+              tableCellHeading={tableCellHeading}
+            />
+          </View>
+        </CurvedView>
+      </ScrollView>
     </View>
   );
 };
