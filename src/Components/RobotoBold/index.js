@@ -4,7 +4,6 @@ import { fonts } from '../../Assets/fonts';
 import { vw } from '../../Assets/themes/dimension';
 
 const RobotoBold = ({ name, style }) => {
-  console.log("@!#@!#!@#1")
   return <Text style={[Style.textStyle, style]}>{name}</Text>;
 };
 

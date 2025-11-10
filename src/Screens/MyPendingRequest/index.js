@@ -29,6 +29,8 @@ const MyPendingRequest = () => {
 
       const res = await get(endpoints.claims.getPendingClaims);
 
+      console.log(res?.data , "leaves data")
+
       const formatted = res.data?.map(item => [
         { label: 'Claim Type', value: item?.claimType ?? '--' },
         { label: 'Claim Number', value: item?.claimNumber ?? '--' },
@@ -43,7 +45,6 @@ const MyPendingRequest = () => {
       ]);
 
       setClaimsData(formatted ?? []);
-      setClaimsData([]);
     } catch (error) {
     } finally {
       setLoading(false);

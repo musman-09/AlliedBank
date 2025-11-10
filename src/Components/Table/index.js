@@ -19,8 +19,7 @@ const Table = ({ data }) => {
     setSelected(tab);
   };
 
-  console.log(data, 'data coming');
-  const selectedTabData = data.filter(row =>
+  const selectedTabData = data?.filter(row =>
     row?.some(obj => obj.label === 'status' && obj.value === selected),
   );
 
@@ -63,7 +62,6 @@ const Table = ({ data }) => {
     );
   };
 
-  console.log(selectedTabData, 'selected tab data');
   return (
     <View style={styles.tableContainer}>
       <View style={styles.tabsContainer}>
@@ -110,11 +108,7 @@ const Table = ({ data }) => {
         </LinearGradient>
       </View>
 
-      <FlatList
-        data={selectedTabData}
-        renderItem={renderItem}
-
-      />
+      <FlatList data={selectedTabData} renderItem={renderItem} />
     </View>
   );
 };
@@ -154,14 +148,14 @@ const styles = StyleSheet.create({
   cell: {
     width: '33.3%',
     paddingVertical: vh * 1,
-    // justifyContent: 'center',
-    // backgroundColor: "yellow",
-    // flexDirection :'row'
+    
     alignItems: 'center',
   },
   label: {},
   value: {
     fontSize: vw * 3.5,
+
+    textAlign: 'center',
   },
   horizontalBar: {
     width: '100%',

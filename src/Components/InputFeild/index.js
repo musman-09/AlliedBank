@@ -24,8 +24,6 @@ const InputFeild = ({
 }) => {
   const [passwordHide, setPasswordHide] = useState(false);
 
-  console.log(passwordHide, 'passwordHideee');
-
   const passwordHideFunc = () => {
     setPasswordHide(!passwordHide);
   };
@@ -40,10 +38,6 @@ const InputFeild = ({
           secureTextEntry={passwordHide ? secureText : false}
           //   secureTextEntry={true}
           onChangeText={onChangeText}
-
-          
-
-
         />
         {eyeIcon && (
           <TouchableOpacity onPress={passwordHideFunc}>
@@ -69,28 +63,29 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: vw * 4,
-    // borderWidth:2,
-    // fontFamily: fonts.Roboto.bold,
+
     fontFamily: 'bold',
     color: COLORS.labelColor,
   },
   inputContainer: {
     backgroundColor: COLORS.white,
-    paddingVertical: vh,
+    // paddingVertical: vh,
     borderColor: COLORS.feildBorderColor,
     borderWidth: 2,
     borderRadius: vw * 2.5,
     paddingHorizontal: vw * 3,
     flexDirection: 'row',
+    height: vh * 7,
   },
   inputContainerIcon: {
     backgroundColor: COLORS.white,
-    paddingVertical: vh,
+    // paddingVertical: vh,
     borderColor: COLORS.feildBorderColor,
     borderWidth: 2,
     borderRadius: vw * 2.5,
     paddingHorizontal: vw * 3,
     flexDirection: 'row',
+    height: vh * 7,
 
     alignItems: 'center',
     justifyContent: 'space-between',

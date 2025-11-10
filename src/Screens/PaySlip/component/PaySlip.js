@@ -4,7 +4,9 @@ import React from 'react';
 const PaySlipCard = ({ year, month }) => {
   return (
     <View>
-      <Text>Showing payslip for {month} {year}</Text>
+      <Text>
+        Showing payslip for {month} {year}
+      </Text>
     </View>
   );
 };

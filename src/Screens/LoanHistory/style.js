@@ -4,8 +4,6 @@ import { vh, vw } from '../../Assets/themes/dimension';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderWidth:2,
-    backgroundColor : "pink"
   },
   graphContainer: {},
   tabsContainer: {
@@ -22,10 +20,10 @@ export const styles = StyleSheet.create({
     width: '32%',
   },
   labelStyle: {
-    fontSize: vw * 3, 
+    fontSize: vw * 3,
   },
   table: {
-    marginTop :vh*3,
+    marginTop: vh * 3,
     // borderWidth:2
-  }
+  },
 });

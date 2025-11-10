@@ -33,7 +33,7 @@ api.interceptors.request.use(
         }
       }
     }
-    console.log(config);
+    
 
     return config;
   },
@@ -58,7 +58,7 @@ export const jsonToFormdata = json => {
 
 api.interceptors.response.use(
   response => {
-    console.log('RRsss', response);
+  
     return response?.data;
   },
 

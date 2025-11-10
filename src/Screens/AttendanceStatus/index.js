@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
 import { Calendar, CalendarProvider } from 'react-native-calendars';
@@ -8,11 +8,58 @@ import CurvedView from '../../Components/CurvedView';
 import { COLORS } from '../../Assets/themes/color';
 import RobotoBold from '../../Components/RobotoBold';
 import { styles } from './style';
+import { get } from '../../apis';
+import endpoints from '../../apis/endpoints';
 
 const AttendanceStatus = () => {
-  const [selected, setSelected] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [markedDates, setMarkedDates] = useState({});
 
-  console.log(selected, 'selected date');
+  const attendanceColorMap = {
+    Present: COLORS.green,
+    'Present With violation': COLORS.violation,
+    'Rest Day': COLORS.blue,
+    'Casual Leave': COLORS.pink,
+    Leave: COLORS.blue,
+    'Gazzetted Holiday': COLORS.green,
+  };
+
+  const mapAttendanceToMarkedDates = attendanceArray => {
+    const markedDates = {};
+
+    attendanceArray.forEach(item => {
+      const date = item.attendanceDate.split('T')[0];
+
+      const color = attendanceColorMap[item.attendanceType] || COLORS.gray;
+
+      markedDates[date] = {
+        selected: true,
+        selectedColor: color,
+        disableTouchEvent: true,
+      };
+    });
+
+    return markedDates;
+  };
+
+  const getAttendance = async () => {
+    try {
+      setLoading(true);
+      const res = await get(endpoints.attendace.history);
+      const apiData = res?.data || [];
+
+      const mappedDates = mapAttendanceToMarkedDates(apiData);
+      setMarkedDates(mappedDates);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAttendance();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -25,19 +72,10 @@ const AttendanceStatus = () => {
             onDayPress={day => {
               setSelected(day.dateString);
             }}
-            markedDates={{
-              [selected]: {
-                selected: true,
-                disableTouchEvent: true,
-                selectedDotColor: 'orange',
-              },
-            }}
+            markedDates={markedDates}
             style={{
               // elevation: 3,
               borderRadius: vw * 2,
-              // marginVertical: vh * 5,
-              // backgroundColor: COLORS.white,
-              // marginHorizontal: vw * 2,
             }}
             theme={{
               backgroundColor: COLORS.orange,
@@ -54,37 +92,22 @@ const AttendanceStatus = () => {
 
           <View style={styles.identifier}>
             <View style={styles.leave}>
-              <View style={styles.squareBlue}>
-
-
-              </View>
+              <View style={styles.squareBlue}></View>
               <RobotoBold name={'On Leave'} />
             </View>
 
-
-              <View style={styles.leave}>
-              <View style={styles.squarePink}>
-
-                
-              </View>
+            <View style={styles.leave}>
+              <View style={styles.squarePink}></View>
               <RobotoBold name={'Absent'} />
             </View>
 
-
-              <View style={styles.leave}>
-              <View style={styles.squareGreen}>
-
-                
-              </View>
+            <View style={styles.leave}>
+              <View style={styles.squareGreen}></View>
               <RobotoBold name={'Holiday'} />
             </View>
 
-
-              <View style={styles.leave}>
-              <View style={styles.squareOrange}>
-
-                
-              </View>
+            <View style={styles.leave}>
+              <View style={styles.squareOrange}></View>
               <RobotoBold name={'Present With Violation'} />
             </View>
           </View>

@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
 import CurvedView from '../../Components/CurvedView';
@@ -11,94 +11,90 @@ import { COLORS } from '../../Assets/themes/color';
 import LinearGradient from 'react-native-linear-gradient';
 import Table from '../../Components/Table';
 
+import endpoints from '../../apis/endpoints';
+import { useFocusEffect } from '@react-navigation/native';
+import { get } from '../../apis';
+import Loader from '../../Components/Loader';
+
 const LeaveManagement = () => {
-  const leaveManagementData = [
-    [
-      { label: 'status', value: 'Pending' },
+  const [leavesTableData, setLeavesTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-      { label: 'Start Date:', value: '12/23/2223' },
-      {
-        label: 'End Date',
-        value: '12/23/2332',
-      },
-      { label: 'Leaves:', value: '12/12/2223' },
-    ],
+  const getLeavesTableData = async () => {
+    try {
+      setLoading(true);
+      const res = await get(endpoints.leaves.getPendingLeaves);
+      console.log(res, 'full response');
 
-    [
-      { label: 'status', value: 'Approved' },
-      { label: 'Start Date:', value: '12/23/2223' },
-      {
-        label: 'End Date',
-        value: '12/23/2332',
-      },
-      { label: 'Leaves:', value: '12/12/2223' },
-    ],
+      const apiData = res?.data || [];
 
-    [
-      { label: 'status', value: 'Pending' },
-      { label: 'Start Date:', value: '12/23/2223' },
-      {
-        label: 'End Date',
-        value: '12/23/2332',
-      },
-      { label: 'Leaves:', value: '12/12/2223' },
-    ],
+      const formattedData = apiData.map(item => [
+        { label: 'status', value: item?.leaveStatus || 'Pending' },
+        { label: 'Start Date:', value: item?.startDate.split("T")[0] || 'N/A' },
+        { label: 'End Date', value: item?.endDate.split("T")[0] || 'N/A' },
+        { label: 'Leaves:', value: item?.totalLeaves || '0' },
+      ]);
 
-    [
-      { label: 'status', value: 'Pending' },
-      { label: 'Start Date:', value: '12/23/2223' },
-      {
-        label: 'End Date',
-        value: '12/23/2332',
-      },
-      { label: 'Leaves:', value: '12/12/2223' },
-    ],
-  ];
+      setLeavesTableData(formattedData);
+    } catch (error) {
+      console.log('Error fetching leaves:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const data = [
     { value: 50, color: COLORS.blue },
     { value: 50, color: COLORS.green },
   ];
+
+  useEffect(() => {
+    getLeavesTableData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <Header />
       <TopView name={'Leave Management'} />
 
-        <ScrollView>
-      <CurvedView >
-
-          <View style={styles.graphContainer}>
-            <PieChart data={data} chartLabel={'Privelege Leaves'} />
-            <PieChart data={data} chartLabel={'Casual Leaves'} />
-          </View>
-
-          <View style={{ marginTop: vh * 3, alignItems: 'center' }}>
-            <View style={styles.barIdentifier}>
-              <View style={styles.legendItem}>
-                <LinearGradient
-                  colors={COLORS.greenRadient}
-                  style={styles.dot}
-                />
-                <RobotoBold name={'Approve'} style={{ fontSize: vw * 3 }} />
+      <ScrollView>
+        <CurvedView>
+          {loading ? (
+            <Loader containerStyle={styles.loadercontainer} />
+          ) : (
+            <>
+              {' '}
+              <View style={styles.graphContainer}>
+                <PieChart data={data} chartLabel={'Privelege Leaves'} />
+                <PieChart data={data} chartLabel={'Casual Leaves'} />
               </View>
-              <View style={styles.legendItem}>
-                <LinearGradient
-                  colors={COLORS.blueRadient}
-                  style={styles.dot}
-                />
-                <RobotoBold name={'Balance'} style={{ fontSize: vw * 3 }} />
+              <View style={{ marginTop: vh * 3, alignItems: 'center' }}>
+                <View style={styles.barIdentifier}>
+                  <View style={styles.legendItem}>
+                    <LinearGradient
+                      colors={COLORS.greenRadient}
+                      style={styles.dot}
+                    />
+                    <RobotoBold name={'Approve'} style={{ fontSize: vw * 3 }} />
+                  </View>
+                  <View style={styles.legendItem}>
+                    <LinearGradient
+                      colors={COLORS.blueRadient}
+                      style={styles.dot}
+                    />
+                    <RobotoBold name={'Balance'} style={{ fontSize: vw * 3 }} />
+                  </View>
+                </View>
               </View>
-            </View>
-          </View>
+              <View style={styles.table}>
 
-<View style={styles.table}> 
-
-          <Table data={leaveManagementData} />
-          </View>
-      </CurvedView>
-        </ScrollView>
-
-
+                
+                <Table data={leavesTableData} />
+              </View>{' '}
+            </>
+          )}
+        </CurvedView>
+      </ScrollView>
     </View>
   );
 };

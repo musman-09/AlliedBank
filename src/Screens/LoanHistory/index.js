@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
-// import { styles } from '../Home/style'
+
 import { styles } from './style';
 import TopView from '../../Components/TopView';
 import CurvedView from '../../Components/CurvedView';
@@ -11,52 +11,56 @@ import RobotoBold from '../../Components/RobotoBold';
 import Tabs from '../../Components/Tabs';
 import Table from '../../Components/Table';
 import DisplayTable from '../../Components/DisplayTable';
+import endpoints from '../../apis/endpoints';
+import { get } from '../../apis';
+import Loader from '../../Components/Loader';
+import NoDataFound from '../../Components/NoDataFound';
 
 const LoanHistory = () => {
+  const [loanTableData, setLoanTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [selectedTab, setSelectedTab] = useState('House Building');
+
+  const getLoansTableData = async () => {
+    try {
+      setLoading(true);
+      const res = await get(endpoints.loan.history);
+      console.log(res, 'response of loan');
+      console.log(res?.data, 'usman');
+
+      const apiData =
+        res?.data?.map(item => ({
+          payMonth: item?.payMonth.split("T")[0],
+          paymentDate: item?.paymentDate.split["T"][0],
+          installationAmount: item?.installmentAmount,
+          loanType: item?.loanType,
+        })) || [];
+
+      const tabToLoanType = {
+        'House Building': 'House Building',
+        'House Finance': 'Car Lease',
+        'Personal Finance': 'Personal Loan',
+        'Care Ijara': 'Motorcycle Loan',
+        'Care Lease': 'Care Lease',
+      };
+
+      const selectedLoanType = tabToLoanType[selectedTab];
+      const filteredData = apiData.filter(
+        item => item.loanType === selectedLoanType,
+      );
+
+      setLoanTableData(filteredData);
+      console.log(filteredData, 'filtered loan data');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const tableCellHeading = ['Pay Month', 'Pay Date', 'Installment Amount'];
-  const tableData = [
-    {
-      payMonth: 'March/2023',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    ,
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-    {
-      payMonth: 'March',
-      paymentDate: '12/23/2025',
-      installationAmount: '3434434',
-    },
-  ];
+
   const barData = [
     {
       value: 40,
@@ -114,6 +118,10 @@ const LoanHistory = () => {
     { value: 30, frontColor: COLORS.blue },
   ];
 
+  useEffect(() => {
+    getLoansTableData();
+  }, [selectedTab]);
+
   return (
     <View style={styles.container}>
       <Header />
@@ -122,46 +130,64 @@ const LoanHistory = () => {
 
       <ScrollView>
         <CurvedView>
-          <View style={styles.graphContainer}>
-            <BarGraph data={barData} />
-          </View>
-
-          <RobotoBold name={'Loan History'} />
-
-          <View style={styles.tabsContainer}>
-            <Tabs
-              name={'House Building'}
-              container={styles.tabContainer}
-              labelStyle={styles.labelStyle}
-            />
-            <Tabs
-              name={'House Finance'}
-              container={styles.tabContainer}
-              labelStyle={styles.labelStyle}
-            />
-            <Tabs
-              name={'Personal Finance'}
-              container={styles.tabContainer}
-              labelStyle={styles.labelStyle}
-            />
-            <Tabs
-              name={'Care Ijara'}
-              container={styles.tabContainer}
-              labelStyle={styles.labelStyle}
-            />
-            <Tabs
-              name={'Care Lease'}
-              container={styles.tabContainer}
-              labelStyle={styles.labelStyle}
-            />
-          </View>
-
-          <View style={styles.table}>
-            <DisplayTable
-              data={tableData}
-              tableCellHeading={tableCellHeading}
-            />
-          </View>
+          {loading ? (
+            <Loader containerStyle={styles.loadercontainer} />
+          ) : (
+            <>
+              {' '}
+              <View style={styles.graphContainer}>
+                <BarGraph data={barData} />
+              </View>
+              <RobotoBold name={'Loan History'} />
+              <View style={styles.tabsContainer}>
+                <Tabs
+                  onPress={() => setSelectedTab('House Building')}
+                  name={'House Building'}
+                  container={styles.tabContainer}
+                  labelStyle={styles.labelStyle}
+                  isActive={selectedTab === 'House Building'}
+                />
+                <Tabs
+                  onPress={() => setSelectedTab('House Finance')}
+                  name={'House Finance'}
+                  isActive={selectedTab === 'House Finance'}
+                  container={styles.tabContainer}
+                  labelStyle={styles.labelStyle}
+                />
+                <Tabs
+                  name={'Personal Finance'}
+                  onPress={() => setSelectedTab('Personal Finance')}
+                  container={styles.tabContainer}
+                  isActive={selectedTab === 'Personal Finance'}
+                  labelStyle={styles.labelStyle}
+                />
+                <Tabs
+                  name={'Care Ijara'}
+                  onPress={() => setSelectedTab('Care Ijara')}
+                  isActive={selectedTab === 'Care Ijara'}
+                  container={styles.tabContainer}
+                  labelStyle={styles.labelStyle}
+                />
+                <Tabs
+                  name={'Care Lease'}
+                  isActive={selectedTab === 'Care Lease'}
+                  onPress={() => setSelectedTab('Care Lease')}
+                  container={styles.tabContainer}
+                  labelStyle={styles.labelStyle}
+                />
+              </View>
+              <View style={styles.table}>
+                {loanTableData.length > 0 ? (
+                  <DisplayTable
+                    data={loanTableData}
+                    tableCellHeading={tableCellHeading}
+                  />
+                ) : (
+                  <NoDataFound title="No Record Found" />
+                )}
+              </View>
+            </>
+          )}
         </CurvedView>
       </ScrollView>
     </View>
