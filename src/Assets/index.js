@@ -55,6 +55,7 @@ export const icons = {
   pdfDownloadIcon : require('./icons/pdfDownloadIcon.png'),
   fingerPrint  : require('./icons/fingerPrint.png'),
   faceId : require('./icons/faceId.png'),
+  plus  : require('./icons/plus.png'),
 };
 
 export const cardsIcons = {

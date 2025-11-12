@@ -32,4 +32,10 @@ export const styles = StyleSheet.create({
   table: {
     marginTop: vh * 2,
   },
+  plusIcon: {
+    width : vw*20,
+    height : vh*10,
+    resizeMode :"contain",
+    alignSelf:"flex-end"
+  }
 });

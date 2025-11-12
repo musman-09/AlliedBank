@@ -1,4 +1,4 @@
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
@@ -13,8 +13,11 @@ import Table from '../../Components/Table';
 import endpoints from '../../apis/endpoints';
 import { get } from '../../apis';
 import Loader from '../../Components/Loader';
+import { icons } from '../../Assets';
+import { useNavigation } from '@react-navigation/native';
 
 const LeaveManagement = () => {
+  const navigation = useNavigation();
   const [leavesTableData, setLeavesTableData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [casualLeavesData, setCasualLeavesData] = useState([
@@ -26,7 +29,6 @@ const LeaveManagement = () => {
     { value: 50, color: COLORS.green },
   ]);
 
- 
   const [casualStatusCount, setCasualStatusCount] = useState({
     approve: 0,
     pending: 0,
@@ -53,7 +55,6 @@ const LeaveManagement = () => {
           item.leaveType?.toLowerCase() === 'hajj leave',
       );
 
-  
       const casualStatus = casualLeaves.reduce(
         (acc, item) => {
           if (item.leaveStatus?.toLowerCase() === 'approved')
@@ -100,6 +101,10 @@ const LeaveManagement = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const onPressAdd = to => {
+    navigation.navigate(to);
   };
 
   useEffect(() => {
@@ -152,6 +157,10 @@ const LeaveManagement = () => {
               <View style={styles.table}>
                 <Table data={leavesTableData} />
               </View>
+
+              <TouchableOpacity onPress={() => onPressAdd('NewLeaveRequest')}>
+                <Image source={icons.plus} style={styles.plusIcon} />
+              </TouchableOpacity>
             </>
           )}
         </CurvedView>

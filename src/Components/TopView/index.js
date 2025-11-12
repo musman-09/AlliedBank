@@ -34,7 +34,6 @@ const TopView = ({ name, image, profileName, profileDesignation }) => {
 
         {image && (
           <>
-            {' '}
             <Image source={image} style={styles.image} />
             <View
               style={{

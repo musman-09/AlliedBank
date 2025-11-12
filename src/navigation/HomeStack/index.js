@@ -14,7 +14,7 @@ import LeaveManagement from '../../Screens/LeaveManagement';
 import AttendanceStatus from '../../Screens/AttendanceStatus';
 import LoanHistory from '../../Screens/LoanHistory';
 import RateThis from '../../Screens/RateThis';
-
+import NewLeaveRequest from '../../Screens/NewLeaveRequest';
 
 const HomeStack = () => {
   const Stack = createStackNavigator();
@@ -39,6 +39,7 @@ const HomeStack = () => {
       <Stack.Screen name="TaxCertificate" component={TaxCertificate} />
       <Stack.Screen name="LoanHistory" component={LoanHistory} />
       <Stack.Screen name="RateThis" component={RateThis} />
+      <Stack.Screen name="NewLeaveRequest" component={NewLeaveRequest} />
     </Stack.Navigator>
   );
 };

@@ -4,9 +4,14 @@ import { PieChart } from 'react-native-gifted-charts';
 import { vh, vw } from '../../Assets/themes/dimension';
 import RobotoBold from '../RobotoBold';
 import RobotoRegular from '../RobotoRegular';
-import { fonts } from '../../Assets/fonts';
+import { COLORS } from '../../Assets/themes/color';
 
-const pieChart = ({ data, chartLabel, approve, balance }) => {
+const PieChartComponent = ({ data, chartLabel, approve, balance }) => {
+  const chartData = [
+    { value: approve, color: COLORS.green },
+    { value: balance, color: COLORS.blue },
+  ];
+
   return (
     <View style={styles.container}>
       <RobotoBold style={styles.label} name={chartLabel} />
@@ -14,39 +19,26 @@ const pieChart = ({ data, chartLabel, approve, balance }) => {
         donut
         radius={70}
         innerRadius={45}
-        data={data}
-        centerLabelComponent={() => {
-          return <RobotoRegular style={{fontSize :vw*3 }} name={`${approve} / ${balance}`} />;
-        }}
+        data={chartData}
+        centerLabelComponent={() => (
+          <Text style={{ fontSize: vw * 3, flexDirection: 'row' }}>
+            <Text style={{ color: COLORS.green }}>{approve}</Text>
+            <Text style={{ color: 'black' }}> / </Text>
+            <Text style={{ color: COLORS.blue }}>{balance}</Text>
+          </Text>
+        )}
       />
     </View>
   );
 };
 
-export default pieChart;
+export default PieChartComponent;
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth:2,
     gap: vh * 2,
   },
   label: {
     textAlign: 'center',
-  },
-  barIdentifier: {
-    flexDirection: 'row',
-
-    width: '60%',
-    gap: vw * 1.2,
-  },
-  legendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  dot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    marginRight: 6,
   },
 });
