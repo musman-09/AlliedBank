@@ -27,7 +27,6 @@ const ClaimStatus = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.claims.getPendingClaims);
-      console.log(res, 'my respponse !');
 
       const apiData = res?.data || [];
 
@@ -52,48 +51,91 @@ const ClaimStatus = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.claims.medicalClaims);
-      console.log(res, 'my response of medical claims !');
-
       const apiData = res?.data || [];
 
-      const months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
+      const monthlyData = {};
 
-      const formattedData = [];
-      apiData.map(item => {
+      apiData.forEach(item => {
         const date = new Date(item.claimDate);
-        const monthLabel = months[date.getMonth()];
+        const month = date.getMonth();
+        const monthName = date.toLocaleString('default', { month: 'short' });
 
-        formattedData.push({
-          value: item.claimAmount,
-          label: monthLabel,
+        if (!monthlyData[monthName]) {
+          monthlyData[monthName] = { claimAmount: 0, reimbursedAmount: 0 };
+        }
+
+        monthlyData[monthName].claimAmount += item.claimAmount;
+        monthlyData[monthName].reimbursedAmount += item.reimbursedAmount;
+      });
+
+      const formattedBarData = [];
+      Object.keys(monthlyData).forEach(month => {
+        const { claimAmount, reimbursedAmount } = monthlyData[month];
+
+        formattedBarData.push({
+          value: claimAmount,
+          label: month,
           spacing: 2,
           labelWidth: 30,
           labelTextStyle: { color: 'gray' },
           frontColor: COLORS.orange,
         });
 
-        formattedData.push({
-          value: item.reimbursedAmount,
+        formattedBarData.push({
+          value: reimbursedAmount,
           frontColor: COLORS.blue,
         });
       });
 
-      setBarData(formattedData);
+      setBarData(formattedBarData);
     } catch (error) {
-      console.log('Error fetching claims:', error);
+      console.log('Error fetching medical claims:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getTravelClaimsData = async () => {
+    try {
+      setLoading(true);
+      const res = await get(endpoints.claims.travelClaims);
+      const apiData = res?.data || [];
+      const monthlyData = {};
+      apiData.forEach(item => {
+        const date = new Date(item.claimDate);
+        const month = date.getMonth();
+        const monthName = date.toLocaleString('default', { month: 'short' });
+
+        if (!monthlyData[monthName]) {
+          monthlyData[monthName] = { claimAmount: 0, reimbursedAmount: 0 };
+        }
+
+        monthlyData[monthName].claimAmount += item.claimAmount;
+        monthlyData[monthName].reimbursedAmount += item.reimbursedAmount;
+      });
+
+      const formattedBarData = [];
+      Object.keys(monthlyData).forEach(month => {
+        const { claimAmount, reimbursedAmount } = monthlyData[month];
+
+        formattedBarData.push({
+          value: claimAmount,
+          label: month,
+          spacing: 2,
+          labelWidth: 30,
+          labelTextStyle: { color: 'gray' },
+          frontColor: COLORS.orange,
+        });
+
+        formattedBarData.push({
+          value: reimbursedAmount,
+          frontColor: COLORS.blue,
+        });
+      });
+
+      setBarData(formattedBarData);
+    } catch (error) {
+      console.log('Error fetching medical claims:', error);
     } finally {
       setLoading(false);
     }
@@ -116,68 +158,72 @@ const ClaimStatus = () => {
   };
 
   useEffect(() => {
+    if (selectedCarousel === 'Medical Claim') {
+      getMedicalClaimsData();
+    } else if (selectedCarousel === 'Travel Claim') {
+      getTravelClaimsData();
+    }
     getClaimsData();
-    getMedicalClaimsData();
-  }, []);
+  }, [selectedCarousel]);
 
-  const barDataa = [
-    {
-      value: 9322,
-      label: 'Jan',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
+  // const barDataa = [
+  //   {
+  //     value: 9322,
+  //     label: 'Jan',
+  //     spacing: 2,
+  //     labelWidth: 30,
+  //     labelTextStyle: { color: 'gray' },
+  //     frontColor: COLORS.orange,
+  //   },
 
-    { value: 20, frontColor: COLORS.blue },
+  //   { value: 20, frontColor: COLORS.blue },
 
-    {
-      value: 50,
-      label: 'Feb',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 40, frontColor: COLORS.blue },
-    {
-      value: 75,
-      label: 'Mar',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 25, frontColor: COLORS.blue },
-    {
-      value: 30,
-      label: 'Apr',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 20, frontColor: COLORS.blue },
-    {
-      value: 60,
-      label: 'May',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 40, frontColor: COLORS.blue },
-    {
-      value: 65,
-      label: 'Jun',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 30, frontColor: COLORS.blue },
-  ];
+  //   {
+  //     value: 50,
+  //     label: 'Feb',
+  //     spacing: 2,
+  //     labelWidth: 30,
+  //     labelTextStyle: { color: 'gray' },
+  //     frontColor: COLORS.orange,
+  //   },
+  //   { value: 40, frontColor: COLORS.blue },
+  //   {
+  //     value: 75,
+  //     label: 'Mar',
+  //     spacing: 2,
+  //     labelWidth: 30,
+  //     labelTextStyle: { color: 'gray' },
+  //     frontColor: COLORS.orange,
+  //   },
+  //   { value: 25, frontColor: COLORS.blue },
+  //   {
+  //     value: 30,
+  //     label: 'Apr',
+  //     spacing: 2,
+  //     labelWidth: 30,
+  //     labelTextStyle: { color: 'gray' },
+  //     frontColor: COLORS.orange,
+  //   },
+  //   { value: 20, frontColor: COLORS.blue },
+  //   {
+  //     value: 60,
+  //     label: 'May',
+  //     spacing: 2,
+  //     labelWidth: 30,
+  //     labelTextStyle: { color: 'gray' },
+  //     frontColor: COLORS.orange,
+  //   },
+  //   { value: 40, frontColor: COLORS.blue },
+  //   {
+  //     value: 65,
+  //     label: 'Jun',
+  //     spacing: 2,
+  //     labelWidth: 30,
+  //     labelTextStyle: { color: 'gray' },
+  //     frontColor: COLORS.orange,
+  //   },
+  //   { value: 30, frontColor: COLORS.blue },
+  // ];
 
   return (
     <View style={styles.container}>

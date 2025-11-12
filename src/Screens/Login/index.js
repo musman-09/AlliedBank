@@ -4,6 +4,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import React, { useState } from 'react';
 import { icons, Images } from '../../Assets/index';
@@ -16,6 +17,8 @@ import Button from '../../Components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideErrorModal, setErrorModal, setToken } from '../../redux/authSlice';
 import PopupCard from '../../Components/PopupCard';
+import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
+
 const Login = () => {
   const [user, setUser] = useState({
     email: '',
@@ -44,6 +47,57 @@ const Login = () => {
       );
     }
   };
+
+  const onTouchBiometric = async () => {
+    console.log('function bio');
+
+    const rnBiometrics = new ReactNativeBiometrics();
+
+    try {
+      const { available, biometryType } =
+        await rnBiometrics.isSensorAvailable();
+
+      if (!available) {
+        console.log('Biometric sensor not available');
+        return;
+      }
+
+      if (
+        biometryType === BiometryTypes.TouchID ||
+        biometryType === BiometryTypes.Biometrics
+      ) {
+        console.log('Fingerprint available ');
+
+        const { success } = await rnBiometrics.simplePrompt({
+          promptMessage: 'Authenticate with Fingerprint',
+        });
+
+        if (success) {
+          console.log('Fingerprint Auth Success ');
+          dispatch(setToken('Usman'));
+        } else {
+          console.log('Fingerprint Auth Canceled');
+        }
+      } else if (biometryType === BiometryTypes.FaceID) {
+        console.log('Face ID available');
+        const { success } = await rnBiometrics.simplePrompt({
+          promptMessage: 'Authenticate with Face ID',
+        });
+
+        if (success) {
+          console.log('Face ID Auth Success ');
+          dispatch(setToken('usman'));
+        } else {
+          console.log('Face ID Auth Canceled');
+        }
+      } else {
+        console.log('No recognized biometric type');
+      }
+    } catch (error) {
+      console.log('Biometric error:', error);
+    }
+  };
+
   return (
     <ImageBackground
       source={Images.LoginBackground}
@@ -86,6 +140,18 @@ const Login = () => {
           value={user.password}
           onChangeText={text => setUser({ ...user, password: text })}
         />
+
+        <TouchableOpacity onPress={onTouchBiometric}>
+          {Platform.OS === 'ios' ? (
+            <Image source={icons.faceId} style={styles.fingerPrint} />
+          ) : (
+            <Image
+              onPress={onTouchBiometric}
+              source={icons.fingerPrint}
+              style={styles.fingerPrint}
+            />
+          )}
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={onPressLogin} style={styles.buttonContainer}>
           <Button title="LOGIN" titleStyle={styles.ButtonTitle} />

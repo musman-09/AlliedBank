@@ -24,6 +24,7 @@ export const endpoints = {
     reason: 'LeaveManagement/GetLeaveReasons',
     getPendingLeaves: 'LeaveManagement/GetPendingLeaveRequestListByEIN',
     getPendingLeaveDetails: 'LeaveManagement/GetPendingLeaveRequestDetails',
+
     createLeave: data =>
       `LeaveManagement/CreateLeaveRequest?EIN=${data?.ein}&LeaveTypeId=${data?.leaveTypeId}&Country=${data?.countryId}&StartDate=${data?.startDate}&EndDate=${data?.endDate}&ReasonId=${data?.reasonId}`,
   },

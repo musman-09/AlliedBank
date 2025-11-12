@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   cell: {
     width: '33.3%',
     paddingVertical: vh * 1,
-    
+
     alignItems: 'center',
   },
   label: {},

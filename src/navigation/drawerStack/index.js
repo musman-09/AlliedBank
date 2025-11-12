@@ -108,7 +108,6 @@ const drawerStack = () => {
       mainParent: 'Tabs',
     },
 
-    { label: 'Settings', icon: drawerIcons.drawerSettings, to: 'Settings' },
 
     { label: 'Logout', icon: drawerIcons.drawerLogout, to: 'Logout' },
   ];

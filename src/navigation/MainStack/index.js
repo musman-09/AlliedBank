@@ -12,7 +12,7 @@ import AuthStack from '../authStack'
 
 const MainStack = () => {
   const token = useSelector(state => state.counter.token);
-  console.log(token, 'token');
+ 
   const Stack = createStackNavigator();
 
   return (

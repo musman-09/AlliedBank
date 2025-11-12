@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
@@ -10,28 +10,87 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 import LinearGradient from 'react-native-linear-gradient';
 import Table from '../../Components/Table';
-
 import endpoints from '../../apis/endpoints';
-import { useFocusEffect } from '@react-navigation/native';
 import { get } from '../../apis';
 import Loader from '../../Components/Loader';
 
 const LeaveManagement = () => {
   const [leavesTableData, setLeavesTableData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [casualLeavesData, setCasualLeavesData] = useState([
+    { value: 50, color: COLORS.blue },
+    { value: 50, color: COLORS.green },
+  ]);
+  const [privilegeLeavesData, setPrivilegeLeavesData] = useState([
+    { value: 50, color: COLORS.blue },
+    { value: 50, color: COLORS.green },
+  ]);
+
+ 
+  const [casualStatusCount, setCasualStatusCount] = useState({
+    approve: 0,
+    pending: 0,
+  });
+  const [privilegeStatusCount, setPrivilegeStatusCount] = useState({
+    approve: 0,
+    pending: 0,
+  });
 
   const getLeavesTableData = async () => {
     try {
       setLoading(true);
       const res = await get(endpoints.leaves.getPendingLeaves);
-      console.log(res, 'full response');
 
       const apiData = res?.data || [];
 
+      const casualLeaves = apiData.filter(
+        item => item.leaveType?.toLowerCase() === 'casual leave',
+      );
+
+      const privilegeLeaves = apiData.filter(
+        item =>
+          item.leaveType?.toLowerCase() === 'privilege leave' ||
+          item.leaveType?.toLowerCase() === 'hajj leave',
+      );
+
+  
+      const casualStatus = casualLeaves.reduce(
+        (acc, item) => {
+          if (item.leaveStatus?.toLowerCase() === 'approved')
+            acc.approve += item.leaveDays || 0;
+          else acc.pending += item.leaveDays || 0;
+          return acc;
+        },
+        { approve: 0, pending: 0 },
+      );
+
+      const privilegeStatus = privilegeLeaves.reduce(
+        (acc, item) => {
+          if (item.leaveStatus?.toLowerCase() === 'approved')
+            acc.approve += item.leaveDays || 0;
+          else acc.pending += item.leaveDays || 0;
+          return acc;
+        },
+        { approve: 0, pending: 0 },
+      );
+
+      setCasualStatusCount(casualStatus);
+      setPrivilegeStatusCount(privilegeStatus);
+
+      setCasualLeavesData([
+        { value: casualStatus.approve, color: COLORS.green },
+        { value: casualStatus.pending, color: COLORS.blue },
+      ]);
+
+      setPrivilegeLeavesData([
+        { value: privilegeStatus.approve, color: COLORS.green },
+        { value: privilegeStatus.pending, color: COLORS.blue },
+      ]);
+
       const formattedData = apiData.map(item => [
         { label: 'status', value: item?.leaveStatus || 'Pending' },
-        { label: 'Start Date:', value: item?.startDate.split("T")[0] || 'N/A' },
-        { label: 'End Date', value: item?.endDate.split("T")[0] || 'N/A' },
+        { label: 'Start Date:', value: item?.startDate.split('T')[0] || 'N/A' },
+        { label: 'End Date', value: item?.endDate.split('T')[0] || 'N/A' },
         { label: 'Leaves:', value: item?.totalLeaves || '0' },
       ]);
 
@@ -42,11 +101,6 @@ const LeaveManagement = () => {
       setLoading(false);
     }
   };
-
-  const data = [
-    { value: 50, color: COLORS.blue },
-    { value: 50, color: COLORS.green },
-  ];
 
   useEffect(() => {
     getLeavesTableData();
@@ -63,10 +117,19 @@ const LeaveManagement = () => {
             <Loader containerStyle={styles.loadercontainer} />
           ) : (
             <>
-              {' '}
               <View style={styles.graphContainer}>
-                <PieChart data={data} chartLabel={'Privelege Leaves'} />
-                <PieChart data={data} chartLabel={'Casual Leaves'} />
+                <PieChart
+                  data={privilegeLeavesData}
+                  chartLabel={'Privilege Leaves'}
+                  approve={privilegeStatusCount.approve}
+                  balance={privilegeStatusCount.pending}
+                />
+                <PieChart
+                  data={casualLeavesData}
+                  chartLabel={'Casual Leaves'}
+                  approve={casualStatusCount.approve}
+                  balance={casualStatusCount.pending}
+                />
               </View>
               <View style={{ marginTop: vh * 3, alignItems: 'center' }}>
                 <View style={styles.barIdentifier}>
@@ -87,10 +150,8 @@ const LeaveManagement = () => {
                 </View>
               </View>
               <View style={styles.table}>
-
-                
                 <Table data={leavesTableData} />
-              </View>{' '}
+              </View>
             </>
           )}
         </CurvedView>

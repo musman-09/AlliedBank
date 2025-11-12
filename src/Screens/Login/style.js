@@ -19,9 +19,10 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   logoContent: {
-    marginTop: vh * 20,
+    marginTop: vh * 15,
     gap: vh * 2,
     marginBottom: vh * 2,
+  
   },
   logoHeading: {
     color: COLORS.orange,
@@ -47,5 +48,10 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: vh * 2,
     width: '100%',
+  },
+  fingerPrint: {
+    width: vw * 27,
+    height: vw * 27,
+    resizeMode: 'contain',
   },
 });

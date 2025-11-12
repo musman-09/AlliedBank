@@ -26,13 +26,13 @@ const LoanHistory = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.loan.history);
-      console.log(res, 'response of loan');
+
       console.log(res?.data, 'usman');
 
       const apiData =
         res?.data?.map(item => ({
-          payMonth: item?.payMonth.split("T")[0],
-          paymentDate: item?.paymentDate.split["T"][0],
+          payMonth: item?.payMonth.split('T')[0],
+          paymentDate: item?.paymentDate.split('T')[0],
           installationAmount: item?.installmentAmount,
           loanType: item?.loanType,
         })) || [];
@@ -49,6 +49,7 @@ const LoanHistory = () => {
       const filteredData = apiData.filter(
         item => item.loanType === selectedLoanType,
       );
+      console.log(filteredData, 'filtered loan data');
 
       setLoanTableData(filteredData);
       console.log(filteredData, 'filtered loan data');

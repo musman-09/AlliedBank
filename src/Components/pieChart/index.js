@@ -3,8 +3,10 @@ import React from 'react';
 import { PieChart } from 'react-native-gifted-charts';
 import { vh, vw } from '../../Assets/themes/dimension';
 import RobotoBold from '../RobotoBold';
+import RobotoRegular from '../RobotoRegular';
+import { fonts } from '../../Assets/fonts';
 
-const pieChart = ({ data, chartLabel }) => {
+const pieChart = ({ data, chartLabel, approve, balance }) => {
   return (
     <View style={styles.container}>
       <RobotoBold style={styles.label} name={chartLabel} />
@@ -14,15 +16,9 @@ const pieChart = ({ data, chartLabel }) => {
         innerRadius={45}
         data={data}
         centerLabelComponent={() => {
-          return <Text style={{ fontSize: vw * 3 }}>70%</Text>;
+          return <RobotoRegular style={{fontSize :vw*3 }} name={`${approve} / ${balance}`} />;
         }}
       />
-
-
-       
-
-
-
     </View>
   );
 };

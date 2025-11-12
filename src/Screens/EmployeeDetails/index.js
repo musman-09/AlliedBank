@@ -94,7 +94,10 @@ const EmployeeDetails = () => {
         />
         <View>
           <RobotoBold name={item.label} style={styles.label} />
-          <RobotoRegular style={styles.value} name={item?.value.toString()} />
+          <RobotoRegular
+            style={styles.value}
+            name={item?.value ? String(item.value) : '—'}
+          />
         </View>
       </View>
     );
