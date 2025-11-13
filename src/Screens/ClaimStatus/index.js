@@ -166,64 +166,7 @@ const ClaimStatus = () => {
     getClaimsData();
   }, [selectedCarousel]);
 
-  // const barDataa = [
-  //   {
-  //     value: 9322,
-  //     label: 'Jan',
-  //     spacing: 2,
-  //     labelWidth: 30,
-  //     labelTextStyle: { color: 'gray' },
-  //     frontColor: COLORS.orange,
-  //   },
-
-  //   { value: 20, frontColor: COLORS.blue },
-
-  //   {
-  //     value: 50,
-  //     label: 'Feb',
-  //     spacing: 2,
-  //     labelWidth: 30,
-  //     labelTextStyle: { color: 'gray' },
-  //     frontColor: COLORS.orange,
-  //   },
-  //   { value: 40, frontColor: COLORS.blue },
-  //   {
-  //     value: 75,
-  //     label: 'Mar',
-  //     spacing: 2,
-  //     labelWidth: 30,
-  //     labelTextStyle: { color: 'gray' },
-  //     frontColor: COLORS.orange,
-  //   },
-  //   { value: 25, frontColor: COLORS.blue },
-  //   {
-  //     value: 30,
-  //     label: 'Apr',
-  //     spacing: 2,
-  //     labelWidth: 30,
-  //     labelTextStyle: { color: 'gray' },
-  //     frontColor: COLORS.orange,
-  //   },
-  //   { value: 20, frontColor: COLORS.blue },
-  //   {
-  //     value: 60,
-  //     label: 'May',
-  //     spacing: 2,
-  //     labelWidth: 30,
-  //     labelTextStyle: { color: 'gray' },
-  //     frontColor: COLORS.orange,
-  //   },
-  //   { value: 40, frontColor: COLORS.blue },
-  //   {
-  //     value: 65,
-  //     label: 'Jun',
-  //     spacing: 2,
-  //     labelWidth: 30,
-  //     labelTextStyle: { color: 'gray' },
-  //     frontColor: COLORS.orange,
-  //   },
-  //   { value: 30, frontColor: COLORS.blue },
-  // ];
+ 
 
   return (
     <View style={styles.container}>

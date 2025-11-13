@@ -46,7 +46,8 @@ const Select = ({
     setSelectedOption(item);
     setIsVisible(false);
     if (onSelectOption) {
-      onSelectOption( item);
+      onSelectOption(name, item);
+      
     }
   };
 

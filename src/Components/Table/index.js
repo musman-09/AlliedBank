@@ -56,7 +56,6 @@ const Table = ({ data }) => {
           </View>
         ))}
 
-       
         <View style={styles.horizontalBar} />
       </View>
     );
@@ -108,7 +107,12 @@ const Table = ({ data }) => {
         </LinearGradient>
       </View>
 
-      <FlatList data={selectedTabData} renderItem={renderItem} />
+      <FlatList
+        data={selectedTabData}
+        renderItem={renderItem}
+        nestedScrollEnabled={true}
+        style={{ maxHeight: vh * 100 }}
+      />
     </View>
   );
 };
@@ -151,7 +155,7 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
   },
-  label: {},
+
   value: {
     fontSize: vw * 3.5,
 

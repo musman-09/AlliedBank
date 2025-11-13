@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
   },
   table: {
     marginTop: vh * 2,
+   
   },
   plusIcon: {
     width : vw*20,
