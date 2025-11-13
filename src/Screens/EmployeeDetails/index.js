@@ -17,7 +17,7 @@ const EmployeeDetails = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  console.log(employeeData, 'data off');
+
 
   const fetchEmployeeDetails = async () => {
     try {

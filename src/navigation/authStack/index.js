@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from '../../Screens/Login';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const authStack = () => {
+const AuthStack = () => {
   const Stack = createStackNavigator();
 
   return (
@@ -15,4 +15,4 @@ const authStack = () => {
   );
 };
 
-export default authStack;
+export default AuthStack;

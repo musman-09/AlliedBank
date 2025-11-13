@@ -5,28 +5,71 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  Modal,
 } from 'react-native';
 import React, { useState } from 'react';
 import { icons } from '../../Assets';
 import RobotoBold from '../RobotoBold';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
+import { pick, types } from '@react-native-documents/picker';
+import { Calendar } from 'react-native-calendars';
 
-const Select = ({ label, placeholder, options  , onSelectOption}) => {
+const Select = ({
+  label,
+  placeholder,
+  options,
+  onSelectOption,
+  type,
+  name,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showCalendar, setShowCalendar] = useState(false);
 
-  const onPressDropDown = () => {
-    setIsVisible(!isVisible);
+  const onPressAttachment = async () => {
+    try {
+      const results = await pick({ type: [types.allFiles] });
+      const file = results[0];
+      setSelectedFile(file.name);
+
+      if (onSelectOption) {
+        onSelectOption(name, file);
+      }
+    } catch (err) {
+      console.log('error while uploading', err);
+    }
   };
 
   const onSelect = item => {
     setSelectedOption(item);
     setIsVisible(false);
-     if (onSelectOption) {
-      onSelectOption(item); 
+    if (onSelectOption) {
+      onSelectOption( item);
     }
   };
+
+  const onPressCalendar = () => setShowCalendar(true);
+
+  const onDayPress = day => {
+    setSelectedOption(day.dateString);
+    if (onSelectOption) {
+      onSelectOption(name, day.dateString);
+    }
+    setShowCalendar(false);
+  };
+
+  const handlePress = () => {
+    if (type === 'file') {
+      onPressAttachment();
+    } else if (type === 'calender') {
+      onPressCalendar();
+    } else {
+      setIsVisible(!isVisible);
+    }
+  };
+
   return (
     <View style={styles.wrapper}>
       <RobotoBold style={styles.label} name={label} />
@@ -34,15 +77,24 @@ const Select = ({ label, placeholder, options  , onSelectOption}) => {
       <TouchableOpacity
         style={styles.selectBox}
         activeOpacity={0.8}
-        onPress={onPressDropDown}
+        onPress={handlePress}
       >
-        <Text style={ selectedOption ? styles.value : styles.placeholder}>
-          {selectedOption ? selectedOption : placeholder}
+        <Text style={selectedOption ? styles.value : styles.placeholder}>
+          {selectedFile
+            ? selectedFile
+            : selectedOption
+            ? selectedOption
+            : placeholder}
         </Text>
-        <Image source={icons.arrowDown} style={styles.icon} />
+
+        {type === 'file' ? (
+          <Image source={icons.Attachment} style={styles.icon} />
+        ) : (
+          <Image source={icons.arrowDown} style={styles.icon} />
+        )}
       </TouchableOpacity>
 
-      {isVisible && (
+      {isVisible && options && (
         <View style={styles.dropdown}>
           <FlatList
             data={options}
@@ -59,20 +111,33 @@ const Select = ({ label, placeholder, options  , onSelectOption}) => {
         </View>
       )}
 
-
+      <Modal visible={showCalendar} transparent={true} animationType="slide">
+        <View style={styles.modalContainer}>
+          <Calendar
+            onDayPress={onDayPress}
+            markedDates={{
+              [selectedOption]: {
+                selected: true,
+                selectedColor: COLORS.primary,
+              },
+            }}
+          />
+          <TouchableOpacity
+            onPress={() => setShowCalendar(false)}
+            style={styles.closeButton}
+          >
+            <Text style={{ color: 'white' }}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
-
-
   );
 };
 
 export default Select;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    // marginVertical: 10,
-    // borderWidth:2
-  },
+  wrapper: {},
   label: {
     position: 'absolute',
     top: vh * -1,
@@ -93,12 +158,14 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     paddingVertical: 14,
     paddingHorizontal: 12,
-    // borderWidth:2
-    // backgroundColor: "yellow",
   },
   placeholder: {
     fontSize: 14,
     color: '#888',
+  },
+  value: {
+    fontSize: 14,
+    color: '#000',
   },
   icon: {
     width: 18,
@@ -120,8 +187,20 @@ const styles = StyleSheet.create({
   option: {
     paddingVertical: vh * 1.5,
     paddingHorizontal: vw * 3,
-
     borderBottomWidth: 0.5,
     borderColor: COLORS.cardBorderColor,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  closeButton: {
+    backgroundColor: COLORS.primary,
+    marginTop: 10,
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
   },
 });

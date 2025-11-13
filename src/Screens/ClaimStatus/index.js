@@ -230,7 +230,7 @@ const ClaimStatus = () => {
       <Header />
       <TopView name={'Claim Status'} />
 
-      <ScrollView>
+
         <CurvedView>
           {loading ? (
             <Loader containerStyle={styles.loadercontainer} />
@@ -264,7 +264,7 @@ const ClaimStatus = () => {
             </View>
           )}
         </CurvedView>
-      </ScrollView>
+      
     </View>
   );
 };

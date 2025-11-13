@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import drawerStack from '../drawerStack';
+
 import Home from '../../Screens/Home';
 import MyPendingRequest from '../../Screens/MyPendingRequest';
 import PendingApproval from '../../Screens/PendingApproval';

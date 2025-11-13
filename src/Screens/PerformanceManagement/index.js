@@ -52,7 +52,7 @@ const PerformanceManagement = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
-    console.log('Viewing Appraisal Letter:', item);
+   
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -124,7 +124,7 @@ const PerformanceManagement = ({ navigation }) => {
       setPdfData(null);
 
       const res = await get(`${endpoints.documents.generateAppraisalLetter}`);
-      console.log(res, 'Appraisal Letter API Response');
+
 
       if (res?.data) {
         const data = Array.isArray(res.data) ? res.data : [res.data];

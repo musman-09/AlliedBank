@@ -27,10 +27,10 @@ const Login = () => {
 
   const errorModal = useSelector(state => state.counter.errorModal);
 
-  console.log(user, 'user type wala');
+ 
   const dispatch = useDispatch();
   const token = useSelector(state => state.counter.token);
-  console.log(token, 'token');
+  
 
   const onPressLogin = () => {
     if (user?.email.length > 0 && user?.password.length > 0) {

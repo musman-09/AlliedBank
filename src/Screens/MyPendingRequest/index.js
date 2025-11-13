@@ -21,7 +21,7 @@ const MyPendingRequest = () => {
   const [leavesData, setLeavesData] = useState([]);
   const [claimsData, setClaimsData] = useState([]);
 
-  console.log('component rendering .. ');
+
 
   const fetchClaims = async () => {
     try {
@@ -29,7 +29,6 @@ const MyPendingRequest = () => {
 
       const res = await get(endpoints.claims.getPendingClaims);
 
-      console.log(res?.data , "leaves data")
 
       const formatted = res.data?.map(item => [
         { label: 'Claim Type', value: item?.claimType ?? '--' },
@@ -56,7 +55,6 @@ const MyPendingRequest = () => {
       setLoading(true);
       const res = await get(endpoints.leaves.getPendingLeaves);
 
-      console.log(res, 'leaves response . . . . .');
 
       const formatted = res.data?.map(item => [
         { label: 'Full Name', value: item?.fullName ?? '--' },

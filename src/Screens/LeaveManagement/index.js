@@ -116,55 +116,53 @@ const LeaveManagement = () => {
       <Header />
       <TopView name={'Leave Management'} />
 
-      <ScrollView>
-        <CurvedView>
-          {loading ? (
-            <Loader containerStyle={styles.loadercontainer} />
-          ) : (
-            <>
-              <View style={styles.graphContainer}>
-                <PieChart
-                  data={privilegeLeavesData}
-                  chartLabel={'Privilege Leaves'}
-                  approve={privilegeStatusCount.approve}
-                  balance={privilegeStatusCount.pending}
-                />
-                <PieChart
-                  data={casualLeavesData}
-                  chartLabel={'Casual Leaves'}
-                  approve={casualStatusCount.approve}
-                  balance={casualStatusCount.pending}
-                />
-              </View>
-              <View style={{ marginTop: vh * 3, alignItems: 'center' }}>
-                <View style={styles.barIdentifier}>
-                  <View style={styles.legendItem}>
-                    <LinearGradient
-                      colors={COLORS.greenRadient}
-                      style={styles.dot}
-                    />
-                    <RobotoBold name={'Approve'} style={{ fontSize: vw * 3 }} />
-                  </View>
-                  <View style={styles.legendItem}>
-                    <LinearGradient
-                      colors={COLORS.blueRadient}
-                      style={styles.dot}
-                    />
-                    <RobotoBold name={'Balance'} style={{ fontSize: vw * 3 }} />
-                  </View>
+      <CurvedView>
+        {loading ? (
+          <Loader containerStyle={styles.loadercontainer} />
+        ) : (
+          <>
+            <View style={styles.graphContainer}>
+              <PieChart
+                data={privilegeLeavesData}
+                chartLabel={'Privilege Leaves'}
+                approve={privilegeStatusCount.approve}
+                balance={privilegeStatusCount.pending}
+              />
+              <PieChart
+                data={casualLeavesData}
+                chartLabel={'Casual Leaves'}
+                approve={casualStatusCount.approve}
+                balance={casualStatusCount.pending}
+              />
+            </View>
+            <View style={{ marginTop: vh * 3, alignItems: 'center' }}>
+              <View style={styles.barIdentifier}>
+                <View style={styles.legendItem}>
+                  <LinearGradient
+                    colors={COLORS.greenRadient}
+                    style={styles.dot}
+                  />
+                  <RobotoBold name={'Approve'} style={{ fontSize: vw * 3 }} />
+                </View>
+                <View style={styles.legendItem}>
+                  <LinearGradient
+                    colors={COLORS.blueRadient}
+                    style={styles.dot}
+                  />
+                  <RobotoBold name={'Balance'} style={{ fontSize: vw * 3 }} />
                 </View>
               </View>
-              <View style={styles.table}>
-                <Table data={leavesTableData} />
-              </View>
+            </View>
+            <View style={styles.table}>
+              <Table data={leavesTableData} />
+            </View>
 
-              <TouchableOpacity onPress={() => onPressAdd('NewLeaveRequest')}>
-                <Image source={icons.plus} style={styles.plusIcon} />
-              </TouchableOpacity>
-            </>
-          )}
-        </CurvedView>
-      </ScrollView>
+            <TouchableOpacity onPress={() => onPressAdd('NewLeaveRequest')}>
+              <Image source={icons.plus} style={styles.plusIcon} />
+            </TouchableOpacity>
+          </>
+        )}
+      </CurvedView>
     </View>
   );
 };

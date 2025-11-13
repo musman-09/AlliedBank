@@ -53,7 +53,7 @@ const TaxCertificate = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
-    console.log('Viewing Tax Certificate:', item);
+
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -123,7 +123,7 @@ const TaxCertificate = ({ navigation }) => {
       setPdfData(null);
 
       const res = await get(`${endpoints.documents.generateTaxCertifcate}`);
-      console.log(res, 'Tax Certificate API Response');
+
 
       if (res?.data) {
         const data = Array.isArray(res.data) ? res.data : [res.data];

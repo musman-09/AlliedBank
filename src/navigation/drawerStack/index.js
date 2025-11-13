@@ -12,7 +12,7 @@ import Tabs from '../Tabs';
 import { logoutUser } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
 
-const drawerStack = () => {
+const DrawerStack = () => {
   const dispatch = useDispatch();
   const Drawer = createDrawerNavigator();
 
@@ -194,7 +194,7 @@ const drawerStack = () => {
   );
 };
 
-export default drawerStack;
+export default DrawerStack;
 
 const styles = StyleSheet.create({
   drawerContainer: {

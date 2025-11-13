@@ -24,7 +24,7 @@ const Home = () => {
   };
 
   const toggleDrawer = () => {
-    console.log('menu pressed');
+    
     navigation.toggleDrawer();
   };
 
@@ -161,7 +161,7 @@ const Home = () => {
       </ImageBackground>
 
       <View style={styles.cardsContainer}>
-        {/* <Text> asdsa</Text> */}
+     
 
         <FlatList
           data={cardData}

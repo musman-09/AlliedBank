@@ -33,7 +33,7 @@ const RecentHrCirculars = () => {
       }));
       setHrCircularData(formatted);
     } catch (error) {
-      console.log('Error fetching HR circulars:', error);
+      
       Alert.alert('Error', 'Failed to load HR Circulars.');
     }
   };
@@ -45,9 +45,9 @@ const RecentHrCirculars = () => {
   );
 
   const onView = item => {
-    console.log(item?.url, 'url i got');
+
     if (!item?.url) {
-      Alert.alert('nh mil rha url');
+      Alert.alert('url not found');
       return;
     }
 
@@ -93,7 +93,7 @@ const RecentHrCirculars = () => {
               style={{ flex: 1 }}
               trustAllCerts={false}
               onError={error => {
-                console.log('PDF load error:', error);
+              
                 Alert.alert(
                   'Error',
                   'Unable to open this file. It may not be a PDF.',

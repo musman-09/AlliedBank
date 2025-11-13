@@ -56,7 +56,7 @@ const Table = ({ data }) => {
           </View>
         ))}
 
-        {/* divider at bottom of each row */}
+       
         <View style={styles.horizontalBar} />
       </View>
     );

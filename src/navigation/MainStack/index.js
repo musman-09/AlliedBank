@@ -7,7 +7,7 @@ import Login from '../../Screens/Login';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 import MyPendingRequest from '../../Screens/MyPendingRequest';
-import drawerStack from '../drawerStack'
+import DrawerStack from '../DrawerStack'
 import AuthStack from '../authStack'
 
 const MainStack = () => {
@@ -19,10 +19,10 @@ const MainStack = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {token ? (
      
-            <Stack.Screen name="drawerStack" component={drawerStack} />
+            <Stack.Screen name="DrawerStack" component={DrawerStack} />
       ) : (
         
-        <Stack.Screen name="authStack" component={AuthStack} />
+        <Stack.Screen name="AuthStack" component={AuthStack} />
       )}
     </Stack.Navigator>
   );

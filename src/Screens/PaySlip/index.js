@@ -13,7 +13,7 @@ import Pdf from 'react-native-pdf';
 import { Platform, PermissionsAndroid, Alert } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
-import FileViewer from 'react-native-file-viewer';
+
 import { COLORS } from '../../Assets/themes/color';
 
 const PaySlip = ({ navigation }) => {
@@ -43,7 +43,7 @@ const PaySlip = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
-    console.log('item on view', item);
+  
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -113,7 +113,7 @@ const PaySlip = ({ navigation }) => {
       setPdfData(null);
 
       const res = await get(`${endpoints.payslips.generatePaySlip}`);
-      console.log(res, 'response of generate pay slip');
+
 
       if (res?.data) {
         const data = Array.isArray(res.data) ? res.data : [res.data];
@@ -176,8 +176,7 @@ const PaySlip = ({ navigation }) => {
 
       <Modal visible={visible} animationType="slide">
         <View style={{ flex: 1 }}>
-
-          <Header  toggleDrawer={()=>setVisible(false)}/>
+          <Header toggleDrawer={() => setVisible(false)} />
           <TouchableOpacity
             onPress={() => setVisible(false)}
             style={{ padding: 15, backgroundColor: COLORS.black }}

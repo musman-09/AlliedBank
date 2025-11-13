@@ -1,7 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-// import { icons } from '../../Assets';
-
 import RobotoBold from '../RobotoBold';
 import RobotoRegular from '../RobotoRegular';
 import { icons } from '../../Assets';
@@ -9,7 +7,7 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 
 const EmployeeCard = ({ data, onViewDownload }) => {
-  console.log(data, 'Data . . . ');
+ 
   const [isToggle, setIsToggle] = useState(false);
 
   const toggleButton = () => {
@@ -96,13 +94,13 @@ const styles = StyleSheet.create({
     paddingVertical: vh * 1,
   },
   containerClosed: {
-    // flex: 1,
+ 
     gap: vh,
     borderRadius: vw * 5,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    // alignContent : "center",
+
     borderColor: COLORS.lightBorder,
     elevation: 2,
     backgroundColor: COLORS.white,
@@ -112,7 +110,7 @@ const styles = StyleSheet.create({
 
   left: {
     flexDirection: 'row',
-    // borderWidth: 2,
+
     alignItems: 'center',
     width: '50%',
     gap: vw * 2,
@@ -124,21 +122,16 @@ const styles = StyleSheet.create({
   },
   firstRow: {
     flexDirection: 'row',
-    // borderWidth: 2,
+
     alignContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    // borderColor: 'red',
-    // justifyContent: 'space-between',
-    // alignItems: 'flex-end',
-    // alignItems:""
+   
   },
   right: {
     flexDirection: 'row',
-    // borderWidth: 2,
-    // justifyContent:"center",
-    // alignItems:"center",
+
     gap: vw * 2,
     width: '50%',
     alignItems: 'center',
@@ -159,10 +152,10 @@ const styles = StyleSheet.create({
   secondRowLeft: {
     flexDirection: 'row',
     gap: vw,
-    // borderWidth:2
+  
   },
   secondRow: {
-    // borderWidth:2,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
