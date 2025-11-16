@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 import MyPendingRequest from '../../Screens/MyPendingRequest';
 import DrawerStack from '../DrawerStack'
-import AuthStack from '../authStack'
+import AuthStack from '../AuthStack'
 
 const MainStack = () => {
   const token = useSelector(state => state.counter.token);

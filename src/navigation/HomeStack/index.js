@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import AuthStack from '../authStack';
+import AuthStack from '../AuthStack';
 import MyPendingRequest from '../../Screens/MyPendingRequest';
 import PendingApproval from '../../Screens/PendingApproval';
 import Home from '../../Screens/Home';

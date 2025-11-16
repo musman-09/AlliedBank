@@ -111,7 +111,7 @@ const Table = ({ data }) => {
         data={selectedTabData}
         renderItem={renderItem}
         nestedScrollEnabled={true}
-        style={{ maxHeight: vh * 100 }}
+        // style={{ backgroundColor  : 'red' }}
       />
     </View>
   );
