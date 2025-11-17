@@ -19,6 +19,7 @@ import NoDataFound from '../../Components/NoDataFound';
 const LoanHistory = () => {
   const [loanTableData, setLoanTableData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loanBarData, setLoanBarData] = useState([]);
 
   const [selectedTab, setSelectedTab] = useState('House Building');
 
@@ -35,7 +36,56 @@ const LoanHistory = () => {
           paymentDate: item?.paymentDate.split('T')[0],
           installationAmount: item?.installmentAmount,
           loanType: item?.loanType,
+          totalAmountPaid: item?.totalAmountPaid,
+          totalDueLoan: item?.totalDueLoan,
         })) || [];
+
+      const monthData = [];
+
+      apiData.forEach(item => {
+        const month = item.payMonth.slice(0, 7); 
+        console.log(month, 'momth usman');
+
+        
+        const existing = monthData.find(m => m.month === month);
+
+        console.log(existing, 'existing value usman');
+        if (existing) {
+        
+          existing.paid += item.totalAmountPaid;
+          existing.due += item.totalDueLoan;
+        } else {
+          
+          monthData.push({
+            month,
+            paid: item.totalAmountPaid,
+            due: item.totalDueLoan,
+          });
+        }
+      });
+
+    
+
+      
+      const barGraphData = [];
+      monthData.forEach(item => {
+       
+        barGraphData.push({
+          value: item.paid,
+          label: item.month.split('-')[1], 
+          spacing: 2,
+          labelWidth: 30,
+          labelTextStyle: { color: 'gray' },
+          frontColor: COLORS.orange,
+        });
+      
+        barGraphData.push({
+          value: item.due,
+          frontColor: COLORS.blue,
+        });
+      });
+
+      setLoanBarData(barGraphData); 
 
       const tabToLoanType = {
         'House Building': 'House Building',
@@ -135,9 +185,8 @@ const LoanHistory = () => {
             <Loader containerStyle={styles.loadercontainer} />
           ) : (
             <>
-              {' '}
               <View style={styles.graphContainer}>
-                <BarGraph data={barData} />
+                <BarGraph data={loanBarData} />
               </View>
               <RobotoBold name={'Loan History'} />
               <View style={styles.tabsContainer}>
