@@ -154,7 +154,7 @@ const LeaveManagement = () => {
               </View>
             </View>
             <View style={styles.table}>
-              <Table data={leavesTableData} />
+              <Table data={leavesTableData} bottomPadding={vh*40}/>
             </View>
 
             <TouchableOpacity onPress={() => onPressAdd('NewLeaveRequest')}>
