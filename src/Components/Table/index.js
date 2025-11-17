@@ -12,7 +12,7 @@ import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
 import RobotoRegular from '../RobotoRegular';
 
-const Table = ({ data }) => {
+const Table = ({ data  ,  bottomPadding}) => {
   const [selected, setSelected] = useState('Pending');
 
   const onPressTab = tab => {
@@ -112,6 +112,8 @@ const Table = ({ data }) => {
         renderItem={renderItem}
         nestedScrollEnabled={true}
         // style={{ backgroundColor  : 'red' }}
+      contentContainerStyle={{ paddingBottom: bottomPadding }}
+      
       />
     </View>
   );

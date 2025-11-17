@@ -12,6 +12,7 @@ import { COLORS } from '../../Assets/themes/color';
 import endpoints from '../../apis/endpoints';
 import { get } from '../../apis';
 import Loader from '../../Components/Loader';
+import { vh } from '../../Assets/themes/dimension';
 
 const ClaimStatus = () => {
   const [loading, setLoading] = useState(false);
@@ -166,48 +167,44 @@ const ClaimStatus = () => {
     getClaimsData();
   }, [selectedCarousel]);
 
- 
-
   return (
     <View style={styles.container}>
       <Header />
       <TopView name={'Claim Status'} />
 
+      <CurvedView>
+        {loading ? (
+          <Loader containerStyle={styles.loadercontainer} />
+        ) : (
+          <View style={styles.curvedViewContent}>
+            <View style={{ alignItems: 'center' }}>
+              <View style={styles.crowselBar}>
+                <TouchableOpacity onPress={handlePrev}>
+                  <Image
+                    style={styles.crowseIcon}
+                    source={icons.leftArrow}
+                    onTouchEnd={handlePrev}
+                  />
+                </TouchableOpacity>
 
-        <CurvedView>
-          {loading ? (
-            <Loader containerStyle={styles.loadercontainer} />
-          ) : (
-            <View style={styles.curvedViewContent}>
-              <View style={{ alignItems: 'center' }}>
-                <View style={styles.crowselBar}>
-                  <TouchableOpacity onPress={handlePrev}>
-                    <Image
-                      style={styles.crowseIcon}
-                      source={icons.leftArrow}
-                      onTouchEnd={handlePrev}
-                    />
-                  </TouchableOpacity>
+                <RobotoBold name={selectedCarousel} />
 
-                  <RobotoBold name={selectedCarousel} />
-
-                  <TouchableOpacity onPress={handleNext}>
-                    <Image
-                      style={styles.crowseIcon}
-                      source={icons.rightArrow}
-                      onTouchEnd={handleNext}
-                    />
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity onPress={handleNext}>
+                  <Image
+                    style={styles.crowseIcon}
+                    source={icons.rightArrow}
+                    onTouchEnd={handleNext}
+                  />
+                </TouchableOpacity>
               </View>
-
-              <BarGraph data={barData} />
-
-              <Table data={claimsTableData} />
             </View>
-          )}
-        </CurvedView>
-      
+
+            <BarGraph data={barData} />
+
+            <Table data={claimsTableData} bottomPadding={vh * 90} />
+          </View>
+        )}
+      </CurvedView>
     </View>
   );
 };
