@@ -93,10 +93,10 @@ const PerformanceManagement = ({ navigation }) => {
 
       const filePath = `${dir}/${fileName}`;
 
-      // Write Base64 PDF to file
+     
       await RNFetchBlob.fs.writeFile(filePath, item, 'base64');
 
-      // Add the download to Android's system download manager
+
       if (Platform.OS === 'android') {
         await RNFetchBlob.android.addCompleteDownload({
           title: fileName,

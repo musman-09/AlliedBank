@@ -20,7 +20,6 @@ const LoanHistory = () => {
   const [loanTableData, setLoanTableData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loanBarData, setLoanBarData] = useState([]);
-
   const [selectedTab, setSelectedTab] = useState('House Building');
 
   const getLoansTableData = async () => {
@@ -28,7 +27,7 @@ const LoanHistory = () => {
       setLoading(true);
       const res = await get(endpoints.loan.history);
 
-      console.log(res?.data, 'usman');
+
 
       const apiData =
         res?.data?.map(item => ({
@@ -43,19 +42,15 @@ const LoanHistory = () => {
       const monthData = [];
 
       apiData.forEach(item => {
-        const month = item.payMonth.slice(0, 7); 
-        console.log(month, 'momth usman');
+        const month = item.payMonth.slice(0, 7);
 
-        
         const existing = monthData.find(m => m.month === month);
 
-        console.log(existing, 'existing value usman');
+
         if (existing) {
-        
           existing.paid += item.totalAmountPaid;
           existing.due += item.totalDueLoan;
         } else {
-          
           monthData.push({
             month,
             paid: item.totalAmountPaid,
@@ -64,28 +59,42 @@ const LoanHistory = () => {
         }
       });
 
-    
+      const getMonthName = num => {
+        const months = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ];
+        return months[num - 1];
+      };
 
-      
       const barGraphData = [];
       monthData.forEach(item => {
-       
         barGraphData.push({
           value: item.paid,
-          label: item.month.split('-')[1], 
+          label: getMonthName(Number(item.month.split('-')[1])),
           spacing: 2,
           labelWidth: 30,
           labelTextStyle: { color: 'gray' },
           frontColor: COLORS.orange,
         });
-      
+
         barGraphData.push({
           value: item.due,
           frontColor: COLORS.blue,
         });
       });
 
-      setLoanBarData(barGraphData); 
+      setLoanBarData(barGraphData);
 
       const tabToLoanType = {
         'House Building': 'House Building',
@@ -99,10 +108,10 @@ const LoanHistory = () => {
       const filteredData = apiData.filter(
         item => item.loanType === selectedLoanType,
       );
-      console.log(filteredData, 'filtered loan data');
+      
 
       setLoanTableData(filteredData);
-      console.log(filteredData, 'filtered loan data');
+
     } catch (error) {
       console.log(error);
     } finally {
@@ -112,62 +121,7 @@ const LoanHistory = () => {
 
   const tableCellHeading = ['Pay Month', 'Pay Date', 'Installment Amount'];
 
-  const barData = [
-    {
-      value: 40,
-      label: '',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 20, frontColor: COLORS.blue },
-    {
-      value: 50,
-      label: 'Feb',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 40, frontColor: COLORS.blue },
-    {
-      value: 75,
-      label: 'Mar',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 25, frontColor: COLORS.blue },
-    {
-      value: 30,
-      label: 'Apr',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 20, frontColor: COLORS.blue },
-    {
-      value: 60,
-      label: 'May',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 40, frontColor: COLORS.blue },
-    {
-      value: 65,
-      label: 'Jun',
-      spacing: 2,
-      labelWidth: 30,
-      labelTextStyle: { color: 'gray' },
-      frontColor: COLORS.orange,
-    },
-    { value: 30, frontColor: COLORS.blue },
-  ];
+ console.log(selectedTab , "selecting tab usman")
 
   useEffect(() => {
     getLoansTableData();
@@ -178,8 +132,6 @@ const LoanHistory = () => {
       <Header />
 
       <TopView name={'Active Loans'} />
-
-      <ScrollView>
         <CurvedView>
           {loading ? (
             <Loader containerStyle={styles.loadercontainer} />
@@ -239,7 +191,6 @@ const LoanHistory = () => {
             </>
           )}
         </CurvedView>
-      </ScrollView>
     </View>
   );
 };
