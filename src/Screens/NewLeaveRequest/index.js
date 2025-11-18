@@ -55,7 +55,6 @@ const NewLeaveRequest = () => {
       try {
 
         const ein = '12345';
-
         const url = endpoints.leaves.createLeave({
           ein,
           leaveTypeId:formData.leaveType,

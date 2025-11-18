@@ -108,7 +108,6 @@ const DrawerStack = () => {
       mainParent: 'Tabs',
     },
 
-
     { label: 'Logout', icon: drawerIcons.drawerLogout, to: 'Logout' },
   ];
 
@@ -128,7 +127,6 @@ const DrawerStack = () => {
           dispatch(logoutUser());
         } else {
           navigation.navigate(menu.to);
-          
         }
       }
     };
@@ -161,6 +159,7 @@ const DrawerStack = () => {
             {menus.map((menu, index) => {
               return (
                 <TouchableOpacity
+                  key={index}
                   style={styles.menuContainer}
                   onPress={() => onPressMenu(menu)}
                 >

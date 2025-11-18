@@ -24,7 +24,6 @@ const Home = () => {
   };
 
   const toggleDrawer = () => {
-    
     navigation.toggleDrawer();
   };
 
@@ -161,8 +160,6 @@ const Home = () => {
       </ImageBackground>
 
       <View style={styles.cardsContainer}>
-     
-
         <FlatList
           data={cardData}
           renderItem={renderItem}
