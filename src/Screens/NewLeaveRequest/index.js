@@ -11,6 +11,8 @@ import PopupCard from '../../Components/PopupCard';
 import { hideErrorModal, setErrorModal } from '../../redux/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { icons } from '../../Assets';
+import { post } from '../../apis';
+import endpoints from '../../apis/endpoints';
 
 const NewLeaveRequest = () => {
   const leavesTypes = [
@@ -41,7 +43,7 @@ const NewLeaveRequest = () => {
       [fieldName]: value,
     }));
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       formData.leaveType &&
       formData.country &&
@@ -50,27 +52,66 @@ const NewLeaveRequest = () => {
       formData.attachment &&
       formData.reason
     ) {
-      dispatch(
-        setErrorModal({
-          title: 'Successfull',
-          detail: 'Submitted',
-          logo: icons.successfullcon,
+      try {
 
-          buttonName: 'Continue',
-        }),
-      );
+        const ein = '12345';
+
+        const url = endpoints.leaves.createLeave({
+          ein,
+          leaveTypeId:formData.leaveType,
+          countryId:formData.country,
+          startDate: formData.startDate,
+          endDate: formData.endDate,
+          reasonId : formData.reason,
+        });
+
+        const res = await post(url);
+        console.log(res, "response of create leaves")
+        if (res) {
+          dispatch(
+            setErrorModal({
+              title: 'Successfull',
+              detail: 'Submitted',
+              logo: icons.successfullcon,
+              buttonName: 'Continue',
+            }),
+          );
+
+         
+          setFormData({
+            leaveType: '',
+            country: '',
+            startDate: '',
+            endDate: '',
+            attachment: null,
+            reason: '',
+          });
+        } else {
+          throw new Error('Something went wrong');
+        }
+      } catch (error) {
+        console.log('Error creating leave:', error);
+        dispatch(
+          setErrorModal({
+            title: 'Error',
+            detail: 'Failed to submit leave',
+            logo: icons.errorIcon,
+            buttonName: 'Back',
+          }),
+        );
+      }
     } else {
       dispatch(
         setErrorModal({
           title: 'Missing Fields',
-          detail: 'Please fill all feilds',
+          detail: 'Please fill all fields',
           logo: icons.errorIcon,
-
           buttonName: 'Back',
         }),
       );
     }
   };
+
 
   return (
     <View style={styles.container}>
@@ -85,6 +126,7 @@ const NewLeaveRequest = () => {
             options={leavesTypes}
             label="Leave Type"
             onSelectOption={handleSelect}
+            value={formData.leaveType}
           />
 
           <Select
@@ -93,6 +135,7 @@ const NewLeaveRequest = () => {
             options={Country}
             label="Country"
             onSelectOption={handleSelect}
+            value={formData.country}
           />
 
           <View style={styles.dateContainer}>
@@ -103,6 +146,7 @@ const NewLeaveRequest = () => {
                 type="calender"
                 placeholder="Select Start Date"
                 onSelectOption={handleSelect}
+                value={formData.startDate}
               />
             </View>
             <View style={{ width: '49%' }}>
@@ -112,6 +156,7 @@ const NewLeaveRequest = () => {
                 type="calender"
                 placeholder="Select End Date"
                 onSelectOption={handleSelect}
+                value={formData.endDate}
               />
             </View>
           </View>
@@ -122,6 +167,7 @@ const NewLeaveRequest = () => {
             placeholder="Select File"
             type="file"
             onSelectOption={handleSelect}
+            value={formData.attachment}
           />
 
           <Select
@@ -130,6 +176,7 @@ const NewLeaveRequest = () => {
             label="Reason"
             placeholder="--Select Reason--"
             onSelectOption={handleSelect}
+            value={formData.reason}
           />
 
           <TouchableOpacity onPress={handleSubmit}>

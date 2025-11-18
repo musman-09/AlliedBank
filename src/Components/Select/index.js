@@ -22,12 +22,12 @@ const Select = ({
   onSelectOption,
   type,
   name,
+  value
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
-
   const onPressAttachment = async () => {
     try {
       const results = await pick({ type: [types.allFiles] });
@@ -45,9 +45,13 @@ const Select = ({
   const onSelect = item => {
     setSelectedOption(item);
     setIsVisible(false);
+
     if (onSelectOption) {
-     onSelectOption(item);
-      
+      if (name) {
+        onSelectOption(name, item);
+      } else {
+        onSelectOption(item);
+      }
     }
   };
 
@@ -81,11 +85,11 @@ const Select = ({
         onPress={handlePress}
       >
         <Text style={selectedOption ? styles.value : styles.placeholder}>
-          {selectedFile
-            ? selectedFile
-            : selectedOption
-            ? selectedOption
-            : placeholder}
+         {selectedFile
+    ? selectedFile
+    : value  
+    ? value
+    : placeholder}
         </Text>
 
         {type === 'file' ? (

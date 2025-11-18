@@ -25,8 +25,6 @@ const LoanHistory = () => {
       setLoading(true);
       const res = await get(endpoints.loan.history);
 
-    
-      
       const apiData =
         res?.data?.map(item => ({
           payMonth: item?.payMonth.split('T')[0],
@@ -37,17 +35,12 @@ const LoanHistory = () => {
           totalDueLoan: item?.totalDueLoan,
         })) || [];
 
-        
-
-
-
       const monthData = [];
 
       apiData.forEach(item => {
         const month = item.payMonth.slice(0, 7);
 
         const existing = monthData.find(m => m.month === month);
-
 
         if (existing) {
           existing.paid += item.totalAmountPaid;
@@ -82,7 +75,7 @@ const LoanHistory = () => {
       const barGraphData = [];
       monthData.forEach(item => {
         barGraphData.push({
-          value: item.paid,
+          value: item.paid / 100,
           label: getMonthName(Number(item.month.split('-')[1])),
           spacing: 2,
           labelWidth: 30,
@@ -91,7 +84,7 @@ const LoanHistory = () => {
         });
 
         barGraphData.push({
-          value: item.due,
+          value: item.due / 100,
           frontColor: COLORS.blue,
         });
       });
@@ -110,10 +103,8 @@ const LoanHistory = () => {
       const filteredData = apiData.filter(
         item => item.loanType === selectedLoanType,
       );
-      
 
       setLoanTableData(filteredData);
-
     } catch (error) {
       console.log(error);
     } finally {
@@ -122,7 +113,6 @@ const LoanHistory = () => {
   };
 
   const tableCellHeading = ['Pay Month', 'Pay Date', 'Installment Amount'];
-
 
   useEffect(() => {
     getLoansTableData();
@@ -133,65 +123,65 @@ const LoanHistory = () => {
       <Header />
 
       <TopView name={'Active Loans'} />
-        <CurvedView>
-          {loading ? (
-            <Loader containerStyle={styles.loadercontainer} />
-          ) : (
-            <>
-              <View style={styles.graphContainer}>
-                <BarGraph data={loanBarData} />
-              </View>
-              <RobotoBold name={'Loan History'} />
-              <View style={styles.tabsContainer}>
-                <Tabs
-                  onPress={() => setSelectedTab('House Building')}
-                  name={'House Building'}
-                  container={styles.tabContainer}
-                  labelStyle={styles.labelStyle}
-                  isActive={selectedTab === 'House Building'}
+      <CurvedView>
+        {loading ? (
+          <Loader containerStyle={styles.loadercontainer} />
+        ) : (
+          <>
+            <View style={styles.graphContainer}>
+              <BarGraph data={loanBarData} />
+            </View>
+            <RobotoBold name={'Loan History'} />
+            <View style={styles.tabsContainer}>
+              <Tabs
+                onPress={() => setSelectedTab('House Building')}
+                name={'House Building'}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+                isActive={selectedTab === 'House Building'}
+              />
+              <Tabs
+                onPress={() => setSelectedTab('House Finance')}
+                name={'House Finance'}
+                isActive={selectedTab === 'House Finance'}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+              />
+              <Tabs
+                name={'Personal Finance'}
+                onPress={() => setSelectedTab('Personal Finance')}
+                container={styles.tabContainer}
+                isActive={selectedTab === 'Personal Finance'}
+                labelStyle={styles.labelStyle}
+              />
+              <Tabs
+                name={'Care Ijara'}
+                onPress={() => setSelectedTab('Care Ijara')}
+                isActive={selectedTab === 'Care Ijara'}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+              />
+              <Tabs
+                name={'Care Lease'}
+                isActive={selectedTab === 'Care Lease'}
+                onPress={() => setSelectedTab('Care Lease')}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+              />
+            </View>
+            <View style={styles.table}>
+              {loanTableData.length > 0 ? (
+                <DisplayTable
+                  data={loanTableData}
+                  tableCellHeading={tableCellHeading}
                 />
-                <Tabs
-                  onPress={() => setSelectedTab('House Finance')}
-                  name={'House Finance'}
-                  isActive={selectedTab === 'House Finance'}
-                  container={styles.tabContainer}
-                  labelStyle={styles.labelStyle}
-                />
-                <Tabs
-                  name={'Personal Finance'}
-                  onPress={() => setSelectedTab('Personal Finance')}
-                  container={styles.tabContainer}
-                  isActive={selectedTab === 'Personal Finance'}
-                  labelStyle={styles.labelStyle}
-                />
-                <Tabs
-                  name={'Care Ijara'}
-                  onPress={() => setSelectedTab('Care Ijara')}
-                  isActive={selectedTab === 'Care Ijara'}
-                  container={styles.tabContainer}
-                  labelStyle={styles.labelStyle}
-                />
-                <Tabs
-                  name={'Care Lease'}
-                  isActive={selectedTab === 'Care Lease'}
-                  onPress={() => setSelectedTab('Care Lease')}
-                  container={styles.tabContainer}
-                  labelStyle={styles.labelStyle}
-                />
-              </View>
-              <View style={styles.table}>
-                {loanTableData.length > 0 ? (
-                  <DisplayTable
-                    data={loanTableData}
-                    tableCellHeading={tableCellHeading}
-                  />
-                ) : (
-                  <NoDataFound title="No Record Found" />
-                )}
-              </View>
-            </>
-          )}
-        </CurvedView>
+              ) : (
+                <NoDataFound title="No Record Found" />
+              )}
+            </View>
+          </>
+        )}
+      </CurvedView>
     </View>
   );
 };

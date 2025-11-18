@@ -153,13 +153,13 @@ const LeaveManagement = () => {
                 </View>
               </View>
             </View>
-            <View style={styles.table}>
-              <Table data={leavesTableData} bottomPadding={vh*40}/>
-            </View>
-
             <TouchableOpacity onPress={() => onPressAdd('NewLeaveRequest')}>
               <Image source={icons.plus} style={styles.plusIcon} />
             </TouchableOpacity>
+
+            <View style={styles.table}>
+              <Table data={leavesTableData} bottomPadding={vh * 50} />
+            </View>
           </>
         )}
       </CurvedView>

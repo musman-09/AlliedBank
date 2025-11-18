@@ -11,8 +11,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
 import RobotoRegular from '../RobotoRegular';
+import NoDataFound from '../NoDataFound';
 
-const Table = ({ data  ,  bottomPadding}) => {
+const Table = ({ data, bottomPadding }) => {
   const [selected, setSelected] = useState('Pending');
 
   const onPressTab = tab => {
@@ -107,14 +108,16 @@ const Table = ({ data  ,  bottomPadding}) => {
         </LinearGradient>
       </View>
 
-      <FlatList
-        data={selectedTabData}
-        renderItem={renderItem}
-        nestedScrollEnabled={true}
-        // style={{ backgroundColor  : 'red' }}
-      contentContainerStyle={{ paddingBottom: bottomPadding }}
-      
-      />
+      {selectedTabData.length > 0 ? (
+        <FlatList
+          data={selectedTabData}
+          renderItem={renderItem}
+          nestedScrollEnabled={true}
+          contentContainerStyle={{ paddingBottom: bottomPadding }}
+        />
+      ) : (
+        <NoDataFound title={'No Data'} />
+      )}
     </View>
   );
 };

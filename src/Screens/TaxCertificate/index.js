@@ -20,7 +20,7 @@ import { get } from '../../apis';
 import endpoints from '../../apis/endpoints';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
-import FileViewer from 'react-native-file-viewer';
+
 
 const TaxCertificate = ({ navigation }) => {
   const [selectedYear, setSelectedYear] = useState(null);
@@ -144,10 +144,12 @@ const TaxCertificate = ({ navigation }) => {
       <CurvedView>
         <View style={styles.curvedViewContainer}>
           <Select
+
             label="Select Year"
             placeholder="-- Select Year --"
             options={selectYears}
             onSelectOption={setSelectedYear}
+            
           />
 
           <Select
