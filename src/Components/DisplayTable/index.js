@@ -40,15 +40,9 @@ const DisplayTable = ({ data, tableCellHeading }) => {
       <FlatList
         data={data}
         renderItem={renderItem}
-        ListHeaderComponent={()=>(
-          <View>terhiqksldjfljqerwkdasjfo;wreq eridqufshckjenwds eridsglkmc, </View>
-        )}
-        contentContainerStyle={{
-          gap: vh * 0.5,
-
       
-        }}
-        style={{   }}
+       
+        style={{paddingBottom : vh*40}}
       />
     </View>
   );
