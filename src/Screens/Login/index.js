@@ -58,7 +58,17 @@ const Login = () => {
         await rnBiometrics.isSensorAvailable();
 
       if (!available) {
-        console.log('Biometric sensor not available');
+
+         dispatch(
+        setErrorModal({
+          title: 'Biometric sensor not available',
+          detail: 'Please fill both feild username and password',
+          logo: icons.errorIcon,
+
+          buttonName: 'Continue',
+        }),
+      );
+       
         return;
       }
 

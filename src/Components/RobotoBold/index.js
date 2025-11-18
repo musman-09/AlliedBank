@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { fonts } from '../../Assets/fonts';
 import { vw } from '../../Assets/themes/dimension';

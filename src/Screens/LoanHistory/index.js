@@ -1,7 +1,6 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
-
 import { styles } from './style';
 import TopView from '../../Components/TopView';
 import CurvedView from '../../Components/CurvedView';
@@ -9,7 +8,6 @@ import BarGraph from '../../Components/BarGraph';
 import { COLORS } from '../../Assets/themes/color';
 import RobotoBold from '../../Components/RobotoBold';
 import Tabs from '../../Components/Tabs';
-import Table from '../../Components/Table';
 import DisplayTable from '../../Components/DisplayTable';
 import endpoints from '../../apis/endpoints';
 import { get } from '../../apis';
@@ -27,8 +25,8 @@ const LoanHistory = () => {
       setLoading(true);
       const res = await get(endpoints.loan.history);
 
-
-
+    
+      
       const apiData =
         res?.data?.map(item => ({
           payMonth: item?.payMonth.split('T')[0],
@@ -38,6 +36,10 @@ const LoanHistory = () => {
           totalAmountPaid: item?.totalAmountPaid,
           totalDueLoan: item?.totalDueLoan,
         })) || [];
+
+        
+
+
 
       const monthData = [];
 
@@ -121,7 +123,6 @@ const LoanHistory = () => {
 
   const tableCellHeading = ['Pay Month', 'Pay Date', 'Installment Amount'];
 
- console.log(selectedTab , "selecting tab usman")
 
   useEffect(() => {
     getLoansTableData();

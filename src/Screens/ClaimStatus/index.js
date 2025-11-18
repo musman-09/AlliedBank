@@ -52,6 +52,7 @@ const ClaimStatus = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.claims.medicalClaims);
+      console.log(res, 'response of claim status');
       const apiData = res?.data || [];
 
       const monthlyData = {};
@@ -74,7 +75,7 @@ const ClaimStatus = () => {
         const { claimAmount, reimbursedAmount } = monthlyData[month];
 
         formattedBarData.push({
-          value: claimAmount,
+          value: claimAmount/100,
           label: month,
           spacing: 2,
           labelWidth: 30,
@@ -83,7 +84,7 @@ const ClaimStatus = () => {
         });
 
         formattedBarData.push({
-          value: reimbursedAmount,
+          value: reimbursedAmount/100,
           frontColor: COLORS.blue,
         });
       });
@@ -120,7 +121,7 @@ const ClaimStatus = () => {
         const { claimAmount, reimbursedAmount } = monthlyData[month];
 
         formattedBarData.push({
-          value: claimAmount,
+          value: claimAmount / 100,
           label: month,
           spacing: 2,
           labelWidth: 30,
@@ -129,10 +130,12 @@ const ClaimStatus = () => {
         });
 
         formattedBarData.push({
-          value: reimbursedAmount,
+          value: reimbursedAmount / 100,
           frontColor: COLORS.blue,
         });
       });
+
+      console.log(formattedBarData , "foratedataa")
 
       setBarData(formattedBarData);
     } catch (error) {
