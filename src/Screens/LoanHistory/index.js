@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import { styles } from './style';
@@ -169,6 +169,8 @@ const LoanHistory = () => {
                 labelStyle={styles.labelStyle}
               />
             </View>
+
+        
             <View style={styles.table}>
               {loanTableData.length > 0 ? (
                 <DisplayTable
@@ -179,6 +181,7 @@ const LoanHistory = () => {
                 <NoDataFound title="No Record Found" />
               )}
             </View>
+     
           </>
         )}
       </CurvedView>

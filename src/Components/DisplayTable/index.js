@@ -24,25 +24,26 @@ const DisplayTable = ({ data, tableCellHeading }) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.cellHeadingContainer}>
-        <View style={styles.cellHeading}>
-          <RobotoBold style={styles.heading} name={tableCellHeading[0]} />
-        </View>
-
-        <View style={styles.cellHeading}>
-          <RobotoBold style={styles.heading} name={tableCellHeading[1]} />
-        </View>
-        <View style={styles.cellHeading}>
-          <RobotoBold style={styles.heading} name={tableCellHeading[2]} />
-        </View>
-      </View>
-
       <FlatList
         data={data}
         renderItem={renderItem}
-      
-       
-        style={{paddingBottom : vh*40}}
+        ListHeaderComponent={() => (
+          <View style={styles.cellHeadingContainer}>
+            <View style={styles.cellHeading}>
+              <RobotoBold style={styles.heading} name={tableCellHeading[0]} />
+            </View>
+
+            <View style={styles.cellHeading}>
+              <RobotoBold style={styles.heading} name={tableCellHeading[1]} />
+            </View>
+
+            <View style={styles.cellHeading}>
+              <RobotoBold style={styles.heading} name={tableCellHeading[2]} />
+            </View>
+          </View>
+        )}
+        showsVerticalScrollIndicator={false}
+
       />
     </View>
   );

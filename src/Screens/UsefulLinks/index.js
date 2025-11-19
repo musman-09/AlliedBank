@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import TopView from '../../Components/TopView';
@@ -9,6 +9,7 @@ import { icons } from '../../Assets';
 import { get } from '../../apis';
 import endpoints from '../../apis/endpoints';
 import Loader from '../../Components/Loader';
+import { Linking } from 'react-native';
 
 const UsefulLinks = () => {
   const [linksData, setLinksData] = useState([]);
@@ -27,6 +28,17 @@ const UsefulLinks = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const onPressLink = item => {
+    if (!item?.linkUrl) {
+      console.log('No URL found');
+      return;
+    }
+
+    Linking.openURL(item.linkUrl).catch(() => {
+      console.log('Failed to open URL');
+    });
   };
 
   useEffect(() => {
@@ -50,10 +62,12 @@ const UsefulLinks = () => {
 
                   <RobotoRegular style={styles.linkText} name={item.linkName} />
 
-                  <Image
-                    style={styles.ArrowIcon}
-                    source={icons.arrowDirection}
-                  />
+                  <TouchableOpacity onPress={() => onPressLink(item)}>
+                    <Image
+                      style={styles.ArrowIcon}
+                      source={icons.arrowDirection}
+                    />
+                  </TouchableOpacity>
                 </View>
               );
             })

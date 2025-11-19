@@ -138,6 +138,7 @@ const PaySlip = ({ navigation }) => {
             placeholder="-- Select Year --"
             options={selectYears}
             onSelectOption={setSelectedYear}
+            value={selectedYear}
           />
 
           <Select
@@ -145,6 +146,7 @@ const PaySlip = ({ navigation }) => {
             placeholder="-- Select Month --"
             options={selectMonths}
             onSelectOption={setSelectedMonth}
+            value={selectedMonth}
           />
 
           {loading && (

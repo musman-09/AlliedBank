@@ -4,19 +4,11 @@ import { COLORS } from '../../Assets/themes/color';
 
 export const styles = StyleSheet.create({
   profileBackground: {
-    // flex: 1,
-    height: vh * 28,
     paddingHorizontal: vw * 5,
   },
   profileContainer: {
-    // flex: 1,
-    // height: vh * 25,
-    // borderWidth: 2,
-    // marginHorizontal: vw * 4,
     marginVertical: vh * 4,
     flexDirection: 'row',
-    // width: '90%',
-    // borderWidth: 2,
   },
   left: {
     width: '70%',
@@ -27,7 +19,6 @@ export const styles = StyleSheet.create({
     gap: vh,
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth: 2,
   },
   profileName: {
     color: COLORS.white,
@@ -41,6 +32,7 @@ export const styles = StyleSheet.create({
   profileDetailText: {
     color: COLORS.white,
     fontSize: vw * 3,
+    marginLeft: vw * 2,
   },
   profileText: {
     color: COLORS.white,
@@ -53,11 +45,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   iconsTextRow: {
-    // borderWidth: 2,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     flexDirection: 'row',
-    gap: vw * 2,
   },
 
   bannerIcon: {
@@ -75,13 +63,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '80%',
     borderRadius: vw * 6,
-    // borderWidth: 2,
+
     paddingVertical: vh * 1.5,
-    // paddingHorizontal: vw * 4,
   },
   approvalBannerContent: {
     flexDirection: 'row',
-    // borderWidth: 2,
+
     alignItems: 'center',
     justifyContent: 'center',
     gap: vw * 1.8,
@@ -92,9 +79,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 1.8,
   },
   cardsContainer: {
-    // marginHorizontal: vw * 2,
     marginVertical: vh * 2,
-    paddingHorizontal: vw * 3,
-    // borderWidth: 2,
+    paddingHorizontal: vw * 3,flex: 1 
   },
 });

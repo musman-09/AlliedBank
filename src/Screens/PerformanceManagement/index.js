@@ -149,6 +149,7 @@ const PerformanceManagement = ({ navigation }) => {
             placeholder="-- Select Year --"
             options={selectYears}
             onSelectOption={setSelectedYear}
+            value={selectedYear}
           />
 
           <Select
@@ -156,6 +157,7 @@ const PerformanceManagement = ({ navigation }) => {
             placeholder="-- Select Month --"
             options={selectMonths}
             onSelectOption={setSelectedMonth}
+            value={selectedMonth}
           />
 
           {loading && (

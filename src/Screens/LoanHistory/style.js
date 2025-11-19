@@ -24,6 +24,5 @@ export const styles = StyleSheet.create({
   },
   table: {
     marginTop: vh * 3,
-    // borderWidth:2
   },
 });

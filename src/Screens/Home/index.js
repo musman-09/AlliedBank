@@ -148,7 +148,6 @@ const Home = () => {
               </View>
             </TouchableOpacity>
           </View>
-
           <View style={styles.right}>
             <Image style={styles.userImage} source={Images.userImage} />
             <RobotoBold
@@ -166,7 +165,6 @@ const Home = () => {
           keyExtractor={(item, index) => index.toString()}
           numColumns={3}
           contentContainerStyle={{
-            paddingBottom: vh * 35,
             gap: vh * 1.5,
           }}
           columnWrapperStyle={{

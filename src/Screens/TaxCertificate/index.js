@@ -149,6 +149,7 @@ const TaxCertificate = ({ navigation }) => {
             placeholder="-- Select Year --"
             options={selectYears}
             onSelectOption={setSelectedYear}
+            value={selectedYear}
             
           />
 
@@ -157,6 +158,7 @@ const TaxCertificate = ({ navigation }) => {
             placeholder="-- Select Month --"
             options={selectMonths}
             onSelectOption={setSelectedMonth}
+            value={selectedMonth}
           />
 
           {loading && (

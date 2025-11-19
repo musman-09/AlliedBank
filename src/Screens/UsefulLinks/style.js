@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   usefulLinksContainer: {},
   usefulCard: {
     flexDirection: 'row',
+    
 
     alignItems: 'center',
     justifyContent: 'space-between',
