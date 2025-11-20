@@ -82,7 +82,6 @@ const LoanHistory = () => {
           labelTextStyle: { color: 'gray' },
           frontColor: COLORS.orange,
         });
-
         barGraphData.push({
           value: item.due / 100,
           frontColor: COLORS.blue,
@@ -115,7 +114,6 @@ const LoanHistory = () => {
   const tableCellHeading = ['Pay Month', 'Pay Date', 'Installment Amount'];
 
   useEffect(() => {
-    getLoansTableData();
   }, [selectedTab]);
 
   return (
@@ -170,7 +168,6 @@ const LoanHistory = () => {
               />
             </View>
 
-        
             <View style={styles.table}>
               {loanTableData.length > 0 ? (
                 <DisplayTable
@@ -181,7 +178,6 @@ const LoanHistory = () => {
                 <NoDataFound title="No Record Found" />
               )}
             </View>
-     
           </>
         )}
       </CurvedView>

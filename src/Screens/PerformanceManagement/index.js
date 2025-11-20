@@ -52,7 +52,6 @@ const PerformanceManagement = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
-   
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -93,9 +92,7 @@ const PerformanceManagement = ({ navigation }) => {
 
       const filePath = `${dir}/${fileName}`;
 
-     
       await RNFetchBlob.fs.writeFile(filePath, item, 'base64');
-
 
       if (Platform.OS === 'android') {
         await RNFetchBlob.android.addCompleteDownload({
@@ -124,7 +121,6 @@ const PerformanceManagement = ({ navigation }) => {
       setPdfData(null);
 
       const res = await get(`${endpoints.documents.generateAppraisalLetter}`);
-
 
       if (res?.data) {
         const data = Array.isArray(res.data) ? res.data : [res.data];
@@ -188,14 +184,8 @@ const PerformanceManagement = ({ navigation }) => {
       <Modal visible={visible} animationType="slide">
         <View style={{ flex: 1 }}>
           <Header toggleDrawer={() => setVisible(false)} />
-          <TouchableOpacity
-            onPress={() => setVisible(false)}
-            style={{ padding: 15, backgroundColor: '#000' }}
-          >
-            <RobotoBold
-              name="Close PDF"
-              style={{ color: '#fff', textAlign: 'center' }}
-            />
+          <TouchableOpacity onPress={() => setVisible(false)}>
+            <TopView name={'Close'} />
           </TouchableOpacity>
 
           {pdfSource && (

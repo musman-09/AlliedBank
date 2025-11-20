@@ -190,14 +190,8 @@ const TaxCertificate = ({ navigation }) => {
         <View style={{ flex: 1 }}>
           <Header toggleDrawer={() => setVisible(false)} />
 
-          <TouchableOpacity
-            onPress={() => setVisible(false)}
-            style={{ padding: 15, backgroundColor: '#000' }}
-          >
-            <RobotoBold
-              name="Close PDF"
-              style={{ color: '#fff', textAlign: 'center' }}
-            />
+            <TouchableOpacity onPress={() => setVisible(false)}>
+            <TopView name={'Close'} />
           </TouchableOpacity>
 
           {pdfSource && (

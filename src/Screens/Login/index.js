@@ -18,6 +18,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideErrorModal, setErrorModal, setToken } from '../../redux/authSlice';
 import PopupCard from '../../Components/PopupCard';
 import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
+import { post } from '../../apis';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import endpoints from '../../apis/endpoints';
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -27,21 +30,48 @@ const Login = () => {
 
   const errorModal = useSelector(state => state.counter.errorModal);
 
- 
   const dispatch = useDispatch();
   const token = useSelector(state => state.counter.token);
-  
 
-  const onPressLogin = () => {
-    if (user?.email.length > 0 && user?.password.length > 0) {
-      dispatch(setToken('token'));
-    } else {
+  const onPressLogin = async () => {
+    if (!user.email || !user.password) {
       dispatch(
         setErrorModal({
           title: 'Missing Fields',
           detail: 'Please fill both feild username and password',
           logo: icons.errorIcon,
+          buttonName: 'Continue',
+        }),
+      );
+      return;
+    }
 
+    try {
+      let body = {
+        username: user.email,
+        password: user.password,
+      };
+
+      const res = await post(endpoints.auth.login, body);
+
+      if (res?.data?.token) {
+        dispatch(setToken(res.data.token));
+      } else {
+        dispatch(
+          setErrorModal({
+            title: 'Invalid Credentials',
+            detail: 'Username or password is incorrect',
+            logo: icons.errorIcon,
+            buttonName: 'Continue',
+          }),
+        );
+      }
+    } catch (error) {
+      dispatch(
+        setErrorModal({
+          title: 'Login Failed',
+          detail: 'Something went wrong. Please try again.',
+          logo: icons.errorIcon,
           buttonName: 'Continue',
         }),
       );
@@ -58,17 +88,16 @@ const Login = () => {
         await rnBiometrics.isSensorAvailable();
 
       if (!available) {
+        dispatch(
+          setErrorModal({
+            title: 'Biometric sensor not available',
+            detail: 'Please fill both feild username and password',
+            logo: icons.errorIcon,
 
-         dispatch(
-        setErrorModal({
-          title: 'Biometric sensor not available',
-          detail: 'Please fill both feild username and password',
-          logo: icons.errorIcon,
+            buttonName: 'Continue',
+          }),
+        );
 
-          buttonName: 'Continue',
-        }),
-      );
-       
         return;
       }
 

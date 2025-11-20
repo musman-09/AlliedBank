@@ -43,7 +43,6 @@ const PaySlip = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
-  
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -114,7 +113,6 @@ const PaySlip = ({ navigation }) => {
 
       const res = await get(`${endpoints.payslips.generatePaySlip}`);
 
-
       if (res?.data) {
         const data = Array.isArray(res.data) ? res.data : [res.data];
         setPdfData(data);
@@ -179,14 +177,8 @@ const PaySlip = ({ navigation }) => {
       <Modal visible={visible} animationType="slide">
         <View style={{ flex: 1 }}>
           <Header toggleDrawer={() => setVisible(false)} />
-          <TouchableOpacity
-            onPress={() => setVisible(false)}
-            style={{ padding: 15, backgroundColor: COLORS.black }}
-          >
-            <RobotoBold
-              name="Close PDF"
-              style={{ color: '#fff', textAlign: 'center' }}
-            />
+          <TouchableOpacity onPress={() => setVisible(false)}>
+            <TopView name={'Close'} />
           </TouchableOpacity>
 
           {pdfSource && (
