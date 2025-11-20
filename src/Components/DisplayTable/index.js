@@ -43,7 +43,6 @@ const DisplayTable = ({ data, tableCellHeading }) => {
           </View>
         )}
         showsVerticalScrollIndicator={false}
-
       />
     </View>
   );
@@ -52,7 +51,11 @@ const DisplayTable = ({ data, tableCellHeading }) => {
 export default DisplayTable;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+
+    height : vh*20,
+    borderWidth:2,
+  },
   cellHeadingContainer: {
     flexDirection: 'row',
   },

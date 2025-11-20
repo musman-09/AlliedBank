@@ -13,12 +13,14 @@ export const styles = StyleSheet.create({
   left: {
     width: '70%',
 
+    borderColor: 'red',
     gap: vh,
   },
   right: {
     gap: vh,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '30%',
   },
   profileName: {
     color: COLORS.white,
@@ -33,10 +35,12 @@ export const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: vw * 3,
     marginLeft: vw * 2,
+    textAlign: 'left',
+    width: '80%',
   },
   profileText: {
     color: COLORS.white,
-    fontSize: vw * 3.4,
+    fontSize: vw * 2.5,
     textAlign: 'center',
   },
   profileIcons: {
@@ -80,6 +84,7 @@ export const styles = StyleSheet.create({
   },
   cardsContainer: {
     marginVertical: vh * 2,
-    paddingHorizontal: vw * 3,flex: 1 
+    paddingHorizontal: vw * 3,
+    flex: 1,
   },
 });

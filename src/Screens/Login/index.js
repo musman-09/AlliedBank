@@ -11,7 +11,7 @@ import { icons, Images } from '../../Assets/index';
 import { styles } from './style';
 import RobotoBold from '../../Components/RobotoBold';
 import RobotoSemiBold from '../../Components/RobotoSemiBold';
-import { vw } from '../../Assets/themes/dimension';
+import { vh, vw } from '../../Assets/themes/dimension';
 import InputFeild from '../../Components/InputFeild';
 import Button from '../../Components/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
 import { post } from '../../apis';
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 import endpoints from '../../apis/endpoints';
+import Loader from '../../Components/Loader';
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -32,6 +33,8 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const token = useSelector(state => state.counter.token);
+
+  const [loading, setLoading] = useState(false);
 
   const onPressLogin = async () => {
     if (!user.email || !user.password) {
@@ -47,6 +50,7 @@ const Login = () => {
     }
 
     try {
+      setLoading(true);
       let body = {
         username: user.email,
         password: user.password,
@@ -75,6 +79,8 @@ const Login = () => {
           buttonName: 'Continue',
         }),
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -192,9 +198,16 @@ const Login = () => {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onPressLogin} style={styles.buttonContainer}>
-          <Button title="LOGIN" titleStyle={styles.ButtonTitle} />
-        </TouchableOpacity>
+        {loading ? (
+          <Loader containerStyle={{ marginTop: vh * 4 }} />
+        ) : (
+          <TouchableOpacity
+            onPress={onPressLogin}
+            style={styles.buttonContainer}
+          >
+            <Button title="LOGIN" titleStyle={styles.ButtonTitle} />
+          </TouchableOpacity>
+        )}
       </View>
 
       <PopupCard

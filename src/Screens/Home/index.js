@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import Header from '../../Components/Header';
 import { styles } from './style';
 import { cardsIcons, icons, Images } from '../../Assets';
@@ -16,8 +16,15 @@ import RobotoSemiBold from '../../Components/RobotoSemiBold';
 import Card from '../../Components/Card';
 import { vh, vw } from '../../Assets/themes/dimension';
 
+import endpoints from '../../apis/endpoints';
+import { get } from '../../apis';
+import Loader from '../../Components/Loader';
+
 const Home = () => {
   const navigation = useNavigation();
+
+  const [employeeData, setEmployeeData] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onPressCard = to => {
     navigation.navigate(to);
@@ -98,65 +105,89 @@ const Home = () => {
       to: 'RateThis',
     },
   ];
+
+  const getEmployeeDetails = async () => {
+    try {
+      setLoading(true);
+      const res = await get(endpoints.employee.details);
+      console.log(res?.data, 'resose of employee');
+      setEmployeeData(res?.data);
+    } catch (error) {
+      console.log(error, 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      getEmployeeDetails();
+    }, []),
+  );
+
   return (
     <>
       <Header toggleDrawer={toggleDrawer} />
-
-      <ImageBackground
-        style={styles.profileBackground}
-        source={Images.profileBackground}
-      >
-        <View style={styles.profileContainer}>
-          <View style={styles.left}>
-            <RobotoBold
-              style={styles.profileName}
-              name={'Welcome, \nZohaib Ghaffar'}
-            />
-            <View style={styles.iconsTextRow}>
-              <Image style={styles.profileIcons} source={icons.building} />
-              <RobotoSemiBold
-                name={'System Implementation 2\nInformation Technology Group'}
-                style={styles.profileDetailText}
+      {loading ? (
+        <Loader containerStyle={{ marginTop: vh * 10 }} />
+      ) : (
+        <ImageBackground
+          style={styles.profileBackground}
+          source={Images.profileBackground}
+        >
+          <View style={styles.profileContainer}>
+            <View style={styles.left}>
+              <RobotoBold
+                style={styles.profileName}
+                name={`Welcome, \n${employeeData.employeeName}`}
               />
-            </View>
-
-            <View style={styles.iconsTextRow}>
-              <Image style={styles.profileIcons} source={icons.map} />
-              <RobotoSemiBold
-                name={'9554-Fourth Floor, Abhol'}
-                style={styles.profileDetailText}
-              />
-            </View>
-
-            <TouchableOpacity
-              onPress={() => onPressCard('MyPendingRequest')}
-              style={styles.approvalBanner}
-            >
-              <View style={styles.approvalBannerContent}>
-                <Image
-                  style={styles.bannerIcon}
-                  source={icons.pendingApproval}
+              <View style={styles.iconsTextRow}>
+                <Image style={styles.profileIcons} source={icons.building} />
+                <RobotoSemiBold
+                  name={employeeData.organization}
+                  style={styles.profileDetailText}
                 />
-                <RobotoBold
-                  style={styles.bannerText}
-                  name={'Pending Approval'}
-                />
-
-                <View style={styles.approvalNumber}>
-                  <RobotoBold name={'2'} />
-                </View>
               </View>
-            </TouchableOpacity>
+
+              <View style={styles.iconsTextRow}>
+                <Image style={styles.profileIcons} source={icons.map} />
+                <RobotoSemiBold
+                  name={employeeData.placeOfPosting}
+                  style={styles.profileDetailText}
+                />
+              </View>
+
+              <TouchableOpacity
+                onPress={() => onPressCard('MyPendingRequest')}
+                style={styles.approvalBanner}
+              >
+                <View style={styles.approvalBannerContent}>
+                  <Image
+                    style={styles.bannerIcon}
+                    source={icons.pendingApproval}
+                  />
+                  <RobotoBold
+                    style={styles.bannerText}
+                    name={'Pending Approval'}
+                  />
+
+                  <View style={styles.approvalNumber}>
+                    <RobotoBold name={'2'} />
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.right}>
+              <Image style={styles.userImage} source={Images.userImage} />
+
+              <RobotoBold
+                style={styles.profileText}
+                name={employeeData.designation}
+              />
+            </View>
           </View>
-          <View style={styles.right}>
-            <Image style={styles.userImage} source={Images.userImage} />
-            <RobotoBold
-              style={styles.profileText}
-              name={'Sr. Officer IT Group\nHead Office'}
-            />
-          </View>
-        </View>
-      </ImageBackground>
+        </ImageBackground>
+      )}
 
       <View style={styles.cardsContainer}>
         <FlatList

@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: vh * 10,
     borderWidth: 2,
+ 
   },
   tabBarIcon: {
     marginTop: vh * 3,

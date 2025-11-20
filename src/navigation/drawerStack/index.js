@@ -16,6 +16,11 @@ const DrawerStack = () => {
   const dispatch = useDispatch();
   const Drawer = createDrawerNavigator();
 
+  const userLogout = ()=>{
+
+    dispatch(logoutUser());
+  }
+
   const menus = [
     {
       label: 'Home',
@@ -124,7 +129,10 @@ const DrawerStack = () => {
         navigation.navigate(menu.mainParent, { screen: menu.stChild });
       } else if (menu?.to) {
         if (menu?.to === 'Logout') {
-          dispatch(logoutUser());
+
+          userLogout()
+          
+
         } else {
           navigation.navigate(menu.to);
         }
