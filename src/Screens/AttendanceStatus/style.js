@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
-import { AppRegistry } from 'react-native/types_generated/index';
-// import { BounceInDown } from "react-native-reanimated";
+
+
 
 export const styles = StyleSheet.create({
   calenderContainer: {
@@ -60,4 +60,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: vw * 3,
   },
+  loadercontainer: {
+    marginTop : vh*10
+  }
 });

@@ -114,6 +114,7 @@ const LoanHistory = () => {
   const tableCellHeading = ['Pay Month', 'Pay Date', 'Installment Amount'];
 
   useEffect(() => {
+    getLoansTableData();
   }, [selectedTab]);
 
   return (

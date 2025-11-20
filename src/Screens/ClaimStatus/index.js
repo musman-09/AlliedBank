@@ -52,7 +52,7 @@ const ClaimStatus = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.claims.medicalClaims);
-      console.log(res, 'response of claim status');
+
       const apiData = res?.data || [];
 
       const monthlyData = {};
@@ -135,7 +135,7 @@ const ClaimStatus = () => {
         });
       });
 
-      console.log(formattedBarData , "foratedataa")
+      
 
       setBarData(formattedBarData);
     } catch (error) {

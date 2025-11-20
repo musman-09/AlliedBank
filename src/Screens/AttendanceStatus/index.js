@@ -10,6 +10,7 @@ import RobotoBold from '../../Components/RobotoBold';
 import { styles } from './style';
 import { get } from '../../apis';
 import endpoints from '../../apis/endpoints';
+import Loader from '../../Components/Loader';
 
 const AttendanceStatus = () => {
   const [loading, setLoading] = useState(false);
@@ -66,53 +67,59 @@ const AttendanceStatus = () => {
       <Header />
       <TopView name={'Attendance Status'} />
 
-      <CurvedView>
-        <View style={styles.calenderContainer}>
-          <Calendar
-            onDayPress={day => {
-              setSelected(day.dateString);
-            }}
-            markedDates={markedDates}
-            style={{
-              // elevation: 3,
-              borderRadius: vw * 2,
-            }}
-            theme={{
-              backgroundColor: COLORS.orange,
-              calendarBackground: '#ffffff',
-              textSectionTitleColor: '#b6c1cd',
-              selectedDayBackgroundColor: '#00adf5',
-              selectedDayTextColor: '#ffffff',
-              todayTextColor: '#00adf5',
-              dayTextColor: '#2d4150',
-              textDisabledColor: '#dd99ee',
-              textDayFontSize: vw * 4,
-            }}
-          />
+    <CurvedView>
+  <View style={styles.calenderContainer}>
+    {loading ? (
+      <Loader containerStyle={styles.loadercontainer} />
+    ) : (
+      <>
+        <Calendar
+          onDayPress={day => {
+            console.log(day, 'pressed');
+          }}
+          markedDates={markedDates}
+          style={{
+            borderRadius: vw * 2,
+          }}
+          theme={{
+            backgroundColor: COLORS.orange,
+            calendarBackground: '#ffffff',
+            textSectionTitleColor: '#b6c1cd',
+            selectedDayBackgroundColor: '#00adf5',
+            selectedDayTextColor: '#ffffff',
+            todayTextColor: '#00adf5',
+            dayTextColor: '#2d4150',
+            textDisabledColor: '#dd99ee',
+            textDayFontSize: vw * 4,
+          }}
+        />
 
-          <View style={styles.identifier}>
-            <View style={styles.leave}>
-              <View style={styles.squareBlue}></View>
-              <RobotoBold name={'On Leave'} />
-            </View>
+        <View style={styles.identifier}>
+          <View style={styles.leave}>
+            <View style={styles.squareBlue}></View>
+            <RobotoBold name={'On Leave'} />
+          </View>
 
-            <View style={styles.leave}>
-              <View style={styles.squarePink}></View>
-              <RobotoBold name={'Absent'} />
-            </View>
+          <View style={styles.leave}>
+            <View style={styles.squarePink}></View>
+            <RobotoBold name={'Absent'} />
+          </View>
 
-            <View style={styles.leave}>
-              <View style={styles.squareGreen}></View>
-              <RobotoBold name={'Holiday'} />
-            </View>
+          <View style={styles.leave}>
+            <View style={styles.squareGreen}></View>
+            <RobotoBold name={'Holiday'} />
+          </View>
 
-            <View style={styles.leave}>
-              <View style={styles.squareOrange}></View>
-              <RobotoBold name={'Present With Violation'} />
-            </View>
+          <View style={styles.leave}>
+            <View style={styles.squareOrange}></View>
+            <RobotoBold name={'Present With Violation'} />
           </View>
         </View>
-      </CurvedView>
+      </>
+    )}
+  </View>
+</CurvedView>
+
     </View>
   );
 };
