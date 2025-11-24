@@ -27,15 +27,12 @@ const LoanHistory = () => {
 
       const apiData =
         res?.data?.map(item => ({
-
           payMonth: item?.payMonth.split('T')[0],
           paymentDate: item?.paymentDate.split('T')[0],
           installationAmount: item?.installmentAmount,
           loanType: item?.loanType,
           totalAmountPaid: item?.totalAmountPaid,
           totalDueLoan: item?.totalDueLoan,
-           
-          
         })) || [];
 
       const monthData = [];
@@ -106,7 +103,6 @@ const LoanHistory = () => {
         item => item.loanType === selectedLoanType,
       );
 
-
       // const filteredData = [{       payMonth: "usman",
       //     paymentDate: "hanif",
       //     installationAmount: "ppp",
@@ -124,7 +120,6 @@ const LoanHistory = () => {
       //     installationAmount: "usman",
       //     loanType: "oooo", }]
 
-    
       setLoanTableData(filteredData);
     } catch (error) {
       console.log(error);

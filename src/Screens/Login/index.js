@@ -85,8 +85,6 @@ const Login = () => {
   };
 
   const onTouchBiometric = async () => {
-    console.log('function bio');
-
     const rnBiometrics = new ReactNativeBiometrics();
 
     try {
@@ -111,26 +109,21 @@ const Login = () => {
         biometryType === BiometryTypes.TouchID ||
         biometryType === BiometryTypes.Biometrics
       ) {
-        console.log('Fingerprint available ');
-
         const { success } = await rnBiometrics.simplePrompt({
           promptMessage: 'Authenticate with Fingerprint',
         });
 
         if (success) {
-          console.log('Fingerprint Auth Success ');
           dispatch(setToken('Usman'));
         } else {
           console.log('Fingerprint Auth Canceled');
         }
       } else if (biometryType === BiometryTypes.FaceID) {
-        console.log('Face ID available');
         const { success } = await rnBiometrics.simplePrompt({
           promptMessage: 'Authenticate with Face ID',
         });
 
         if (success) {
-          console.log('Face ID Auth Success ');
           dispatch(setToken('usman'));
         } else {
           console.log('Face ID Auth Canceled');

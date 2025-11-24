@@ -19,7 +19,6 @@ const UsefulLinks = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.general.getLinks);
-      console.log(res, 'API response for useful links');
 
       const apiData = res?.data?.useFullLinks || [];
       setLinksData(apiData);

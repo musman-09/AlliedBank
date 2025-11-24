@@ -17,8 +17,6 @@ const EmployeeDetails = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-
   const fetchEmployeeDetails = async () => {
     try {
       setLoading(true);
@@ -118,8 +116,6 @@ const EmployeeDetails = () => {
           <FlatList
             renderItem={renderItem}
             data={employeeData}
-            style={{ height: vh * 80 }}
-            contentContainerStyle={{ paddingBottom: vh * 35 }}
             showsVerticalScrollIndicator={false}
           />
         </View>
