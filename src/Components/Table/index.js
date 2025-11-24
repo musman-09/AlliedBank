@@ -113,7 +113,8 @@ const Table = ({ data, bottomPadding }) => {
           data={selectedTabData}
           renderItem={renderItem}
           nestedScrollEnabled={true}
-          contentContainerStyle={{ paddingBottom: bottomPadding }}
+         
+          // contentContainerStyle={{ paddingBottom: bottomPadding }}
         />
       ) : (
         <NoDataFound title={'No Data'} />

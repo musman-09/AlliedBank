@@ -33,7 +33,6 @@ const RecentHrCirculars = () => {
       }));
       setHrCircularData(formatted);
     } catch (error) {
-      
       Alert.alert('Error', 'Failed to load HR Circulars.');
     }
   };
@@ -45,7 +44,6 @@ const RecentHrCirculars = () => {
   );
 
   const onView = item => {
-
     if (!item?.url) {
       Alert.alert('url not found');
       return;
@@ -93,7 +91,6 @@ const RecentHrCirculars = () => {
               style={{ flex: 1 }}
               trustAllCerts={false}
               onError={error => {
-              
                 Alert.alert(
                   'Error',
                   'Unable to open this file. It may not be a PDF.',

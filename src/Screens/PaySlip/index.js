@@ -15,6 +15,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
 
 import { COLORS } from '../../Assets/themes/color';
+import Loader from '../../Components/Loader';
 
 const PaySlip = ({ navigation }) => {
   const [selectedYear, setSelectedYear] = useState(null);
@@ -148,9 +149,7 @@ const PaySlip = ({ navigation }) => {
           />
 
           {loading && (
-            <RobotoBold
-              style={{ textAlign: 'center', marginTop: 20 }}
-              name={'Loading pay slip...'}
+           <Loader
             />
           )}
 

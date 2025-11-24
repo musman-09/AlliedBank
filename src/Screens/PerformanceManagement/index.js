@@ -20,6 +20,7 @@ import { get } from '../../apis';
 import endpoints from '../../apis/endpoints';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
+import Loader from '../../Components/Loader';
 
 const PerformanceManagement = ({ navigation }) => {
   const [selectedYear, setSelectedYear] = useState(null);
@@ -156,10 +157,9 @@ const PerformanceManagement = ({ navigation }) => {
             value={selectedMonth}
           />
 
+        
           {loading && (
-            <RobotoBold
-              style={{ textAlign: 'center', marginTop: 20 }}
-              name={'Loading appraisal letter...'}
+           <Loader
             />
           )}
 

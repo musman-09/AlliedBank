@@ -22,7 +22,8 @@ const Select = ({
   onSelectOption,
   type,
   name,
-  value
+  value,
+  container,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -76,7 +77,7 @@ const Select = ({
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View style={[container, styles.wrapper]}>
       <RobotoBold style={styles.label} name={label} />
 
       <TouchableOpacity
@@ -85,11 +86,7 @@ const Select = ({
         onPress={handlePress}
       >
         <Text style={selectedOption ? styles.value : styles.placeholder}>
-         {selectedFile
-    ? selectedFile
-    : value  
-    ? value
-    : placeholder}
+          {selectedFile ? selectedFile : value ? value : placeholder}
         </Text>
 
         {type === 'file' ? (
@@ -101,18 +98,15 @@ const Select = ({
 
       {isVisible && options && (
         <View style={styles.dropdown}>
-          <FlatList
-            data={options}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.option}
-                onPress={() => onSelect(item)}
-              >
-                <Text style={styles.optionText}>{item}</Text>
-              </TouchableOpacity>
-            )}
-          />
+          {options.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.option}
+              onPress={() => onSelect(item)}
+            >
+              <Text style={styles.optionText}>{item}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       )}
 
@@ -142,7 +136,9 @@ const Select = ({
 export default Select;
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    // borderWidth:2,
+  },
   label: {
     position: 'absolute',
     top: vh * -1,

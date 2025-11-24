@@ -67,7 +67,6 @@ api.interceptors.response.use(
 
     if (error?.response) {
       const { data } = error?.response || {};
-
       return Promise.reject(data);
     }
   },

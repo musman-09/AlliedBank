@@ -27,5 +27,7 @@ export const COLORS = {
   seaGreen: 'rgba(138, 236, 195, 1)',
   lightOrange: 'rgba(255, 218, 163, 1)',
   borderColor: 'rgba(222, 222, 222, 1)',
-  violation  : "rgba(255, 218, 163, 1)"
+  violation  : "rgba(255, 218, 163, 1)",
+  seaGreen : "rgba(243, 250, 255, 1)",
+  textBlue : "rgba(63, 69, 93, 1)"
 };

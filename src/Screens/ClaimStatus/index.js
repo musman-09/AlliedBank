@@ -70,7 +70,7 @@ const ClaimStatus = () => {
         monthlyData[monthName].reimbursedAmount += item.reimbursedAmount;
       });
 
-      console.log(monthlyData  , "monthly data usman")
+      
 
       const formattedBarData = [];
       Object.keys(monthlyData).forEach(month => {

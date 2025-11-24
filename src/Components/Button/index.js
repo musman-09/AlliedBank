@@ -4,19 +4,19 @@ import RobotoBold from '../RobotoBold';
 import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
 
-const Button = ({ title, titleStyle }) => {
+const Button = ({ title, titleStyle , containerStyle }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,containerStyle]}>
       <RobotoBold style={titleStyle} name={title} />
     </View>
-  );
+  );  
 };
 
 export default Button;
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 1,
+
     borderRadius: vw,
     backgroundColor: COLORS.orange,
     width: '100%',

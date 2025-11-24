@@ -21,7 +21,6 @@ import endpoints from '../../apis/endpoints';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
 
-
 const TaxCertificate = ({ navigation }) => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
@@ -53,7 +52,6 @@ const TaxCertificate = ({ navigation }) => {
   }, [selectedYear, selectedMonth]);
 
   const handleView = item => {
-
     const base64 = `data:application/pdf;base64,${item}`;
     setPdfSource({ uri: base64 });
     setVisible(true);
@@ -124,7 +122,6 @@ const TaxCertificate = ({ navigation }) => {
 
       const res = await get(`${endpoints.documents.generateTaxCertifcate}`);
 
-
       if (res?.data) {
         const data = Array.isArray(res.data) ? res.data : [res.data];
         setPdfData(data);
@@ -144,13 +141,11 @@ const TaxCertificate = ({ navigation }) => {
       <CurvedView>
         <View style={styles.curvedViewContainer}>
           <Select
-
             label="Select Year"
             placeholder="-- Select Year --"
             options={selectYears}
             onSelectOption={setSelectedYear}
             value={selectedYear}
-            
           />
 
           <Select
@@ -161,12 +156,7 @@ const TaxCertificate = ({ navigation }) => {
             value={selectedMonth}
           />
 
-          {loading && (
-            <RobotoBold
-              style={{ textAlign: 'center', marginTop: 20 }}
-              name={'Loading tax certificate...'}
-            />
-          )}
+          {loading && <Loader />}
 
           {!loading && pdfData && (
             <FlatList
@@ -190,7 +180,7 @@ const TaxCertificate = ({ navigation }) => {
         <View style={{ flex: 1 }}>
           <Header toggleDrawer={() => setVisible(false)} />
 
-            <TouchableOpacity onPress={() => setVisible(false)}>
+          <TouchableOpacity onPress={() => setVisible(false)}>
             <TopView name={'Close'} />
           </TouchableOpacity>
 

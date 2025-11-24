@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { icons } from '../../Assets';
 import RobotoBold from '../RobotoBold';
@@ -6,7 +6,7 @@ import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { fonts } from '../../Assets/fonts';
 
-const ClaimsCard = ({ data }) => {
+const ClaimsCard = ({ data , onPressView }) => {
   return (
     <View style={styles.container}>
       <View style={styles.firstRow}>
@@ -25,10 +25,11 @@ const ClaimsCard = ({ data }) => {
           </View>
         </View>
 
-        <View style={styles.eyeViewContainer}>
+
+        <TouchableOpacity onPress={onPressView} style={styles.eyeViewContainer}>
           <Image source={icons.whiteEye} style={styles.eye} />
           <RobotoBold style={styles.eyeText} name={'View'} />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.horizontallLine}></View>

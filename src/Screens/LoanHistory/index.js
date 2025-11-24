@@ -103,22 +103,7 @@ const LoanHistory = () => {
         item => item.loanType === selectedLoanType,
       );
 
-      // const filteredData = [{       payMonth: "usman",
-      //     paymentDate: "hanif",
-      //     installationAmount: "ppp",
-      //     loanType: "oooo", } , {       payMonth: "usman",
-      //     paymentDate: "hanif",
-      //     installationAmount: "ppp",
-      //     loanType: "oooo", },{       payMonth: "usman",
-      //     paymentDate: "hanif",
-      //     installationAmount: "ppp",
-      //     loanType: "oooo", },{       payMonth: "usman",
-      //     paymentDate: "hanif",
-      //     installationAmount: "ppp",
-      //     loanType: "oooo", },{       payMonth: "usman",
-      //     paymentDate: "hanif",
-      //     installationAmount: "usman",
-      //     loanType: "oooo", }]
+   
 
       setLoanTableData(filteredData);
     } catch (error) {

@@ -110,7 +110,7 @@ const Home = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.employee.details);
-      console.log(res?.data, 'resose of employee');
+  
       setEmployeeData(res?.data);
     } catch (error) {
       console.log(error, 'error');

@@ -56,7 +56,6 @@ export default InputFeild;
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 2,
     width: '100%',
     gap: vh,
     marginTop: vh * 2,
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     backgroundColor: COLORS.white,
-    // paddingVertical: vh,
+
     borderColor: COLORS.feildBorderColor,
     borderWidth: 2,
     borderRadius: vw * 2.5,
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
   },
   inputContainerIcon: {
     backgroundColor: COLORS.white,
-    // paddingVertical: vh,
+
     borderColor: COLORS.feildBorderColor,
     borderWidth: 2,
     borderRadius: vw * 2.5,

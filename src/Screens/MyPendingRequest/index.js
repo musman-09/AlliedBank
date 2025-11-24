@@ -15,20 +15,21 @@ import moment from 'moment';
 import { COLORS } from '../../Assets/themes/color';
 import NoDataFound from '../../Components/NoDataFound';
 
-const MyPendingRequest = () => {
+const MyPendingRequest = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('Claims');
   const [loading, setLoading] = useState(false);
   const [leavesData, setLeavesData] = useState([]);
   const [claimsData, setClaimsData] = useState([]);
 
-
+  const onPressView = () => {
+    navigation.navigate('PendingApproval');
+  };
 
   const fetchClaims = async () => {
     try {
       setLoading(true);
 
       const res = await get(endpoints.claims.getPendingClaims);
-
 
       const formatted = res.data?.map(item => [
         { label: 'Claim Type', value: item?.claimType ?? '--' },
@@ -54,7 +55,6 @@ const MyPendingRequest = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.leaves.getPendingLeaves);
-
 
       const formatted = res.data?.map(item => [
         { label: 'Full Name', value: item?.fullName ?? '--' },
@@ -125,7 +125,7 @@ const MyPendingRequest = () => {
               <NoDataFound title={'No Claims Found'} />
             ) : (
               claimsData.map((card, index) => (
-                <ClaimsCard key={index} data={card} />
+                <ClaimsCard key={index} data={card} onPressView={onPressView} />
               ))
             )
           ) : leavesData.length === 0 ? (
@@ -135,7 +135,7 @@ const MyPendingRequest = () => {
             />
           ) : (
             leavesData.map((card, index) => (
-              <ClaimsCard key={index} data={card} />
+              <ClaimsCard key={index} data={card} onPressView={onPressView} />
             ))
           )}
         </CurvedView>
