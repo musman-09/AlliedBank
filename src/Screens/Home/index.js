@@ -19,6 +19,7 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import endpoints from '../../apis/endpoints';
 import { get } from '../../apis';
 import Loader from '../../Components/Loader';
+import { COLORS } from '../../Assets/themes/color';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -172,7 +173,7 @@ const Home = () => {
                   />
 
                   <View style={styles.approvalNumber}>
-                    <RobotoBold name={'2'} />
+                    <RobotoBold style={{color: COLORS.orange}} name={'2'} />
                   </View>
                 </View>
               </TouchableOpacity>

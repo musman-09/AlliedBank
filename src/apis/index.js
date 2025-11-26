@@ -8,7 +8,6 @@ const api = axios.create({
   // baseURL: "http://localhost:8087/api",
 
   // baseURL: "http://192.168.0.231:3001/api",
-
   timeout: 6000,
 });
 
@@ -21,6 +20,7 @@ api.interceptors.request.use(
     } else {
       config.headers['Content-Type'] = 'multipart/form-data';
     }
+    
 
     const data = store?.getState();
 

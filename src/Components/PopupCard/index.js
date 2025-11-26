@@ -110,5 +110,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: vw * 4,
+    color : COLORS.white
   },
 });

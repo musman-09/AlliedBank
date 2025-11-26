@@ -65,7 +65,7 @@ const NewLeaveRequest = () => {
         });
 
         const res = await post(url);
-        console.log(res, "response of create leaves")
+    
         if (res) {
           dispatch(
             setErrorModal({
