@@ -120,7 +120,7 @@ const LeaveManagement = () => {
         {loading ? (
           <Loader containerStyle={styles.loadercontainer} />
         ) : (
-          <>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.graphContainer}>
               <PieChart
                 data={privilegeLeavesData}
@@ -160,7 +160,7 @@ const LeaveManagement = () => {
             <View style={styles.table}>
               <Table data={leavesTableData} bottomPadding={vh * 50} />
             </View>
-          </>
+          </ScrollView>
         )}
       </CurvedView>
     </View>

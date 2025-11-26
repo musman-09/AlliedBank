@@ -37,7 +37,7 @@ const EmployeeCard = ({ data, onViewDownload }) => {
                 style={styles.downloadIcon}
                 source={isToggle ? icons.arrowUp : icons.arrowDown}
               />
-            </TouchableOpacity>{' '}
+            </TouchableOpacity>
           </View>
         )}
       </View>
@@ -110,9 +110,8 @@ const styles = StyleSheet.create({
 
   left: {
     flexDirection: 'row',
-
     alignItems: 'center',
-    width: '50%',
+    flex: 1,
     gap: vw * 2,
   },
   docIcon: {
@@ -122,18 +121,14 @@ const styles = StyleSheet.create({
   },
   firstRow: {
     flexDirection: 'row',
-
-    alignContent: 'center',
-    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-   
+    justifyContent: 'space-between',
+    width: '100%',
   },
   right: {
     flexDirection: 'row',
-
     gap: vw * 2,
-    width: '50%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -143,11 +138,8 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: vw * 3,
     marginTop: vh * 0.5,
-
     textAlign: 'justify',
-
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexWrap: 'wrap',
   },
   secondRowLeft: {
     flexDirection: 'row',
@@ -168,5 +160,6 @@ const styles = StyleSheet.create({
   docName: {
     fontSize: vw * 3.5,
     color: COLORS.textGray,
+    flexShrink: 1,
   },
 });

@@ -70,14 +70,12 @@ const ClaimStatus = () => {
         monthlyData[monthName].reimbursedAmount += item.reimbursedAmount;
       });
 
-      
-
       const formattedBarData = [];
       Object.keys(monthlyData).forEach(month => {
         const { claimAmount, reimbursedAmount } = monthlyData[month];
 
         formattedBarData.push({
-          value: claimAmount/100,
+          value: claimAmount / 100,
           label: month,
           spacing: 2,
           labelWidth: 30,
@@ -86,7 +84,7 @@ const ClaimStatus = () => {
         });
 
         formattedBarData.push({
-          value: reimbursedAmount/100,
+          value: reimbursedAmount / 100,
           frontColor: COLORS.blue,
         });
       });
@@ -137,8 +135,6 @@ const ClaimStatus = () => {
         });
       });
 
-      
-
       setBarData(formattedBarData);
     } catch (error) {
       console.log('Error fetching medical claims:', error);
@@ -181,33 +177,33 @@ const ClaimStatus = () => {
         {loading ? (
           <Loader containerStyle={styles.loadercontainer} />
         ) : (
-          <View style={styles.curvedViewContent}>
-            <View style={{ alignItems: 'center' }}>
-              <View style={styles.crowselBar}>
-                <TouchableOpacity onPress={handlePrev}>
-                  <Image
-                    style={styles.crowseIcon}
-                    source={icons.leftArrow}
-                    onTouchEnd={handlePrev}
-                  />
-                </TouchableOpacity>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+           
+          >
+            <View style={styles.curvedViewContent}>
+              <View style={{ alignItems: 'center' }}>
+                <View style={styles.crowselBar}>
+                  <TouchableOpacity onPress={handlePrev}>
+                    <Image style={styles.crowseIcon} source={icons.leftArrow} />
+                  </TouchableOpacity>
 
-                <RobotoBold name={selectedCarousel} />
+                  <RobotoBold name={selectedCarousel} />
 
-                <TouchableOpacity onPress={handleNext}>
-                  <Image
-                    style={styles.crowseIcon}
-                    source={icons.rightArrow}
-                    onTouchEnd={handleNext}
-                  />
-                </TouchableOpacity>
+                  <TouchableOpacity onPress={handleNext}>
+                    <Image
+                      style={styles.crowseIcon}
+                      source={icons.rightArrow}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
+
+              <BarGraph data={barData} />
+
+              <Table data={claimsTableData} bottomPadding={vh * 90} />
             </View>
-
-            <BarGraph data={barData} />
-
-            <Table data={claimsTableData} bottomPadding={vh * 90} />
-          </View>
+          </ScrollView>
         )}
       </CurvedView>
     </View>

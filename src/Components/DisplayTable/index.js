@@ -16,17 +16,20 @@ const DisplayTable = ({ data, tableCellHeading }) => {
         <View style={styles.cellRow}>
           <RobotoRegular style={styles.row} name={item?.paymentDate} />
         </View>
+
         <View style={styles.cellRow}>
           <RobotoRegular style={styles.row} name={item?.installationAmount} />
         </View>
       </View>
     );
   };
+
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
         renderItem={renderItem}
+        scrollEnabled={false}
         ListHeaderComponent={() => (
           <View style={styles.cellHeadingContainer}>
             <View style={styles.cellHeading}>
@@ -51,37 +54,29 @@ const DisplayTable = ({ data, tableCellHeading }) => {
 export default DisplayTable;
 
 const styles = StyleSheet.create({
-  container: {
-
-    height : vh*20,
-    borderWidth:2,
-  },
+  container: {},
   cellHeadingContainer: {
     flexDirection: 'row',
   },
   cellHeading: {
     backgroundColor: COLORS.orange,
     width: '33.4%',
-
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: vh,
   },
   cellRowContainer: {
     flexDirection: 'row',
-
     paddingVertical: vh,
     gap: vw,
   },
   cellRow: {
     width: '33.4%',
-
     justifyContent: 'center',
     alignItems: 'center',
   },
   heading: {
     color: COLORS.white,
-    // fontSize : vw*
   },
   row: {
     fontSize: vw * 4,

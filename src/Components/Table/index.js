@@ -109,13 +109,12 @@ const Table = ({ data, bottomPadding }) => {
       </View>
 
       {selectedTabData.length > 0 ? (
-        <FlatList
-          data={selectedTabData}
-          renderItem={renderItem}
-          nestedScrollEnabled={true}
-         
-          // contentContainerStyle={{ paddingBottom: bottomPadding }}
-        />
+    <FlatList
+  data={selectedTabData}
+  renderItem={renderItem}
+  scrollEnabled={false}  
+  showsVerticalScrollIndicator={false}
+/>
       ) : (
         <NoDataFound title={'No Data'} />
       )}

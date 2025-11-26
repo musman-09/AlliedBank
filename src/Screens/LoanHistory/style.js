@@ -23,6 +23,10 @@ export const styles = StyleSheet.create({
     fontSize: vw * 3,
   },
   table: {
-    marginTop: vh * 3,
+    marginTop: vh * 2,
+
+
+
+   
   },
 });
