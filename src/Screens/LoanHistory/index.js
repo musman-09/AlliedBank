@@ -39,6 +39,7 @@ const LoanHistory = () => {
 
       apiData.forEach(item => {
         const month = item.payMonth.slice(0, 7);
+
         const existing = monthData.find(m => m.month === month);
 
         if (existing) {
@@ -55,8 +56,18 @@ const LoanHistory = () => {
 
       const getMonthName = num => {
         const months = [
-          'Jan','Feb','Mar','Apr','May','Jun',
-          'Jul','Aug','Sep','Oct','Nov','Dec',
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
         ];
         return months[num - 1];
       };
@@ -89,12 +100,9 @@ const LoanHistory = () => {
 
       const selectedLoanType = tabToLoanType[selectedTab];
 
-      const filteredData = [
-        { payMonth: 'usman', paymentDate: '2023-02-24', installationAmount: 14901 },
-        { payMonth: '2023-02-24', paymentDate: '2023-02-24', installationAmount: 'usman' },
-        { payMonth: 'usman', paymentDate: '2023-02-24', installationAmount: 14901 },
-        { payMonth: '2023-02-24', paymentDate: '2023-02-24', installationAmount: 'usmasasas' },
-      ];
+      const filteredData = apiData.filter(
+        item => item.loanType === selectedLoanType,
+      );
 
       setLoanTableData(filteredData);
     } catch (error) {
@@ -113,48 +121,67 @@ const LoanHistory = () => {
   return (
     <View style={styles.container}>
       <Header />
+
       <TopView name={'Active Loans'} />
-
       <CurvedView>
+        {loading ? (
+          <Loader containerStyle={styles.loadercontainer} />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.graphContainer}>
+              <BarGraph data={loanBarData} />
+            </View>
+            <RobotoBold name={'Loan History'} />
+            <View style={styles.tabsContainer}>
+              <Tabs
+                onPress={() => setSelectedTab('House Building')}
+                name={'House Building'}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+                isActive={selectedTab === 'House Building'}
+              />
+              <Tabs
+                onPress={() => setSelectedTab('House Finance')}
+                name={'House Finance'}
+                isActive={selectedTab === 'House Finance'}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+              />
+              <Tabs
+                name={'Personal Finance'}
+                onPress={() => setSelectedTab('Personal Finance')}
+                container={styles.tabContainer}
+                isActive={selectedTab === 'Personal Finance'}
+                labelStyle={styles.labelStyle}
+              />
+              <Tabs
+                name={'Care Ijara'}
+                onPress={() => setSelectedTab('Care Ijara')}
+                isActive={selectedTab === 'Care Ijara'}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+              />
+              <Tabs
+                name={'Care Lease'}
+                isActive={selectedTab === 'Care Lease'}
+                onPress={() => setSelectedTab('Care Lease')}
+                container={styles.tabContainer}
+                labelStyle={styles.labelStyle}
+              />
+            </View>
 
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-
-        >
-
-          {loading ? (
-            <Loader containerStyle={styles.loadercontainer} />
-          ) : (
-            <>
-              <View style={styles.graphContainer}>
-                <BarGraph data={loanBarData} />
-              </View>
-
-              <RobotoBold name={'Loan History'} />
-
-              <View style={styles.tabsContainer}>
-           
-                <Tabs onPress={() => setSelectedTab('House Building')} name={'House Building'} container={styles.tabContainer} labelStyle={styles.labelStyle} isActive={selectedTab === 'House Building'} />
-                <Tabs onPress={() => setSelectedTab('House Finance')} name={'House Finance'} container={styles.tabContainer} labelStyle={styles.labelStyle} isActive={selectedTab === 'House Finance'} />
-                <Tabs onPress={() => setSelectedTab('Personal Finance')} name={'Personal Finance'} container={styles.tabContainer} labelStyle={styles.labelStyle} isActive={selectedTab === 'Personal Finance'} />
-                <Tabs onPress={() => setSelectedTab('Care Ijara')} name={'Care Ijara'} container={styles.tabContainer} labelStyle={styles.labelStyle} isActive={selectedTab === 'Care Ijara'} />
-                <Tabs onPress={() => setSelectedTab('Care Lease')} name={'Care Lease'} container={styles.tabContainer} labelStyle={styles.labelStyle} isActive={selectedTab === 'Care Lease'} />
-              </View>
-
-              <View style={styles.table}>
-                {loanTableData.length > 0 ? (
-                  <DisplayTable data={loanTableData} tableCellHeading={tableCellHeading} />
-                ) : (
-                  <NoDataFound title="No Record Found" />
-                )}
-              </View>
-            </>
-          )}
-
-        </ScrollView>
-        
-
+            <View style={styles.table}>
+              {loanTableData.length > 0 ? (
+                <DisplayTable
+                  data={loanTableData}
+                  tableCellHeading={tableCellHeading}
+                />
+              ) : (
+                <NoDataFound title="No Record Found" />
+              )}
+            </View>
+          </ScrollView>
+        )}
       </CurvedView>
     </View>
   );
