@@ -11,7 +11,7 @@ import RobotoBold from '../RobotoBold';
 import { COLORS } from '../../Assets/themes/color';
 import { vh, vw } from '../../Assets/themes/dimension';
 import { fonts } from '../../Assets/fonts';
-// import { Image } from 'react-native/types_generated/index';
+
 
 const InputFeild = ({
   label,
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: vw * 4,
+
+    flex: 1,
 
     fontFamily: 'bold',
     color: COLORS.labelColor,

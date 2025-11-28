@@ -20,6 +20,7 @@ import { get } from '../../apis';
 import endpoints from '../../apis/endpoints';
 import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs';
+import Loader from '../../Components/Loader';
 
 const TaxCertificate = ({ navigation }) => {
   const [selectedYear, setSelectedYear] = useState(null);
