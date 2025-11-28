@@ -26,6 +26,7 @@ const Home = () => {
 
   const [employeeData, setEmployeeData] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadedOnce, setLoadedOnce] = useState(false);
 
   const onPressCard = to => {
     navigation.navigate(to);
@@ -111,7 +112,7 @@ const Home = () => {
     try {
       setLoading(true);
       const res = await get(endpoints.employee.details);
-  
+
       setEmployeeData(res?.data);
     } catch (error) {
       console.log(error, 'error');
@@ -122,8 +123,11 @@ const Home = () => {
 
   useFocusEffect(
     useCallback(() => {
-      getEmployeeDetails();
-    }, []),
+      if (!loadedOnce) {
+        getEmployeeDetails();
+        setLoadedOnce(true);
+      }
+    }, [loadedOnce]),
   );
 
   return (
@@ -173,7 +177,7 @@ const Home = () => {
                   />
 
                   <View style={styles.approvalNumber}>
-                    <RobotoBold style={{color: COLORS.orange}} name={'2'} />
+                    <RobotoBold style={{ color: COLORS.orange }} name={'2'} />
                   </View>
                 </View>
               </TouchableOpacity>
