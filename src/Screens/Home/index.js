@@ -36,12 +36,13 @@ const Home = () => {
     navigation.toggleDrawer();
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
     return (
       <Card
         onPress={() => onPressCard(item.to)}
         name={item.name}
         icon={item.icon}
+        index={index}
       />
     );
   };
@@ -201,11 +202,12 @@ const Home = () => {
           keyExtractor={(item, index) => index.toString()}
           numColumns={3}
           contentContainerStyle={{
-            gap: vh * 1.5,
+            // its a content 
           }}
           columnWrapperStyle={{
             justifyContent: 'space-between',
           }}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </>

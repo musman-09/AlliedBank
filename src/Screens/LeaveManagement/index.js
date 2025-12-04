@@ -47,6 +47,8 @@ const LeaveManagement = () => {
 
       const casualLeaves = apiData.filter(
         item => item.leaveType?.toLowerCase() === 'casual leave',
+
+        
       );
 
       const privilegeLeaves = apiData.filter(

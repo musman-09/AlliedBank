@@ -6,9 +6,18 @@ import { vh, vw } from '../../Assets/themes/dimension';
 import { COLORS } from '../../Assets/themes/color';
 import RobotoSemiBold from '../RobotoSemiBold';
 
-const Card = ({ name, icon, onPress  , }) => {
+const Card = ({ name, icon, onPress, index }) => {
+  const isFirstRow = index < 3;
   return (
-    <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
+    <TouchableOpacity style={[
+      styles.cardContainer,
+      {
+        marginTop: isFirstRow ? vh * 2 : 0,
+        marginBottom: vh * 2,
+      },
+    ]}
+    
+      onPress={onPress}>
       <View style={styles.cardContent}>
         <Image style={styles.icon} source={icon} />
         <RobotoSemiBold style={styles.cardText} name={name} />
@@ -27,6 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: vh * 2,
+
 
     borderColor: COLORS.cardBorderColor,
     borderRadius: vw * 4,

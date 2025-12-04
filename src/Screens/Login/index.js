@@ -57,6 +57,7 @@ const Login = () => {
       };
 
       const res = await post(endpoints.auth.login, body);
+    
 
       if (res?.data?.token) {
         dispatch(setToken(res.data.token));

@@ -189,11 +189,12 @@ export const styles = StyleSheet.create({
   approveButton: {
     flex: 1,
 
-    backgroundColor: 'blue',
+    backgroundColor: COLORS.blue,
     borderRadius: vw * 12,
   },
   rejectButton: {
     flex: 1,
     borderRadius: vw * 12,
+   
   },
 });

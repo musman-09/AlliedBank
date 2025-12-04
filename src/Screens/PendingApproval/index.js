@@ -251,7 +251,7 @@ const PendingApproval = () => {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={handleReject} style={{ flex: 1 }}>
+            <TouchableOpacity onPress={handleReject} style={{ flex: 1, }}>
               <Button
                 containerStyle={styles.rejectButton}
                 titleStyle={{ color: COLORS.white }}

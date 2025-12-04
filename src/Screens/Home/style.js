@@ -83,8 +83,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: vw * 1.8,
   },
   cardsContainer: {
-    marginVertical: vh * 2,
+    // marginVertical: vh * 2,
+
     paddingHorizontal: vw * 3,
     flex: 1,
+
   },
 });
